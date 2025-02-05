@@ -19,24 +19,24 @@
   <meta name="author" content="tuyi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我靠，忘记自己还搭建过这样一个博客，期末忙昏了，现在放假了，就可以好好打点一下了，写一点东西记录自己的学习日常，一个人学习感觉好盲目，只有在写点什么的时候才会思考自己要做什么，（1.19） 从今天开始每天写至少一道web题   （1.22） 我靠，要过年了感觉动力不是很够了 （1.24） 要过年了，国内没啥比赛了，国外大不是很想打，还是复习复习吧，每日一web暂停一段时间，更点知识点吧，(1.26">
+    <meta name="description" content="常见的字符串逃逸基本知识1.序列化字符串中的单引号 &#39; 必须用双引号 &quot; 包裹。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 unserialize() 报错。 2.再有特定的针对序列化后的字符串变长变短的情况下  在php中，反序列化 的过程中必须严格按照序列化规则才能成功实现反序列化，例如  1234567891011&lt;?php  	$str &#x3D; &amp;#x27">
 <meta property="og:type" content="article">
-<meta property="og:title" content="问自己">
-<meta property="og:url" content="https://blog.tuyiisxp.top/2025/01/19/%E9%97%AE%E8%87%AA%E5%B7%B1/index.html">
+<meta property="og:title" content="反序列化之字符串逃逸">
+<meta property="og:url" content="https://blog.tuyiisxp.top/2025/02/05/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%83%E9%80%B8/index.html">
 <meta property="og:site_name" content="tuyi的小站">
-<meta property="og:description" content="我靠，忘记自己还搭建过这样一个博客，期末忙昏了，现在放假了，就可以好好打点一下了，写一点东西记录自己的学习日常，一个人学习感觉好盲目，只有在写点什么的时候才会思考自己要做什么，（1.19） 从今天开始每天写至少一道web题   （1.22） 我靠，要过年了感觉动力不是很够了 （1.24） 要过年了，国内没啥比赛了，国外大不是很想打，还是复习复习吧，每日一web暂停一段时间，更点知识点吧，(1.26">
+<meta property="og:description" content="常见的字符串逃逸基本知识1.序列化字符串中的单引号 &#39; 必须用双引号 &quot; 包裹。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 unserialize() 报错。 2.再有特定的针对序列化后的字符串变长变短的情况下  在php中，反序列化 的过程中必须严格按照序列化规则才能成功实现反序列化，例如  1234567891011&lt;?php  	$str &#x3D; &amp;#x27">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-19T03:28:10.000Z">
-<meta property="article:modified_time" content="2025-02-05T08:32:05.035Z">
+<meta property="article:published_time" content="2025-02-05T08:58:55.000Z">
+<meta property="article:modified_time" content="2025-02-05T09:00:35.351Z">
 <meta property="article:author" content="tuyi">
-<meta property="article:tag" content="目标">
+<meta property="article:tag" content="字符串逃逸">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>问自己 - tuyi的小站</title>
+  <title>反序列化之字符串逃逸 - tuyi的小站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -208,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="问自己"></span>
+            <span id="subtitle" data-typed-text="反序列化之字符串逃逸"></span>
           
         </div>
 
@@ -219,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-01-19 11:28" pubdate>
-          2025年1月19日 上午
+        <time datetime="2025-02-05 16:58" pubdate>
+          2025年2月5日 下午
         </time>
       </span>
     
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          178 字
+          1.5k 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          2 分钟
+          13 分钟
         
       </span>
     
@@ -279,7 +279,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">问自己</h1>
+            <h1 id="seo-header">反序列化之字符串逃逸</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -292,11 +292,84 @@
             
               <div class="markdown-body">
                 
-                <p>我靠，忘记自己还搭建过这样一个博客，期末忙昏了，现在放假了，就可以好好打点一下了，写一点东西记录自己的学习日常，一个人学习感觉好盲目，只有在写点什么的时候才会思考自己要做什么，（1.19）</p>
-<p>从今天开始每天写至少一道web题   （1.22）</p>
-<p>我靠，要过年了感觉动力不是很够了 （1.24）</p>
-<p>要过年了，国内没啥比赛了，国外大不是很想打，还是复习复习吧，每日一web暂停一段时间，更点知识点吧，(1.26)</p>
-<p>唉 发现自己好菜啊，收收心好好努力一把（2.5）</p>
+                <h2 id="常见的字符串逃逸"><a href="#常见的字符串逃逸" class="headerlink" title="常见的字符串逃逸"></a>常见的字符串逃逸</h2><h4 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h4><p>1.<strong>序列化字符串中的单引号 <code>&#39;</code> 必须用双引号 <code>&quot;</code> 包裹</strong>。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 <code>unserialize()</code> 报错。</p>
+<p>2.再有特定的针对序列化后的字符串变长变短的情况下</p>
+<ul>
+<li>在php中，反序列化</li>
+<li>的过程中必须严格按照序列化规则才能成功实现反序列化，例如</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-variable">$str</span> = <span class="hljs-string">&#x27;a:2:&#123;i:0;s:4:&quot;flag&quot;;i:1;s:6:&quot;mikasa&quot;;&#125;&#x27;</span>;<br>  	<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str</span>));<br><span class="hljs-meta">?&gt;</span><br><span class="hljs-comment">#输出结果</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">array(2)&#123;</span><br><span class="hljs-comment">	[0]=&gt; string(4) &quot;flag&quot;</span><br><span class="hljs-comment">  [1]=&gt; string(6) &quot;mikasa&quot;</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>一般情况下，按照我们的正常理解，上面例子中变量<code>$str</code>是一个标准的序列化后的字符串，按理来说改变其中任何一个字符都会导致反序列化失败。但事实并非如此。如果在<code>$str</code>结尾的花括号后加一些字符</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-variable">$str</span> = <span class="hljs-string">&#x27;a:2:&#123;i:0;s:4:&quot;flag&quot;;i:1;s:6:&quot;mikasa&quot;;&#125;abc&#x27;</span>;<br>  	<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str</span>));<br><span class="hljs-meta">?&gt;</span><br><span class="hljs-comment">#输出结果依然和上面的相同</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>这说明了反序列化的过程是有一定识别范围的，在这个范围之外的字符（如花括号外的abc）都会被忽略，不影响反序列化的正常进行、</li>
+</ul>
+<hr>
+<h4 id="php-反序列化-的几大特性"><a href="#php-反序列化-的几大特性" class="headerlink" title="php[反序列化]的几大特性"></a>php[反序列化]的几大特性</h4><ul>
+<li>PHP 在反序列化时，底层代码是以 <code>;</code> 作为字段的分隔，以 <code>&#125;</code> 作为结尾（字符串除外）并且是根据长度判断内容的<ul>
+<li>注意点，很容易以为序列化后的字符串是<code>;&#125;</code>结尾，实际上字符串序列化是以<code>;&#125;</code>结尾的，但对象序列化是直接<code>&#125;</code>结尾</li>
+<li>php反序列化字符逃逸，就是通过这个结尾符实现的</li>
+</ul>
+</li>
+<li>当长度不对应的时候会出现报错</li>
+</ul>
+<hr>
+<h4 id="反序列化字符逃逸"><a href="#反序列化字符逃逸" class="headerlink" title="反序列化字符逃逸"></a>反序列化字符逃逸</h4><p>反序列化之所以存在字符串逃逸，最主要的原因是代码中存在针对序列化（serialize()）后的字符串进行了过滤操作（变多或者变少）。</p>
+<p>反序列化字符逃逸问题根据过滤函数一般分为两种，字符数增多和字符数减少</p>
+<h5 id="字符数增多"><a href="#字符数增多" class="headerlink" title="字符数增多"></a>字符数增多</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params"><span class="hljs-variable">$str</span></span>)</span>&#123;<br>  			<span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;x&#x27;</span>,<span class="hljs-string">&#x27;yy&#x27;</span>,<span class="hljs-variable">$str</span>);<br>		&#125;<br>		<br>		<span class="hljs-variable">$username</span> = <span class="hljs-string">&quot;mikasa&quot;</span>;<br>		<span class="hljs-variable">$password</span> = <span class="hljs-string">&quot;biubiu&quot;</span>;<br>		<span class="hljs-variable">$user</span> = <span class="hljs-keyword">array</span>(<span class="hljs-variable">$username</span>,<span class="hljs-variable">$password</span>);<br>		<br>		<span class="hljs-variable">$str1</span> = <span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$user</span>));<br>		<span class="hljs-comment">//$str2 = filter($_GET[&#x27;user&#x27;]);</span><br><br>		<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str1</span>));<br>		<span class="hljs-comment">//var_dump(unserialize($str2));</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>问：如果我能控制进行反序列化的字符串，该如何使var_dump打印出来的password对应的值是<code>123456</code>，而不是<code>biubiu</code>？</p>
+<ul>
+<li>正常情况下反序列化字符串**$str1**的值为<code>a:2:&#123;i:0;s:6:&quot;mikasa&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code></li>
+<li>那么把username的值变为<code>mikasaxxx</code>，当完成序列化，filter函数处理后的结果为<code>a:2:&#123;i:0;s:9:&quot;mikasayyyyyy&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code><ul>
+<li>因为比之前多了三个字符，反序列化时肯定是会失败的！</li>
+<li>所以，可以利用多出来的字符串做一些坏事？</li>
+</ul>
+</li>
+<li>想要password是<code>123456</code>，反序列化化前的字符串要是 <code>a:2:&#123;i:0;s:6:&quot;mikasa&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code></li>
+<li>如果说我们输入的是<ul>
+<li><code>a:2:&#123;i:0;s:26:&quot;mikasa&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code></li>
+<li>多出的字段是 <code>&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code> 数一下是20个字符，</li>
+<li>一个x会导致多出一个字符，所以加上20个x，<code>&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code>部分的内容会被当作无效部分被忽略？？？</li>
+</ul>
+</li>
+<li>所以最终输入是<ul>
+<li><code>a:2:&#123;i:0;s:46:&quot;mikasaxxxxxxxxxxxxxxxxxxxx&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:5:&quot;aaaaa&quot;;&#125;</code></li>
+<li>filter之后，会变为</li>
+<li><code>a:2:&#123;i:0;s:46:&quot;mikasayyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:5:&quot;aaaaa&quot;;&#125;</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="字符串减少"><a href="#字符串减少" class="headerlink" title="字符串减少"></a>字符串减少</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params"><span class="hljs-variable">$str</span></span>)</span>&#123;<br>  			<span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;xx&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-variable">$str</span>);<br>		&#125;<br>		<br>		<span class="hljs-variable">$username</span> = <span class="hljs-string">&quot;mikasa&quot;</span>;<br>		<span class="hljs-variable">$password</span> = <span class="hljs-string">&quot;biubiu&quot;</span>;<br>		<span class="hljs-variable">$user</span> = <span class="hljs-keyword">array</span>(<span class="hljs-variable">$username</span>,<span class="hljs-variable">$password</span>);<br>		<br>		<span class="hljs-variable">$str1</span> = <span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$user</span>));<br>		<span class="hljs-comment">//$str2 = filter(serialize($_GET[&#x27;user&#x27;]));</span><br>		<br>		<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str1</span>));<br>		<span class="hljs-comment">//var_dump(unserialize($str2));</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>问：如果我能控制进行反序列化的字符串，该如何使var_dump打印出来的password对应的值是<code>123456</code>，而不是<code>biubiu</code>？</p>
+<ul>
+<li>正常情况下反序列化字符串**$str1**的值为 <code>a:2:&#123;i:0;s:6:&quot;mikasa&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code></li>
+<li>那么把username的值变为<code>mikasaxxxxxx</code>，当完成序列化，filter函数处理后的结果为<code>a:2:&#123;i:0;s:12:&quot;mikasayyy&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code><ul>
+<li>因为比之前少了三个字符，反序列化时肯定是会失败的,<code>mikasayyy</code>的长度为9，还会继续往后吞3个字符！但这样会造成语法错误！</li>
+<li>所以，是否可以利用变化的字符长度做一些坏事？（吞掉原有的password值，再添加新值！）</li>
+</ul>
+</li>
+<li>构建的注入表达式是**（吞）**<ul>
+<li><code>a:2:&#123;i:0;s:**?**:&quot;mikasa&quot;;i:1;s:5:&quot;biubiu&quot;;&#125;**&quot;;i:1;s:6:&quot;123456&quot;;&#125;**</code></li>
+<li>所以要吞掉的内容是<code>&quot;;i:1;s:5:&quot;biubiu&quot;;&#125;</code> 一共是20个字符！所以需要添加40个x</li>
+</ul>
+</li>
+<li>所以最终的输入时<ul>
+<li><code>a:2:&#123;i:0;s:46:&quot;mikasaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;;i:1;s:5:&quot;biubiu&quot;;&#125;**&quot;;i:1;s:6:&quot;123456&quot;;&#125;**</code></li>
+<li>filter之后，会变为</li>
+<li><code>a:2:&#123;i:0;s:**46**:&quot;mikasayyyyyyyyyyyyyyyyyyyy&quot;;i:1;s:5:&quot;biubiu&quot;;&#125;**&quot;;i:1;s:6:&quot;123456&quot;;&#125;**</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h4><ul>
+<li>当字符增多：在输入的时候再加上精心构造的字符。经过过滤函数，字符变多之后，就把我们构造的给挤出来。从而实现字符逃逸</li>
+<li>当字符减少：在输入的时候再加上精心构造的字符。经过过滤函数，字符减少后，会把原有的吞掉，使构造的字符实现代替</li>
+</ul>
 
                 
               </div>
@@ -305,11 +378,32 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/tuyi/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tuyi/tags/%E7%9B%AE%E6%A0%87/" class="print-no-link">#目标</a>
+        <a href="/tuyi/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%83%E9%80%B8/" class="print-no-link">#字符串逃逸</a>
       
     </div>
   
@@ -321,8 +415,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>问自己</div>
-      <div>https://blog.tuyiisxp.top/2025/01/19/问自己/</div>
+      <div>反序列化之字符串逃逸</div>
+      <div>https://blog.tuyiisxp.top/2025/02/05/反序列化之字符串逃逸/</div>
     </div>
     <div class="license-meta">
       
@@ -334,7 +428,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年1月19日</div>
+          <div>2025年2月5日</div>
         </div>
       
       
@@ -371,18 +465,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/tuyi/2025/01/19/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" title="SSTI模板注入">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SSTI模板注入</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/tuyi/2024/11/12/%E5%BC%80%E7%AB%99/" title="开站">
-                        <span class="hidden-mobile">开站</span>
+                      <a href="/tuyi/2025/02/05/%E7%AC%94%E8%AE%B0%E6%B8%85%E5%8D%95/" title="笔记清单">
+                        <span class="hidden-mobile">笔记清单</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
