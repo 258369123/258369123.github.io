@@ -19,24 +19,26 @@
   <meta name="author" content="tuyi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="mt_rand()存在的问题mt_rand()如何生成的随机整数，它与设置的seed值和调用该函数的次数有关，假设使用mt_srand(12345)进行了一次播种，那么第一次调用mt_rand生成的数值为a，第二次为b，第三次为c。所以当有人拿到与你一串一模一样的seed时，所执行的结果都是跟刚刚描述的一样，这样就可以预测出接下来的数值是多少验证： 123456789101112131415161">
+    <meta name="description" content="zip文件目录穿越目录结构： 123456├── &#x2F;app                               │   ├── &#x2F;app.py                         │   ├── &#x2F;uploads                       │   ├── &#x2F;templates                   │   └── &#x2F;.config │── hom">
 <meta property="og:type" content="article">
-<meta property="og:title" content="php伪随机数">
-<meta property="og:url" content="https://blog.tuyiisxp.top/2025/02/15/php%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/index.html">
+<meta property="og:title" content="zip文件逃逸漏洞">
+<meta property="og:url" content="https://blog.tuyiisxp.top/2025/02/15/zip%E6%96%87%E4%BB%B6%E9%80%83%E9%80%B8%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="tuyi的小站">
-<meta property="og:description" content="mt_rand()存在的问题mt_rand()如何生成的随机整数，它与设置的seed值和调用该函数的次数有关，假设使用mt_srand(12345)进行了一次播种，那么第一次调用mt_rand生成的数值为a，第二次为b，第三次为c。所以当有人拿到与你一串一模一样的seed时，所执行的结果都是跟刚刚描述的一样，这样就可以预测出接下来的数值是多少验证： 123456789101112131415161">
+<meta property="og:description" content="zip文件目录穿越目录结构： 123456├── &#x2F;app                               │   ├── &#x2F;app.py                         │   ├── &#x2F;uploads                       │   ├── &#x2F;templates                   │   └── &#x2F;.config │── hom">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-02-15T11:47:59.000Z">
-<meta property="article:modified_time" content="2025-02-15T12:01:37.841Z">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215202207812.png">
+<meta property="article:published_time" content="2025-02-15T12:09:04.000Z">
+<meta property="article:modified_time" content="2025-02-15T12:25:58.345Z">
 <meta property="article:author" content="tuyi">
-<meta property="article:tag" content="php伪随机数">
+<meta property="article:tag" content="zip文件逃逸">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215202207812.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>php伪随机数 - tuyi的小站</title>
+  <title>zip文件逃逸漏洞 - tuyi的小站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -208,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="php伪随机数"></span>
+            <span id="subtitle" data-typed-text="zip文件逃逸漏洞"></span>
           
         </div>
 
@@ -219,7 +221,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-15 19:47" pubdate>
+        <time datetime="2025-02-15 20:09" pubdate>
           2025年2月15日 晚上
         </time>
       </span>
@@ -231,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          533 字
+          199 字
         
       </span>
     
@@ -242,7 +244,7 @@
         
         
         
-          5 分钟
+          2 分钟
         
       </span>
     
@@ -279,7 +281,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">php伪随机数</h1>
+            <h1 id="seo-header">zip文件逃逸漏洞</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -292,27 +294,22 @@
             
               <div class="markdown-body">
                 
-                <h1 id="mt-rand-存在的问题"><a href="#mt-rand-存在的问题" class="headerlink" title="mt_rand()存在的问题"></a><strong>mt_rand()存在的问题</strong></h1><p>mt_rand()如何生成的随机整数，它与设置的seed值和调用该函数的次数有关，假设使用mt_srand(12345)进行了一次播种，那么第一次调用mt_rand生成的数值为a，第二次为b，第三次为c。所以当有人拿到与你一串一模一样的seed时，所执行的结果都是跟刚刚描述的一样，这样就可以预测出接下来的数值是多少<br>验证：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs php"><br><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-title function_ invoke__">mt_srand</span>(<span class="hljs-number">123</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;当rand值为123时生成的伪随机数列：\n&quot;</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-number">5</span> ;<span class="hljs-variable">$i</span>++)&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">mt_rand</span>().<span class="hljs-string">&quot;\n&quot;</span>;<br>&#125;<br><br><span class="hljs-title function_ invoke__">mt_srand</span>(<span class="hljs-number">11111111</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;当rand值为11111111时生成的伪随机数列:\n&quot;</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-variable">$k</span>=<span class="hljs-number">0</span> ;<span class="hljs-variable">$k</span> &lt; <span class="hljs-number">5</span>; <span class="hljs-variable">$k</span>++)&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">mt_rand</span>().<span class="hljs-string">&quot;\n&quot;</span>;<br>&#125;<br><br><span class="hljs-title function_ invoke__">mt_srand</span>(<span class="hljs-number">123</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;当rand值为123时生成的伪随机数列:\n&quot;</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-variable">$k</span>=<span class="hljs-number">0</span> ;<span class="hljs-variable">$k</span> &lt; <span class="hljs-number">5</span>; <span class="hljs-variable">$k</span>++)&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">mt_rand</span>().<span class="hljs-string">&quot;\n&quot;</span>;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br><br><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-title function_ invoke__">mt_srand</span>(<span class="hljs-number">123</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;当rand值为123时生成的伪随机数列：\n&quot;</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-number">5</span> ;<span class="hljs-variable">$i</span>++)&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">mt_rand</span>().<span class="hljs-string">&quot;\n&quot;</span>;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="zip文件目录穿越"><a href="#zip文件目录穿越" class="headerlink" title="zip文件目录穿越"></a>zip文件目录穿越</h1><p>目录结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">├── /app                               <br>│   ├── /app.py                         <br>│   ├── /uploads                       <br>│   ├── /templates                   <br>│   └── /.config <br>│── home<br></code></pre></td></tr></table></figure>
 
-<p>运行结果：</p>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs dns">当rand值为<span class="hljs-number">123</span>时生成的伪随机数列：<br><span class="hljs-number">1495656191</span><br><span class="hljs-number">1531059894</span><br><span class="hljs-number">614479551</span><br><span class="hljs-number">920134305</span><br><span class="hljs-number">487159790</span><br>当rand值为<span class="hljs-number">11111111</span>时生成的伪随机数列:<br><span class="hljs-number">1275140870</span><br><span class="hljs-number">304669862</span><br><span class="hljs-number">188245067</span><br><span class="hljs-number">1742075826</span><br><span class="hljs-number">1668666189</span><br>当rand值为<span class="hljs-number">123</span>时生成的伪随机数列:<br><span class="hljs-number">1495656191</span><br><span class="hljs-number">1531059894</span><br><span class="hljs-number">614479551</span><br><span class="hljs-number">920134305</span><br><span class="hljs-number">487159790</span><br>当rand值为<span class="hljs-number">123</span>时生成的伪随机数列：<br><span class="hljs-number">1495656191</span><br><span class="hljs-number">1531059894</span><br><span class="hljs-number">614479551</span><br><span class="hljs-number">920134305</span><br><span class="hljs-number">487159790</span><br></code></pre></td></tr></table></figure>
+<p>我们上传文件的目录在<code>uploads</code>，我们想要覆盖app.py，那解释<code>../app.py</code></p>
+<p>我们把要覆盖的文件打包成压缩包，压缩包名字写成<code>..1app.py</code></p>
+<p>然后把文件用<code>notepad++</code>打开把<code>1</code>改成<code>/</code></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215202207812.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250215202207812"></p>
+<p>有两处都要改</p>
+<h1 id="软链接打包"><a href="#软链接打包" class="headerlink" title="软链接打包"></a>软链接打包</h1><p>文件软链接到&#x2F;etc&#x2F;passwd等文件，达到任意文件读取</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ln</span> -s /etc/passwd ./a   <span class="hljs-comment">#文件/etc/pawwsd软链接到a</span><br>zip --symlinks -r 1.zip ./a  <span class="hljs-comment">#将a文件压缩为1.zip</span><br></code></pre></td></tr></table></figure>
 
-<p>发现对于一个种子，题目随机数生成的是一样的</p>
-<h1 id="php-mt-seed4-0工具"><a href="#php-mt-seed4-0工具" class="headerlink" title="php_mt_seed4.0工具"></a>php_mt_seed4.0工具</h1><p>安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/openwall/php_mt_seed<br><span class="hljs-built_in">cd</span> php_mt_seed<br>make<br></code></pre></td></tr></table></figure>
-
-<p>运行方法：</p>
+<p>解释：</p>
 <blockquote>
-<p>time 开头，使用 .&#x2F; 执行我们的程序，后面再接上希望逆推的随机数字节</p>
+<h3 id="symlinks："><a href="#symlinks：" class="headerlink" title="--symlinks："></a><code>--symlinks</code>：</h3><p>这个选项告诉 <code>zip</code> 在压缩符号链接（symlink）时，要保留其符号链接特性，而不是将它们转换成链接目标文件的实际内容</p>
 </blockquote>
-<p>随机数转字节</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">php_mt_seed</span>(<span class="hljs-params"><span class="hljs-variable">$dict</span></span>) </span>&#123;<br>    <span class="hljs-variable">$chars</span> = <span class="hljs-string">&#x27;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#x27;</span>;<br>    <span class="hljs-variable">$response</span> = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$dict</span>); <span class="hljs-variable">$i</span>++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-variable">$j</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$j</span> &lt; <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$chars</span>); <span class="hljs-variable">$j</span>++) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-variable">$dict</span>[<span class="hljs-variable">$i</span>] == <span class="hljs-variable">$chars</span>[<span class="hljs-variable">$j</span>]) &#123;<br>                <span class="hljs-variable">$response</span> .= <span class="hljs-variable">$j</span> . <span class="hljs-string">&#x27; &#x27;</span> . <span class="hljs-variable">$j</span> . <span class="hljs-string">&#x27; 0 &#x27;</span> . (<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$chars</span>) - <span class="hljs-number">1</span>) . <span class="hljs-string">&#x27; &#x27;</span>;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$response</span>;<br>&#125;<br><br><span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">php_mt_seed</span>(<span class="hljs-string">&quot;输入&quot;</span>);<br></code></pre></td></tr></table></figure>
-
-<h1 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h1><p>而且数据可以按次数推的，如果运行了两次随机数</p>
-<p>假设生成了12位的随机字符串，生成了两次，我们不知道第一次的，但是知道第二次的</p>
-<p>我们可以再第二次处理后的字节前加上12组<code>0 0 0 0</code></p>
-<p>也可以将种子爆破出来</p>
+<p>这个仅适合哪些文件展示界面适用</p>
 
                 
               </div>
@@ -346,7 +343,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tuyi/tags/php%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="print-no-link">#php伪随机数</a>
+        <a href="/tuyi/tags/zip%E6%96%87%E4%BB%B6%E9%80%83%E9%80%B8/" class="print-no-link">#zip文件逃逸</a>
       
     </div>
   
@@ -358,8 +355,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>php伪随机数</div>
-      <div>https://blog.tuyiisxp.top/2025/02/15/php伪随机数/</div>
+      <div>zip文件逃逸漏洞</div>
+      <div>https://blog.tuyiisxp.top/2025/02/15/zip文件逃逸漏洞/</div>
     </div>
     <div class="license-meta">
       
@@ -408,9 +405,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/tuyi/2025/02/15/zip%E6%96%87%E4%BB%B6%E9%80%83%E9%80%B8%E6%BC%8F%E6%B4%9E/" title="zip文件逃逸漏洞">
+                      <a href="/tuyi/2025/02/15/linux%E6%8F%90%E6%9D%83/" title="linux提权">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">zip文件逃逸漏洞</span>
+                        <span class="hidden-mobile">linux提权</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -418,8 +415,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/tuyi/2025/02/15/API%E4%B8%8Edeepseek/" title="API">
-                        <span class="hidden-mobile">API</span>
+                      <a href="/tuyi/2025/02/15/php%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/" title="php伪随机数">
+                        <span class="hidden-mobile">php伪随机数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
