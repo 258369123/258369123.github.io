@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/tuyi/img/tuyi.jpg">
-  <link rel="icon" href="/tuyi/img/tuyi.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/tuyi.jpg">
+  <link rel="icon" href="/img/tuyi.jpg">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <meta name="description" content="前言在adwp或者adw赛制中当我们打进内网时(前提是打进去，这就不得不提ccb了😭)，搭建代理是必不可少的一部分 介绍几种简单的方法 内网穿透frp有公网ip的话可以试试frp 有时间补上(狗头)🐶 花生壳内网穿透没有公网ip的话就直接使用花生壳吧 官网 简单无脑一看就会 端口转发使用iptable可以转发但是够简单，有没有简单又方便的方法的呢 有的兄弟有的，那就是LCX简单的端口转发工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内网代理搭建">
-<meta property="og:url" content="https://blog.tuyiisxp.top/2025/03/17/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:url" content="https://258369123.github.io/2025/03/17/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="tuyi的小站">
 <meta property="og:description" content="前言在adwp或者adw赛制中当我们打进内网时(前提是打进去，这就不得不提ccb了😭)，搭建代理是必不可少的一部分 介绍几种简单的方法 内网穿透frp有公网ip的话可以试试frp 有时间补上(狗头)🐶 花生壳内网穿透没有公网ip的话就直接使用花生壳吧 官网 简单无脑一看就会 端口转发使用iptable可以转发但是够简单，有没有简单又方便的方法的呢 有的兄弟有的，那就是LCX简单的端口转发工具">
 <meta property="og:locale" content="zh_CN">
@@ -75,19 +75,19 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/tuyi/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/tuyi/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/tuyi/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="/tuyi/css/custom.css">
-<link rel="stylesheet" href="/tuyi/css/reward.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/reward.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
@@ -95,15 +95,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.tuyiisxp.top","root":"/tuyi/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/tuyi/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"258369123.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/tuyi/js/utils.js" ></script>
-  <script  src="/tuyi/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -120,7 +120,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/tuyi/">
+    <a class="navbar-brand" href="/">
       <strong>tuyi的小站</strong>
     </a>
 
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -175,7 +175,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -187,7 +187,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -217,7 +217,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/tuyi/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -330,7 +330,7 @@
 
 <p>将本地端口流量转发到目标端口，支持内网环境</p>
 <h1 id="内网隧道搭建"><a href="#内网隧道搭建" class="headerlink" title="内网隧道搭建"></a>内网隧道搭建</h1><h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><p>ssh有点是方便，不要安装啥东西，直接就可以使用，但是弊端也很明显，只能一个端口一个端口的转发流量</p>
-<h3 id="单层ssh隧道搭建"><a href="#单层ssh隧道搭建" class="headerlink" title="单层ssh隧道搭建"></a>单层ssh隧道搭建</h3><p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250318003401221.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250318003401221"></p>
+<h3 id="单层ssh隧道搭建"><a href="#单层ssh隧道搭建" class="headerlink" title="单层ssh隧道搭建"></a>单层ssh隧道搭建</h3><p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250318003401221.png" srcset="/img/loading.gif" lazyload alt="image-20250318003401221"></p>
 <p>我们的机器只能访问外围主机，我们可以使用外围主机当跳板访问内网</p>
 <p>在我们机器上运行</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ssh -L <span class="hljs-number">8085</span>:<span class="hljs-number">172.2</span>.<span class="hljs-number">136.5</span>:<span class="hljs-number">80</span> ctfshow@pwn<span class="hljs-selector-class">.challenge</span><span class="hljs-selector-class">.ctf</span><span class="hljs-selector-class">.show</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-number">28227</span><br></code></pre></td></tr></table></figure>
@@ -338,7 +338,7 @@
 <p>这里我们将可控linux服务器中172.2.136.5:80的流量转发到本地windows的8085端口上，然后就可以通过访问127.0.0.1:8085以访问172.2.136.5的web服务，流量转发过程为:</p>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">172.2.136.5:80</span>-&gt;windows的<span class="hljs-number">80</span>端口<br></code></pre></td></tr></table></figure>
 
-<h3 id="多层ssh隧道搭建"><a href="#多层ssh隧道搭建" class="headerlink" title="多层ssh隧道搭建"></a>多层ssh隧道搭建</h3><p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250318003945521.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250318003945521"></p>
+<h3 id="多层ssh隧道搭建"><a href="#多层ssh隧道搭建" class="headerlink" title="多层ssh隧道搭建"></a>多层ssh隧道搭建</h3><p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250318003945521.png" srcset="/img/loading.gif" lazyload alt="image-20250318003945521"></p>
 <p>不同内网之间没法直接相互通信，因此如果我们想用windows攻击机直接访问深层内网的web服务，需要先在表层内网服务器和深层内网服务器之间建立隧道，然后再在windows攻击机和表层内网服务器之间建立隧道，最后就可以用windows攻击机直接访问到深层内网的web服务。</p>
 <p>在表层内网服务器上运行：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ssh -L <span class="hljs-number">9383</span>:<span class="hljs-number">172.2</span>.<span class="hljs-number">136.5</span>:<span class="hljs-number">80</span> ctfshow@pwn<span class="hljs-selector-class">.challenge</span><span class="hljs-selector-class">.ctf</span><span class="hljs-selector-class">.show</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-number">28227</span><br></code></pre></td></tr></table></figure>
@@ -366,7 +366,7 @@
 <p>agent：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash">-l 被动模式下的监听地址[ip]:&lt;port&gt;<br><br>-s 节点通信加密密钥<br><br>-c 主动模式下的目标节点地址<br><br>--proxy socks5代理服务器地址<br><br>--proxyu socks5代理服务器用户名(可选)<br><br>--proxyp socks5代理服务器密码(可选)<br><br>--reconnect 重连时间间隔（s）<br><br>--rehost 端口复用时复用的IP地址<br><br>--report 端口复用时复用的端口号<br><br>--up 上游协议类型,默认为裸TCP流量,可选HTTP<br><br>--down 下游协议类型,默认为裸TCP流量,可选HTTP<br><br>--cs 运行平台的shell编码类型，默认为utf-8，可选gbk<br></code></pre></td></tr></table></figure>
 
-<h3 id="单层隧道搭建"><a href="#单层隧道搭建" class="headerlink" title="单层隧道搭建"></a>单层隧道搭建</h3><p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250318003401221.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250318003401221"></p>
+<h3 id="单层隧道搭建"><a href="#单层隧道搭建" class="headerlink" title="单层隧道搭建"></a>单层隧道搭建</h3><p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250318003401221.png" srcset="/img/loading.gif" lazyload alt="image-20250318003401221"></p>
 <p>控制端配置</p>
 <p>windows使用被动模式，监听端口8000，并对通信进行加密秘钥为123。等待被控端的连接</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">windows_x64_admin.exe -l 192.168.125.134:8000 -s 123 <br></code></pre></td></tr></table></figure>
@@ -379,34 +379,34 @@
 
 <p>此时客户端与控制端间搭建了一条socks隧道。</p>
 <p>此时，admin端就可以控制</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314000539830.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314000539830"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314000539830.png" srcset="/img/loading.gif" lazyload alt="image-20250314000539830"></p>
 <p>可以看到detail有一个节点</p>
 <p>我们使用这个节点<code>use 0</code></p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314000649868.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314000649868"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314000649868.png" srcset="/img/loading.gif" lazyload alt="image-20250314000649868"></p>
 <p>建立socks隧道</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314001615923.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314001615923"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314001615923.png" srcset="/img/loading.gif" lazyload alt="image-20250314001615923"></p>
 <p>在windows使用proxifier创建代理</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314001732271.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314001732271"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314001732271.png" srcset="/img/loading.gif" lazyload alt="image-20250314001732271"></p>
 <p>创建代理规则</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314003554392.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314003554392"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314003554392.png" srcset="/img/loading.gif" lazyload alt="image-20250314003554392"></p>
 <p>目标ip填目标靶机地址</p>
 <p>在linux使用proxychains创建代理</p>
 <p>我们需要修改&#x2F;etc&#x2F;proxychains4.conf </p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314002529186.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314002529186"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314002529186.png" srcset="/img/loading.gif" lazyload alt="image-20250314002529186"></p>
 <p>修改成指定端口(这里是windows做admin就不演示)</p>
 <p>成功访问内网</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314002917468.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314002917468"></p>
-<h3 id="多层隧道搭建"><a href="#多层隧道搭建" class="headerlink" title="多层隧道搭建"></a>多层隧道搭建</h3><p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250318003945521.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250318003945521"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314002917468.png" srcset="/img/loading.gif" lazyload alt="image-20250314002917468"></p>
+<h3 id="多层隧道搭建"><a href="#多层隧道搭建" class="headerlink" title="多层隧道搭建"></a>多层隧道搭建</h3><p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250318003945521.png" srcset="/img/loading.gif" lazyload alt="image-20250318003945521"></p>
 <p>在单层的基础上我们<code>use 0</code>之后继续使用监听</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314003137910.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314003137910"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314003137910.png" srcset="/img/loading.gif" lazyload alt="image-20250314003137910"></p>
 <p>模式选择普通模式1,2是iptables 重用模式，仅限linux，3是复用socks模式，这里没必要，要是是docker容器限制端口可以使用3</p>
 <p>继续在深层内网机器主动连接我们的10000端口</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">./linux_x64_agent</span> -c ip<span class="hljs-function">:10000</span> -s 123 <span class="hljs-params">--reconnect</span> 8<br></code></pre></td></tr></table></figure>
 
 <p>此时我们的admin又会上线二级代理机器，没环境就不复现了</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314004057422.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314004057422"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314004057422.png" srcset="/img/loading.gif" lazyload alt="image-20250314004057422"></p>
 <p>我们<code>use 1</code>在创建socks</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314004135114.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250314004135114"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250314004135114.png" srcset="/img/loading.gif" lazyload alt="image-20250314004135114"></p>
 <p>这是我们的widows就可以访问深层内网了在效仿<code>node0</code>配置代理就行</p>
 <p>多级代理就可以了，速度稳定性都还可以</p>
 <p>ps：图片来自网络，写的不好大佬轻点喷</p>
@@ -428,7 +428,7 @@
     
       <span class="category-chain">
         
-  <a href="/tuyi/categories/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E6%90%AD%E5%BB%BA/" class="category-chain-item">内网代理搭建</a>
+  <a href="/categories/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E6%90%AD%E5%BB%BA/" class="category-chain-item">内网代理搭建</a>
   
   
 
@@ -443,7 +443,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tuyi/tags/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E6%90%AD%E5%BB%BA/" class="print-no-link">#内网代理搭建</a>
+        <a href="/tags/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E6%90%AD%E5%BB%BA/" class="print-no-link">#内网代理搭建</a>
       
     </div>
   
@@ -456,7 +456,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>内网代理搭建</div>
-      <div>https://blog.tuyiisxp.top/2025/03/17/内网代理搭建/</div>
+      <div>https://258369123.github.io/2025/03/17/内网代理搭建/</div>
     </div>
     <div class="license-meta">
       
@@ -505,7 +505,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/tuyi/2025/03/20/linux%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/" title="linux深入学习">
+                      <a href="/2025/03/20/linux%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/" title="linux深入学习">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">linux深入学习</span>
                         <span class="visible-mobile">上一篇</span>
@@ -515,7 +515,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/tuyi/2025/03/16/jar%E5%8F%8D%E7%BC%96%E8%AF%91%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85/" title="jar反编译重新打包">
+                      <a href="/2025/03/16/jar%E5%8F%8D%E7%BC%96%E8%AF%91%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85/" title="jar反编译重新打包">
                         <span class="hidden-mobile">jar反编译重新打包</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -706,8 +706,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/tuyi/js/events.js" ></script>
-<script  src="/tuyi/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -729,7 +729,7 @@
 
 
   
-    <script  src="/tuyi/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -828,7 +828,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/tuyi/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -838,13 +838,13 @@
   
 <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
-<script src="/tuyi/js/reward.js"></script>
+<script src="/js/reward.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/tuyi/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

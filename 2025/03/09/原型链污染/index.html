@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/tuyi/img/tuyi.jpg">
-  <link rel="icon" href="/tuyi/img/tuyi.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/tuyi.jpg">
+  <link rel="icon" href="/img/tuyi.jpg">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <meta name="description" content="前言：最近复现知识点时发现，原型链污染这一块的原来还不是很清楚，平时都是那工具搜哈的，现在有时间捡起来重新学习一下 JavaScript原型链污染prototype和__proto__分别是什么JavaScript中，我们如果要定义一个类，需要以定义“构造函数”的方式来定义： 12345function Foo() &#123;    this.bar &#x3D; 1&#125;new Foo()  Fo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="原型链污染">
-<meta property="og:url" content="https://blog.tuyiisxp.top/2025/03/09/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/index.html">
+<meta property="og:url" content="https://258369123.github.io/2025/03/09/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/index.html">
 <meta property="og:site_name" content="tuyi的小站">
 <meta property="og:description" content="前言：最近复现知识点时发现，原型链污染这一块的原来还不是很清楚，平时都是那工具搜哈的，现在有时间捡起来重新学习一下 JavaScript原型链污染prototype和__proto__分别是什么JavaScript中，我们如果要定义一个类，需要以定义“构造函数”的方式来定义： 12345function Foo() &#123;    this.bar &#x3D; 1&#125;new Foo()  Fo">
 <meta property="og:locale" content="zh_CN">
@@ -72,19 +72,19 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/tuyi/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/tuyi/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/tuyi/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="/tuyi/css/custom.css">
-<link rel="stylesheet" href="/tuyi/css/reward.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/reward.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
@@ -92,15 +92,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.tuyiisxp.top","root":"/tuyi/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/tuyi/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"258369123.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/tuyi/js/utils.js" ></script>
-  <script  src="/tuyi/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -117,7 +117,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/tuyi/">
+    <a class="navbar-brand" href="/">
       <strong>tuyi的小站</strong>
     </a>
 
@@ -136,7 +136,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -148,7 +148,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -160,7 +160,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -172,7 +172,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -184,7 +184,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -214,7 +214,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/tuyi/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -336,7 +336,7 @@
 <li>在对象son中寻找last_name</li>
 <li>如果找不到，则在<code>son.__proto__</code>中寻找last_name</li>
 <li>如果仍然找不到，则继续在<code>son.__proto__.__proto__</code>中寻找last_name</li>
-<li>依次寻找，直到找到<code>null</code>结束。比如，<code>Object.prototype</code>的<code>__proto__</code>就是<code>null</code><br><img src="C:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20250311224928865.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250311224928865"></li>
+<li>依次寻找，直到找到<code>null</code>结束。比如，<code>Object.prototype</code>的<code>__proto__</code>就是<code>null</code><br><img src="C:/Users/xp/AppData/Roaming/Typora/typora-user-images/image-20250311224928865.png" srcset="/img/loading.gif" lazyload alt="image-20250311224928865"></li>
 </ol>
 <p>JavaScript的这个查找的机制，被运用在面向对象的继承中，被称作prototype继承链。</p>
 <p>以上就是最基础的JavaScript面向对象编程，只要牢记以下几点即可：</p>
@@ -350,7 +350,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// foo是一个简单的JavaScript对象</span><br><span class="hljs-keyword">let</span> foo = &#123;<span class="hljs-attr">bar</span>: <span class="hljs-number">1</span>&#125;<br><br><span class="hljs-comment">// foo.bar 此时为1</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(foo.<span class="hljs-property">bar</span>)<br><br><span class="hljs-comment">// 修改foo的原型（即Object）</span><br>foo.<span class="hljs-property">__proto__</span>.<span class="hljs-property">bar</span> = <span class="hljs-number">2</span><br><br><span class="hljs-comment">// 由于查找顺序的原因，foo.bar仍然是1</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(foo.<span class="hljs-property">bar</span>)<br><br><span class="hljs-comment">// 此时再用Object创建一个空的zoo对象</span><br><span class="hljs-keyword">let</span> zoo = &#123;&#125;<br><br><span class="hljs-comment">// 查看zoo.bar</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(zoo.<span class="hljs-property">bar</span>)<br></code></pre></td></tr></table></figure>
 
 <p>最后，虽然zoo是一个<strong>空</strong>对象<code>&#123;&#125;</code>，但<code>zoo.bar</code>的结果居然是2：</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250311225454881.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250311225454881"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250311225454881.png" srcset="/img/loading.gif" lazyload alt="image-20250311225454881"></p>
 <p>原因也显而易见：因为前面我们修改了foo的原型<code>foo.__proto__.bar = 2</code>，而foo是一个Object类的实例，所以实际上是修改了Object这个类，给这个类增加了一个属性bar，值为2。</p>
 <p>后来，我们又用Object类创建了一个zoo对象<code>let zoo = &#123;&#125;</code>，zoo对象自然也有一个bar属性了。</p>
 <p>那么，在一个应用中，如果攻击者控制并修改了一个对象的原型，那么将可以影响所有和这个对象来自同一个类、父祖类的对象。这种攻击方式就是<strong>原型链污染</strong>。</p>
@@ -368,13 +368,13 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> o1 = &#123;&#125;<br><span class="hljs-keyword">let</span> o2 = &#123;<span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;__proto__&quot;</span>: &#123;<span class="hljs-attr">b</span>: <span class="hljs-number">2</span>&#125;&#125;<br><span class="hljs-title function_">merge</span>(o1, o2)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(o1.<span class="hljs-property">a</span>, o1.<span class="hljs-property">b</span>)<br><br>o3 = &#123;&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(o3.<span class="hljs-property">b</span>)<br></code></pre></td></tr></table></figure>
 
 <p>结果是，合并虽然成功了，但原型链没有被污染：</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250311225904998.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250311225904998"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250311225904998.png" srcset="/img/loading.gif" lazyload alt="image-20250311225904998"></p>
 <p>这是因为，我们用JavaScript创建o2的过程（<code>let o2 = &#123;a: 1, &quot;__proto__&quot;: &#123;b: 2&#125;&#125;</code>）中，<code>__proto__</code>已经代表o2的原型了，此时遍历o2的所有键名，你拿到的是<code>[a, b]</code>，<code>__proto__</code>并不是一个key，自然也不会修改Object的原型。</p>
 <p>那么，如何让<code>__proto__</code>被认为是一个键名呢？</p>
 <p>我们将代码改成如下：</p>
 <figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs erlang"><span class="hljs-keyword">let</span> o1 = &#123;&#125;<br><span class="hljs-keyword">let</span> o2 = JSON.parse(&#x27;&#123;<span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;__proto__&quot;</span>: &#123;<span class="hljs-string">&quot;b&quot;</span>: <span class="hljs-number">2</span>&#125;&#125;&#x27;)<br><span class="hljs-function"><span class="hljs-title">merge</span><span class="hljs-params">(o1, o2)</span></span><br><span class="hljs-function"><span class="hljs-title">console</span>.<span class="hljs-title">log</span><span class="hljs-params">(o1.a, o1.b)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function"><span class="hljs-title">o3</span> = &#123;&#125;</span><br><span class="hljs-function"><span class="hljs-title">console</span>.<span class="hljs-title">log</span><span class="hljs-params">(o3.b)</span></span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250311225953552.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250311225953552"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250311225953552.png" srcset="/img/loading.gif" lazyload alt="image-20250311225953552"></p>
 <p>可见，新建的o3对象，也存在b属性，说明Object已经被污染：</p>
 <p>这是因为，JSON解析的情况下，<code>__proto__</code>会被认为是一个真正的“键名”，而不代表“原型”，所以在遍历o2的时候会存在这个键。</p>
 <p>merge操作是最常见可能控制键名的操作，也最能被原型链攻击，很多常见的库都存在这个问题</p>
@@ -414,17 +414,17 @@
 <h3 id="污染过程解析"><a href="#污染过程解析" class="headerlink" title="污染过程解析"></a>污染过程解析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">father</span>:<br>    secret=<span class="hljs-string">&quot;hello&quot;</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">son_a</span>(<span class="hljs-title class_ inherited__">father</span>):<br>    <span class="hljs-keyword">pass</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">son_b</span>(<span class="hljs-title class_ inherited__">father</span>):<br>    <span class="hljs-keyword">pass</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">merge</span>(<span class="hljs-params">src,dst</span>):<br>    <span class="hljs-comment"># 遍历字典中的所有键值对</span><br>    <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> src.items():<br>        <span class="hljs-comment"># 检查dst是否为字典</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(dst,<span class="hljs-string">&#x27;__getitem__&#x27;</span>):<br>            <span class="hljs-comment"># 如果存在键k并且v是一个字典</span><br>            <span class="hljs-keyword">if</span> dst.get(k) <span class="hljs-keyword">and</span> <span class="hljs-built_in">type</span>(v) == <span class="hljs-built_in">dict</span>:<br>                merge(v,dst.get(k))<br>            <span class="hljs-keyword">else</span>:<br>                dst[k]=v<br>                <span class="hljs-comment"># 如果dst是一个对象并且有属性k</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">hasattr</span>(dst,k) <span class="hljs-keyword">and</span> <span class="hljs-built_in">type</span>(v) == <span class="hljs-built_in">dict</span>:<br>            merge(v,<span class="hljs-built_in">getattr</span>(dst,k))<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-comment"># 将v赋值给k</span><br>            <span class="hljs-built_in">setattr</span>(dst,k,v)<br>    <br>instance=son_b()<br>payload=&#123;<br>    <span class="hljs-string">&quot;__class__&quot;</span>:&#123;<br>        <span class="hljs-string">&quot;__base__&quot;</span>:&#123;<br>            <span class="hljs-string">&quot;secret&quot;</span>:<span class="hljs-string">&quot;world&quot;</span><br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-built_in">print</span>(son_a.secret)<br><span class="hljs-built_in">print</span>(instance.secret)<br><br>merge(payload,instance)<br><span class="hljs-built_in">print</span>(son_a.secret)<br><span class="hljs-built_in">print</span>(instance.secret)<br></code></pre></td></tr></table></figure>
 
 <p>我们debug一下</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231033660.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250309231033660"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231033660.png" srcset="/img/loading.gif" lazyload alt="image-20250309231033660"></p>
 <p>可以看到我们的键为<code>&#39;__class__&#39;</code>,值为<code>&#123;&#39;__base__&#39;:&#123;&#39;secret&#39;:&#39;world&#39;&#125;&#125;</code>,下一步由于<code>dst</code>不为字典直接到了<code>elif</code></p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231142951.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250309231142951"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231142951.png" srcset="/img/loading.gif" lazyload alt="image-20250309231142951"></p>
 <p>继续之后，发现键为<code>&#39;__base__&#39;</code>,值为<code>&#123;&#39;secret&#39;:&#39;world&#39;&#125;</code></p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231215167.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250309231215167"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231215167.png" srcset="/img/loading.gif" lazyload alt="image-20250309231215167"></p>
 <p><code>dst</code>还是不是字典，继续下一步</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231422466.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250309231422466"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231422466.png" srcset="/img/loading.gif" lazyload alt="image-20250309231422466"></p>
 <p>现在键为<code>&#39;secret&#39;</code>，值为<code>&#39;world&#39;</code>，值不是字典了，直接跳到<code>else</code>所以直接跳转到了<code>setattr</code>，进行赋值</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231536024.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250309231536024"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231536024.png" srcset="/img/loading.gif" lazyload alt="image-20250309231536024"></p>
 <p>继续下一步</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231717896.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250309231717896"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250309231717896.png" srcset="/img/loading.gif" lazyload alt="image-20250309231717896"></p>
 <p>可以看见<code>dst</code>直接就指向地址了</p>
 <p>那么我们就成功的通过当前类的<code>__base__</code>去污染了<code>secret</code>(现在这三个类的<strong>secret</strong>都是<strong>world</strong>)，不过这仅仅只是一个内置属性，那能不能实现最大的利用直接污染<code>object</code>呢</p>
 <p>前面几步都在正常进行，可是到了后面，发现个问题，也就是我们刚才所有的回退那两步发现没了，从而直接报错，也就是说污染失败，得出结论</p>
@@ -493,7 +493,7 @@
 
 <p>只要是<code>BuiltinImporter</code>的加载器都行，所以这里还有**_<em>spec</em>_**也能用</p>
 <p><code>__spec__</code>内置属性在<code>Python 3.4</code>版本引入，其包含了关于类加载时的信息，本身是定义在<code>Lib/importlib/_bootstrap.py</code>的类<code>ModuleSpec</code>，显然因为定义在<code>importlib</code>模块下的<code>py</code>文件，所以可以直接采用<code>&lt;模块名&gt;.__spec__.__init__.__globals__[&#39;sys&#39;]</code>获取到<code>sys</code>模块</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250311173156762.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250311173156762"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250311173156762.png" srcset="/img/loading.gif" lazyload alt="image-20250311173156762"></p>
 <p>看个<code>demo</code></p>
 <p><code>test.py</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>():<br>    secret=<span class="hljs-string">&quot;123456&quot;</span><br></code></pre></td></tr></table></figure>
@@ -597,7 +597,7 @@
     
       <span class="category-chain">
         
-  <a href="/tuyi/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
+  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
   
   
 
@@ -612,7 +612,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tuyi/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" class="print-no-link">#原型链污染</a>
+        <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" class="print-no-link">#原型链污染</a>
       
     </div>
   
@@ -625,7 +625,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>原型链污染</div>
-      <div>https://blog.tuyiisxp.top/2025/03/09/原型链污染/</div>
+      <div>https://258369123.github.io/2025/03/09/原型链污染/</div>
     </div>
     <div class="license-meta">
       
@@ -674,7 +674,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/tuyi/2025/03/13/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83%C2%B7%E7%BD%91%E9%BC%8E%E6%9D%AF%E5%8D%8A%E5%86%B3%E8%B5%9B/" title="春秋云境·网鼎杯半决赛">
+                      <a href="/2025/03/13/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83%C2%B7%E7%BD%91%E9%BC%8E%E6%9D%AF%E5%8D%8A%E5%86%B3%E8%B5%9B/" title="春秋云境·网鼎杯半决赛">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">春秋云境·网鼎杯半决赛</span>
                         <span class="visible-mobile">上一篇</span>
@@ -684,7 +684,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/tuyi/2025/03/09/TPCTF%E5%A4%8D%E7%8E%B0/" title="TPCTF复现">
+                      <a href="/2025/03/09/TPCTF%E5%A4%8D%E7%8E%B0/" title="TPCTF复现">
                         <span class="hidden-mobile">TPCTF复现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -875,8 +875,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/tuyi/js/events.js" ></script>
-<script  src="/tuyi/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -898,7 +898,7 @@
 
 
   
-    <script  src="/tuyi/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -997,7 +997,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/tuyi/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -1007,13 +1007,13 @@
   
 <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
-<script src="/tuyi/js/reward.js"></script>
+<script src="/js/reward.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/tuyi/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

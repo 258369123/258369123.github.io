@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/tuyi/img/tuyi.jpg">
-  <link rel="icon" href="/tuyi/img/tuyi.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/tuyi.jpg">
+  <link rel="icon" href="/img/tuyi.jpg">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <meta name="description" content="java反编译jar包并修改class文件重新打包手写个简单的javademo  添加工件  构建jar包  使用jadx打开导出文件 修改要改的java包  使用 javac重新编译加上java的配置文件生成class文件 123javac -classpath 配置文件 java文件javac -classpath C:\Users\xp\Downloads\4\resources\META-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jar反编译重新打包">
-<meta property="og:url" content="https://blog.tuyiisxp.top/2025/03/16/jar%E5%8F%8D%E7%BC%96%E8%AF%91%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85/index.html">
+<meta property="og:url" content="https://258369123.github.io/2025/03/16/jar%E5%8F%8D%E7%BC%96%E8%AF%91%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85/index.html">
 <meta property="og:site_name" content="tuyi的小站">
 <meta property="og:description" content="java反编译jar包并修改class文件重新打包手写个简单的javademo  添加工件  构建jar包  使用jadx打开导出文件 修改要改的java包  使用 javac重新编译加上java的配置文件生成class文件 123javac -classpath 配置文件 java文件javac -classpath C:\Users\xp\Downloads\4\resources\META-">
 <meta property="og:locale" content="zh_CN">
@@ -65,19 +65,19 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/tuyi/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/tuyi/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/tuyi/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="/tuyi/css/custom.css">
-<link rel="stylesheet" href="/tuyi/css/reward.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/reward.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
@@ -85,15 +85,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.tuyiisxp.top","root":"/tuyi/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/tuyi/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"258369123.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/tuyi/js/utils.js" ></script>
-  <script  src="/tuyi/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -110,7 +110,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/tuyi/">
+    <a class="navbar-brand" href="/">
       <strong>tuyi的小站</strong>
     </a>
 
@@ -129,7 +129,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -141,7 +141,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -153,7 +153,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -165,7 +165,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -177,7 +177,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -207,7 +207,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/tuyi/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -298,14 +298,14 @@
               <div class="markdown-body">
                 
                 <h1 id="java反编译jar包并修改class文件重新打包"><a href="#java反编译jar包并修改class文件重新打包" class="headerlink" title="java反编译jar包并修改class文件重新打包"></a>java反编译jar包并修改class文件重新打包</h1><p>手写个简单的javademo</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250316000901953.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250316000901953"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250316000901953.png" srcset="/img/loading.gif" lazyload alt="image-20250316000901953"></p>
 <p>添加工件</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250316000927506.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250316000927506"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250316000927506.png" srcset="/img/loading.gif" lazyload alt="image-20250316000927506"></p>
 <p>构建jar包</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250316001012430.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250316001012430"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250316001012430.png" srcset="/img/loading.gif" lazyload alt="image-20250316001012430"></p>
 <p>使用jadx打开导出文件</p>
 <p>修改要改的java包</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250316001753701.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250316001753701"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250316001753701.png" srcset="/img/loading.gif" lazyload alt="image-20250316001753701"></p>
 <p>使用</p>
 <p>javac重新编译加上java的配置文件生成class文件</p>
 <figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">javac -classpath 配置文件 java文件<br><br>javac -classpath <span class="hljs-name">C</span>:\Users\xp\Downloads\<span class="hljs-number">4</span>\resources\META-INF\MANIFEST.MF ./Main.java<br></code></pre></td></tr></table></figure>
@@ -328,7 +328,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tuyi/tags/jar%E5%8F%8D%E7%BC%96%E8%AF%91%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85/" class="print-no-link">#jar反编译重新打包</a>
+        <a href="/tags/jar%E5%8F%8D%E7%BC%96%E8%AF%91%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85/" class="print-no-link">#jar反编译重新打包</a>
       
     </div>
   
@@ -341,7 +341,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>jar反编译重新打包</div>
-      <div>https://blog.tuyiisxp.top/2025/03/16/jar反编译重新打包/</div>
+      <div>https://258369123.github.io/2025/03/16/jar反编译重新打包/</div>
     </div>
     <div class="license-meta">
       
@@ -390,7 +390,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/tuyi/2025/03/17/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E6%90%AD%E5%BB%BA/" title="内网代理搭建">
+                      <a href="/2025/03/17/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E6%90%AD%E5%BB%BA/" title="内网代理搭建">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">内网代理搭建</span>
                         <span class="visible-mobile">上一篇</span>
@@ -400,7 +400,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/tuyi/2025/03/15/jsp%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/" title="jsp一句话木马">
+                      <a href="/2025/03/15/jsp%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/" title="jsp一句话木马">
                         <span class="hidden-mobile">jsp一句话木马</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -591,8 +591,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/tuyi/js/events.js" ></script>
-<script  src="/tuyi/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -614,7 +614,7 @@
 
 
   
-    <script  src="/tuyi/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -713,7 +713,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/tuyi/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -723,13 +723,13 @@
   
 <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
-<script src="/tuyi/js/reward.js"></script>
+<script src="/js/reward.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/tuyi/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

