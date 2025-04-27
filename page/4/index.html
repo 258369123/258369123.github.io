@@ -237,15 +237,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/02/05/%E7%AC%94%E8%AE%B0%E6%B8%85%E5%8D%95/" target="_self">
-          笔记清单
+        <a href="/2025/02/15/php%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/" target="_self">
+          php伪随机数
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/05/%E7%AC%94%E8%AE%B0%E6%B8%85%E5%8D%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/15/php%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/" target="_self">
         <div>
-          部分未及时更新   xss指北  xxe指北  Xpath注入指北  Djingo_ssti  pker  pickle反序列化  PHP原生类介绍  PHP伪协议介绍  Mysql注入指北  MongDB注入指北  论DNS  反序列化之字符串逃逸  zip文件逃逸漏洞  linux提权  php伪随机数
+          mt_rand()存在的问题mt_rand()如何生成的随机整数，它与设置的seed值和调用该函数的次数有关，假设使用mt_srand(12345)进行了一次播种，那么第一次调用mt_rand生成的数值为a，第二次为b，第三次为c。所以当有人拿到与你一串一模一样的seed时，所执行的结果都是跟刚刚描述的一样，这样就可以预测出接下来的数值是多少验证： 123456789101112131415161
         </div>
       </a>
 
@@ -253,17 +253,359 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-02-05 15:20" pubdate>
-              2025-02-05
+            <time datetime="2025-02-15 19:47" pubdate>
+              2025-02-15
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%AF%BC%E8%88%AA/">#导航</a>
+              <a href="/tags/php%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/">#php伪随机数</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/02/15/API%E4%B8%8Edeepseek/" target="_self">
+          API
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/15/API%E4%B8%8Edeepseek/" target="_self">
+        <div>
+          基础知识什么是APIAI的API基本都遵循openai的最早发布的API格式(以deepseek为例)： 123456789curl https://api.deepseek.com/chat/completions \  -H &quot;Content-Type: application/json&quot; \  -H &quot;Authorization: Bearer &lt;Deep
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-15 12:48" pubdate>
+              2025-02-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/API/">#API</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/02/11/VNCTF-web/" target="_self">
+          VNCTF-web
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/11/VNCTF-web/" target="_self">
+        <div>
+          奶龙回家 输入1&#39;回显  但是输入1&#39;&#39;两个单引号  正常回显，说明存在sql注入 先fuzz一下  过滤了一点而且对大小写敏感，猜测是sqlite(也可能是正则），打时间盲注，那他过滤sleep干嘛，迷惑我们吗 既然猜测是sqlite那就使用randombolb函数试试 空格使用/**/过滤 尝试 1payload = &quot;&#x27;OR/**/(case/**
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-11 09:56" pubdate>
+              2025-02-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" class="category-chain-item">比赛复现</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/sqlite%E6%B3%A8%E5%85%A5/">#sqlite注入</a>
+            
+              <a href="/tags/linux%E6%8F%90%E6%9D%83/">#linux提权</a>
+            
+              <a href="/tags/%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8/">#时间盲注</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/02/09/n1ctf/" target="_self">
+          n1ctf
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/09/n1ctf/" target="_self">
+        <div>
+          n1ctfwebn1战队的招新赛，题目都非常有深度，平时的知识点但是很深入，写之前还抱有一丝进入战队的幻想，拼尽全力无法战胜 全是大佬 写出4题其中Easydb是在23：08写出提交 Gavatar写了很久，一直以为是上传文件，有任意文件读取，但是那个权限实在没法绕	 后面突然想起这是LFI那是不是可以利用去年那个cve，结果就成了 ^_^ LFI到RCE感谢kengwang师傅让我了解 现在分析
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-09 20:52" pubdate>
+              2025-02-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80web/" class="category-chain-item">每日一web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%AF%94%E8%B5%9B/">#比赛</a>
+            
+              <a href="/tags/xss/">#xss</a>
+            
+              <a href="/tags/zip%E4%B8%8A%E4%BC%A0/">#zip上传</a>
+            
+              <a href="/tags/linux%E8%B6%8A%E6%9D%83/">#linux越权</a>
+            
+              <a href="/tags/CVE-2024-2961/">#CVE-2024-2961</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/02/07/hgameweek1/" target="_self">
+          hgameweek1
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/07/hgameweek1/" target="_self">
+        <div>
+          webPacman一个是一道js逆向吧，没怎么写明白，控制调试后修改分数大于10000然后挂了就行， 但其实flag就在代码里面，虽然混淆的很厉害但是代码利用3个base4，一个个是就出来了 BandBomb刚开始看到主界面的全回显以为有xss，测了很久发现没有 发现每次访问根路由都要加载模板文件，而且在rename路由又有任意文件覆盖那就考虑覆盖模板文件mortis.ejs 首先上传一个ejs文
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-07 14:48" pubdate>
+              2025-02-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80web/" class="category-chain-item">每日一web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%AF%94%E8%B5%9B/">#比赛</a>
+            
+              <a href="/tags/xss/">#xss</a>
+            
+              <a href="/tags/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89/">#条件竞争</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/02/05/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%83%E9%80%B8/" target="_self">
+          反序列化之字符串逃逸
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/05/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%83%E9%80%B8/" target="_self">
+        <div>
+          常见的字符串逃逸基本知识1.序列化字符串必须使用单引号 &#39;  包裹。PHP 的序列化格式要求字符串部分使用双引号，否则会导致 unserialize() 报错。 2.再有特定的针对序列化后的字符串变长变短的情况下  在php中，反序列化的过程中必须严格按照序列化规则才能成功实现反序列化，例如  1234567891011&lt;?php  	$str = &#x27;a:2:&#123;i
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-05 16:58" pubdate>
+              2025-02-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%83%E9%80%B8/">#字符串逃逸</a>
             
           </div>
         
@@ -519,320 +861,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/01/26/xxe%E6%8C%87%E5%8C%97/" target="_self">
-          xxe指北
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/26/xxe%E6%8C%87%E5%8C%97/" target="_self">
-        <div>
-          此文章已加密或未写完，请输入密码后访问。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-01-26 18:03" pubdate>
-              2025-01-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/xxe/">#xxe</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/01/26/xss%E6%8C%87%E5%8C%97/" target="_self">
-          xss指北
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/26/xss%E6%8C%87%E5%8C%97/" target="_self">
-        <div>
-          此文章已加密或未写完，请输入密码后访问。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-01-26 18:03" pubdate>
-              2025-01-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/xss/">#xss</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/01/26/MongDB%E6%B3%A8%E5%85%A5%E6%8C%87%E5%8C%97/" target="_self">
-          MongDB注入指北
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/26/MongDB%E6%B3%A8%E5%85%A5%E6%8C%87%E5%8C%97/" target="_self">
-        <div>
-          此文章已加密或未写完，请输入密码后访问。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-01-26 18:03" pubdate>
-              2025-01-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/MangDB%E6%B3%A8%E5%85%A5/">#MangDB注入</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/01/25/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" target="_self">
-          pickle反序列化
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/25/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" target="_self">
-        <div>
-          什么是pickle pickle实际上是一门栈语言  与PHP类似，python也有序列化功能以长期储存内存中的数据。pickle是python下的序列化与反序列化包  与json相比，pickle以二进制储存，不易人工阅读；json可以跨语言，而pickle是Python专用的；pickle能表示python几乎所有的类型（包括自定义类型），json只能表示一部分内置类型且不能表示自定义类型。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-01-25 14:06" pubdate>
-              2025-01-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="category-chain-item">知识点</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pickle/">#pickle</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/01/25/%E5%90%AF%E8%88%AA%E6%9D%AF/" target="_self">
-          启航杯
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/25/%E5%90%AF%E8%88%AA%E6%9D%AF/" target="_self">
-        <div>
-          启航杯2025.1.25web也是第一次正式比赛akweb啊  呜呜呜 虽然多不难 Easy_include源码 123456789101112131415161718192021&lt;?phperror_reporting(0);//flag in flag.php$file=$_GET[&#x27;file&#x27;];if(isset($file))&#123;    if(!preg_
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-01-25 13:18" pubdate>
-              2025-01-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80web/" class="category-chain-item">每日一web</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%AF%94%E8%B5%9B/">#比赛</a>
-            
-              <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">#文件包含</a>
-            
-              <a href="/tags/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">#php反序列化</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
